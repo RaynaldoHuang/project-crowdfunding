@@ -1,5 +1,7 @@
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import Image from "next/image";
+import logo from "@/public/images/logo.png"
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -19,7 +21,8 @@ export default function App() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">ACME</p>
+          <Image src={logo} alt={""} height={400}
+          ></Image>
         </NavbarBrand>
       </NavbarContent>
 
@@ -50,8 +53,8 @@ export default function App() {
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
+          <Button as={Link} className="bg-sky-600 text-white" href="#" variant="flat">
+            Register
           </Button>
         </NavbarItem>
       </NavbarContent>
