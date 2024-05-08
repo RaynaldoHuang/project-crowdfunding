@@ -1,7 +1,7 @@
 import Image from "next/image";
-import volunteerIcon from "@/public/images/volunteericon.svg";
-import educationIcon from "@/public/images/educationicon.svg";
-import securityIcon from "@/public/images/securityicon.svg";
+import volunteerIcon from "@/public/svgs/volunteericon.svg";
+import educationIcon from "@/public/svgs/educationicon.svg";
+import securityIcon from "@/public/svgs/securityicon.svg";
 
 export default function Features() {
     return (
