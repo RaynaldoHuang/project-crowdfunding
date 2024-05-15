@@ -22,6 +22,9 @@ export default function Footer() {
                    <Link href={""}><Image src={instagram} alt={""} height={40}
                     ></Image></Link>
                 </div>
+                <div>
+                    
+                </div>
             </div>
         </div>
     );

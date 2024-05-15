@@ -7,44 +7,37 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    "About Us",
-    "Features",
-    "Donation",
-    "Volunteer",
+    "Fitur",
+    "Kampanye",
+    "Sukarelawan",
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
+    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="xl">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand>
-          <Image src={logo} alt={""} height={400}
-          ></Image>
+          <Image src={logo} alt={""} height={400} className="md:h-[30px] md:w-[140px]"/>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem className="mx-5">
           <Link color="foreground" href="#">
-            About Us
+            Fitur
           </Link>
         </NavbarItem>
         <NavbarItem className="mx-5">
           <Link color="foreground" href="#">
-            Features
+            Kampanye
           </Link>
         </NavbarItem>
         <NavbarItem className="mx-5">
           <Link color="foreground" href="#">
-            Donation
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="mx-5">
-          <Link color="foreground" href="#">
-            Volunteer
+            Sukarelawan
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -54,7 +47,7 @@ export default function App() {
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} className="bg-sky-600 text-white" href="#" variant="flat">
-            Register
+            Daftar Akun
           </Button>
         </NavbarItem>
       </NavbarContent>

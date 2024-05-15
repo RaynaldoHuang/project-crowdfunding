@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const {nextui} = require("@nextui-org/react")
+import { nextui } from "@nextui-org/react";
 
 const config: Config = {
   content: [
@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        '8xl': '1350px'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

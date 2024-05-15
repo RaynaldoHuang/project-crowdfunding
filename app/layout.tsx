@@ -3,7 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
+const opnsns = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Crowdfunding Project",
@@ -26,7 +26,7 @@ export default function RootLayout({
         />
       </Head>
       <html lang="en">
-        <body className={openSans.className} suppressHydrationWarning={true}>{children}</body>
+        <body className={opnsns.className} suppressHydrationWarning={true}>{children}</body>
       </html>
     </>
   );
