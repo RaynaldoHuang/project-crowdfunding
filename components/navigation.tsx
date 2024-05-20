@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import Image from "next/image";
-import logo from "@/public/images/logo.png"
+import logo from "@/public/svgs/logo.svg"
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

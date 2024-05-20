@@ -12,9 +12,9 @@ export default function FeaturesV2() {
                         ></Image>
                     </div>
                     <div className="lg:w-1/2">
-                        <h1 className="text-2xl font-bold text-sky-900 mt-4 lg:text-4xl">Kami yakin kami bisa menghemat
+                        <h1 className="text-2xl font-bold text-sky-900 mt-4 lg:text-4xl text-balance">Kami yakin kami bisa menghemat
                             lebih banyak kehidupan bersamamu</h1>
-                        <p className="text-slate-500 text-base mt-4">Sekecil apapun yang kamu lakukan untuk berbagi
+                        <p className="text-slate-500 text-base mt-4 text-balance">Sekecil apapun yang kamu lakukan untuk berbagi
                             tandanya kamu sudah menjadi manusia yang berguna
                             menjadi untuk sesama manusia dan untuk Anda.</p>
                         <div>

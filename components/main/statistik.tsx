@@ -20,7 +20,7 @@ export default function Statistik() {
                     <p className="text-slate-500">Sukarelawan</p>
                 </div>
                 <div className="flex flex-col">
-                    <h1 className="font-bold text-3xl text-sky-900">40 years</h1>
+                    <h1 className="font-bold text-3xl text-sky-900">40 Tahun</h1>
                     <p className="text-slate-500">Pengalaman</p>
                 </div>
             </div>

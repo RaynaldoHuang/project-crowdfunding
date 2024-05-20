@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/public/images/logo.png"
+import logo from "@/public/svgs/logo.svg"
 import facebook from "@/public/svgs/facebook.svg"
 import twitter from "@/public/svgs/twitter.svg"
 import instagram from "@/public/svgs/Instagram.svg"
@@ -19,11 +19,27 @@ export default function Footer() {
                     ></Image></Link>
                     <Link href={""}><Image src={twitter} alt={""} height={40}
                     ></Image></Link>
-                   <Link href={""}><Image src={instagram} alt={""} height={40}
+                    <Link href={""}><Image src={instagram} alt={""} height={40}
                     ></Image></Link>
                 </div>
-                <div>
-                    
+                <div className="flex flex-row">
+                    <div>
+                        <h1 className="text-lg font-bold text-sky-900 mt-12 mb-6 mr-32">Menu</h1>
+                        <div className="flex flex-col gap-y-2">
+                            <Link href={""} className="text-slate-500 text-base">Fitur</Link>
+                            <Link href={""} className="text-slate-500 text-base">Kampanye</Link>
+                            <Link href={""} className="text-slate-500 text-base">Sukarelawan</Link>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 className="text-lg font-bold text-sky-900 mt-12 mb-6">Kategori</h1>
+                        <div className="flex flex-col gap-y-2">
+                            <Link href={""} className="text-slate-500 text-base">Uang</Link>
+                            <Link href={""} className="text-slate-500 text-base">Mainan Anak-Anak</Link>
+                            <Link href={""} className="text-slate-500 text-base">Bantuan Obat</Link>
+                            <Link href={""} className="text-slate-500 text-base">Makanan Sehat</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
