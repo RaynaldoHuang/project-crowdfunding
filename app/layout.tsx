@@ -24,6 +24,7 @@ export default function RootLayout({
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
         />
+        <link rel="apple-touch-icon" href="/favicon.ico" sizes="any" />
       </Head>
       <html lang="en">
         <body className={opnsns.className} suppressHydrationWarning={true}>{children}</body>
