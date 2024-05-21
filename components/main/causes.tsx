@@ -1,4 +1,5 @@
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
+'use client'
+
 import img1 from "@/public/images/img1.jpg";
 import Image from "next/image";
 
@@ -6,8 +7,11 @@ import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useEffect, useState } from "react";
 
 export default function Causes() {
+    const [campaignList, setCampaignList] = useState([]);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -16,9 +20,24 @@ export default function Causes() {
         slidesToScroll: 1
     };
 
+    const fetchCampaign = async () => {
+        const response = await fetch('http://localhost:3000/api/campaign')
+        const data = await response.json()
+
+        console.log(data.data.campaign)
+
+        
+    }
+
+    useEffect(() => {
+        fetchCampaign();
+    }, [])
+
     return (
         <div className="lg:max-w-8xl mx-auto lg:mt-32">
             <div className="w-11/12 mx-auto mt-10 pb-12 overflow-x-hidden">
+
+                {campaignList}
 
                 {/* mobile-view */}
                 <div className="lg:hidden">
@@ -81,7 +100,25 @@ export default function Causes() {
                         </div>
                     </div>
                     <div className="grid grid-cols-4 justify-between gap-x-8 mt-20">
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                            {/* {
+                                campaignList.map((cl) => (
+                                    <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                                        <Image src={img1} alt={""} width={350} className="rounded-xl"
+                                        />
+                                        <div className="pb-0 pt-2 flex-col items-start">
+                                            <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
+                                                {}</h1>
+                                            <p className="text-slate-500 text-base mt-4 line-clamp-3 text-balance">Anak-anak yang membutuhkan biaya sekolahnya
+                                                dan makanan terbengkalai karena disana</p>
+                                            <p className="text-orange-500 text-base mt-2">Terkumpul Rp.475.000.000</p>
+                                            <button className="text-sky-600 px-8 mt-6 border py-2 border-sky-600 rounded-xl">
+                                                Donasi
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            } */}
+                        {/* <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
                             <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
                             <div className="pb-0 pt-2 flex-col items-start">
@@ -125,22 +162,7 @@ export default function Causes() {
                                     Donasi
                                 </button>
                             </div>
-                        </div>
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
-                            <Image src={img1} alt={""} width={350} className="rounded-xl"
-                            />
-                            <div className="pb-0 pt-2 flex-col items-start">
-                                <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
-                                    Anak-anak yang membutuhkan sekolah
-                                    biaya dan makanan</h1>
-                                <p className="text-slate-500 text-base mt-4 line-clamp-3 text-balance">Anak-anak yang membutuhkan biaya sekolahnya
-                                    dan makanan terbengkalai karena disana</p>
-                                <p className="text-orange-500 text-base mt-2">Terkumpul Rp.475.000.000</p>
-                                <button className="text-sky-600 px-8 mt-6 border py-2 border-sky-600 rounded-xl">
-                                    Donasi
-                                </button>
-                            </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
