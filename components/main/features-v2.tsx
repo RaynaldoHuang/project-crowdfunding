@@ -8,8 +8,7 @@ export default function FeaturesV2() {
             <div className="lg:max-w-8xl mx-auto lg:mt-32">
                 <div className="w-11/12 mx-auto pt-6 pb-6 lg:flex lg:flex-row lg:items-center lg:justify-between mt-20 lg:gap-x-20">
                     <div>
-                        <Image src={img3} alt={""} height={400}
-                        ></Image>
+                        <Image src={img3} alt={""} height={400} />
                     </div>
                     <div className="lg:w-1/2">
                         <h1 className="text-2xl font-bold text-sky-900 mt-4 lg:text-4xl text-balance">Kami yakin kami bisa menghemat
