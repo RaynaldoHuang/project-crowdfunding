@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import img3 from "@/public/images/img3.png";
+import img1 from "@/public/images/img1.jpg";
 import Image from "next/image";
 
 import Slider from 'react-slick';
@@ -19,7 +19,7 @@ export default function Causes() {
     return (
         <div className="lg:max-w-8xl mx-auto lg:mt-32">
             <div className="w-11/12 mx-auto mt-10 pb-12 overflow-x-hidden">
-                
+
                 {/* mobile-view */}
                 <div className="lg:hidden">
                     <div className="mb-8">
@@ -31,10 +31,10 @@ export default function Causes() {
                     <div className="slider-container">
                         <Slider {...settings}>
                             <div className="px-2 mb-5">
-                                <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                                    <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                                <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                                    <Image src={img1} alt={""} width={350} className="rounded-xl"
                                     />
-                                    <div className="pb-0 pt-2 px-4 flex-col items-start">
+                                    <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-semibold mt-4">
                                             Anak-anak yang membutuhkan sekolah
                                             biaya dan makanan</h1>
@@ -48,10 +48,10 @@ export default function Causes() {
                                 </div>
                             </div>
                             <div className="px-2 mb-5">
-                                <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                                    <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                                <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                                    <Image src={img1} alt={""} width={350} className="rounded-xl"
                                     />
-                                    <div className="pb-0 pt-2 px-4 flex-col items-start">
+                                    <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-semibold mt-4">
                                             Anak-anak yang membutuhkan sekolah
                                             biaya dan makanan</h1>
@@ -81,10 +81,10 @@ export default function Causes() {
                         </div>
                     </div>
                     <div className="grid grid-cols-4 justify-between gap-x-8 mt-20">
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                            <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                            <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
-                            <div className="pb-0 pt-2 px-4 flex-col items-start">
+                            <div className="pb-0 pt-2 flex-col items-start">
                                 <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
                                     Anak-anak yang membutuhkan sekolah
                                     biaya dan makanan</h1>
@@ -96,10 +96,10 @@ export default function Causes() {
                                 </button>
                             </div>
                         </div>
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                            <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                            <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
-                            <div className="pb-0 pt-2 px-4 flex-col items-start">
+                            <div className="pb-0 pt-2 flex-col items-start">
                                 <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
                                     Anak-anak yang membutuhkan sekolah
                                     biaya dan makanan</h1>
@@ -111,10 +111,10 @@ export default function Causes() {
                                 </button>
                             </div>
                         </div>
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                            <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                            <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
-                            <div className="pb-0 pt-2 px-4 flex-col items-start">
+                            <div className="pb-0 pt-2 flex-col items-start">
                                 <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
                                     Anak-anak yang membutuhkan sekolah
                                     biaya dan makanan</h1>
@@ -126,10 +126,10 @@ export default function Causes() {
                                 </button>
                             </div>
                         </div>
-                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6">
-                            <Image src={img3} alt={""} width={350} className="px-4 rounded-xl"
+                        <div className="border border-slate-300 rounded-3xl pt-4 pb-6 px-4">
+                            <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
-                            <div className="pb-0 pt-2 px-4 flex-col items-start">
+                            <div className="pb-0 pt-2 flex-col items-start">
                                 <h1 className="text-xl font-semibold mt-4 text-balance line-clamp-2">
                                     Anak-anak yang membutuhkan sekolah
                                     biaya dan makanan</h1>
