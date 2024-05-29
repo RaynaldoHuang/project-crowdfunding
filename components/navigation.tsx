@@ -43,7 +43,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/Login">Login</Link>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} className="bg-sky-600 text-white" href="#" variant="flat">
@@ -59,7 +59,7 @@ export default function App() {
                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
               className="w-full"
-              href="#"
+              href={`#${item.toLowerCase()}`}
               size="lg"
             >
               {item}

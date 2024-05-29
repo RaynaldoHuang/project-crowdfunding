@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
+import Head from "next/head";;
 
 const opnsns = Open_Sans({ subsets: ["latin"] });
 
@@ -27,7 +27,8 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico" sizes="any" />
       </Head>
       <html lang="en">
-        <body className={opnsns.className} suppressHydrationWarning={true}>{children}</body>
+        <body className={opnsns.className} suppressHydrationWarning={true}>{children}
+        </body>
       </html>
     </>
   );
