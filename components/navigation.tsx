@@ -46,7 +46,7 @@ export default function App() {
           <Link href="/Login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} className="bg-sky-600 text-white" href="#" variant="flat">
+          <Button as={Link} className="bg-sky-600 text-white" href="/register" variant="flat">
             Daftar Akun
           </Button>
         </NavbarItem>

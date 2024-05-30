@@ -12,7 +12,8 @@ const config: Config = {
   theme: {
     extend: {
       maxWidth: {
-        '8xl': '1350px'
+        '8xl': '1350px',
+        '5xl': '520px'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
