@@ -1,7 +1,7 @@
 "use client"
 
 import { Input } from "@nextui-org/react";
-import React from "react";
+import React, { FormEvent } from "react";
 import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import Link from "next/link"
@@ -12,6 +12,26 @@ export default function LoginPage() {
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
+    /**
+     * Handles user authentication through the API
+     * @param event 
+     */
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        
+        const formData = new FormData(event.currentTarget)
+
+        const response = await fetch('/api/login', {
+        method: 'POST',
+        body: formData,
+        })
+    
+        // Handle response if necessary
+        const data = await response.json()
+
+        console.log(data.message)
+    }
+
     return (
         <>
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
@@ -20,16 +40,18 @@ export default function LoginPage() {
                         <h1 className="font-bold text-3xl mb-2">Selamat Datang Kembali</h1>
                         <p className="text-xs">Silahkan Masukkan Email dan Password Kamu</p>
                     </div>
-                    <div className="pt-10">
+                    <form className="pt-10" onSubmit={handleSubmit}>
                         {/* email */}
                         <div>
                             <Input className="pb-8"
                                 key="outside"
-                                type="email"
-                                label="Email"
+                                type="text"
+                                label="Username"
                                 labelPlacement="outside"
-                                placeholder="Masukkan email Kamu"
+                                placeholder="Masukkan username"
                                 isRequired
+                                name="username"
+                                errorMessage="Silahkan diisi kolom ini."
                             />
                         </div>
 
@@ -51,16 +73,18 @@ export default function LoginPage() {
                                     </button>
                                 }
                                 isRequired
+                                name="password"
+                                errorMessage="Silahkan diisi kolom ini."
                             />
                         </div>
                         <Link href={""} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
-                        <Button fullWidth className="mt-10 bg-sky-600 text-white">
+                        <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit">
                             Login
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" color="white" />
                             </svg>
                         </Button>
-                    </div>
+                    </form>
                     <div className="flex flex-row mt-10 items-center justify-between">
                         <p className="text-xs">Belum punya akun?</p>
                         <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/register" as={Link}>
