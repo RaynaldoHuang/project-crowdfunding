@@ -2,8 +2,8 @@
 
 import { Input } from "@nextui-org/react";
 import React from "react";
-import { EyeFilledIcon } from "@/app/Login/icon/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "@/app/Login/icon/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import Link from "next/link"
 import { Button } from "@nextui-org/react";
 

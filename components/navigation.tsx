@@ -43,7 +43,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="/Login">Login</Link>
+          <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} className="bg-sky-600 text-white" href="/register" variant="flat">

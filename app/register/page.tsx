@@ -2,8 +2,8 @@
 
 import { Input } from "@nextui-org/react";
 import React from "react";
-import { EyeFilledIcon } from "@/app/Login/icon/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "@/app/Login/icon/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -99,7 +99,7 @@ export default function RegisterPage() {
                     </div>
                     <div className="flex flex-row mt-10 items-center justify-between">
                         <p className="text-xs">Sudah punya akun?</p>
-                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/Login" as={Link}>
+                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/login" as={Link}>
                             Login
                         </Button>
                     </div>
