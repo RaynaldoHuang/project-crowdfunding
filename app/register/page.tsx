@@ -9,6 +9,7 @@ import Link from "next/link";
 
 export default function RegisterPage() {
     const [match, setMatch] = useState(true);
+    const [passwordMismatch, setPasswordMismatch] = useState(false);
 
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -25,13 +26,21 @@ export default function RegisterPage() {
 
         const formData = new FormData(event.currentTarget)
 
-        // Handle unmatched password
-        // TODO
+        const password = formData.get("password") as string;
+        const confirmPassword = formData.get("confirmPassword") as string;
+
 
         const res = await fetch('/api/register', {
             method: 'POST',
             body: formData,
         })
+
+        if (password !== confirmPassword) {
+            setPasswordMismatch(true);
+            return; // Exit the function
+        }
+
+        setPasswordMismatch(false);
 
         const data = await res.json()
 
@@ -117,6 +126,8 @@ export default function RegisterPage() {
                                 name="confirmPassword"
                             />
                         </div>
+
+                        {passwordMismatch && <p className="text-red-500">Passwords do not match!</p>}
 
 
                         <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit">
