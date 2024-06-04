@@ -41,7 +41,7 @@ export default function AdminDashboard() {
 
                     <div className="flex flex-row items-center justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
                         <div>
-                            <h1 className="font-bold text-2xl mb-1">Rp.90.122.121</h1>
+                            <h1 className="font-bold text-2xl mb-1">Rp. 90.000.000</h1>
                             <p className="text-sm">Jumlah Donasi</p>
                         </div>
                         <div className="h-20 w-20 bg-blue-100 rounded-full flex justify-center items-center">
@@ -137,7 +137,6 @@ export default function AdminDashboard() {
                             <thead className='text-left border-b-2'>
                                 <tr className=''>
                                     <th className='font-normal text-xs text-slate-500 pb-2'>Event Name</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Event Description</th>
                                     <th className='font-normal text-xs text-slate-500 pb-2'>Deadline</th>
                                     <th className='font-normal text-xs text-slate-500 pb-2'>Status</th>
                                     <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
@@ -147,7 +146,6 @@ export default function AdminDashboard() {
                             <tbody>
                                 <tr className='border-b'>
                                     <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>Funding kid age 14 to cure the cancer</td>
                                     <td className='text-xs'>2070-01-01</td>
                                     <td className={clsx('text-xs',)}>Approved</td>
                                     <td className='text-xs'>2024-04-06</td>
@@ -155,7 +153,6 @@ export default function AdminDashboard() {
                                 </tr>
                                 <tr className='border-b'>
                                     <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>Funding kid age 14 to cure the cancer</td>
                                     <td className='text-xs'>2070-01-01</td>
                                     <td className={clsx('text-xs',)}>Approved</td>
                                     <td className='text-xs'>2024-04-06</td>
@@ -163,7 +160,6 @@ export default function AdminDashboard() {
                                 </tr>
                                 <tr className='border-b'>
                                     <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>Funding kid age 14 to cure the cancer</td>
                                     <td className='text-xs'>2070-01-01</td>
                                     <td className={clsx('text-xs',)}>Approved</td>
                                     <td className='text-xs'>2024-04-06</td>
@@ -171,7 +167,6 @@ export default function AdminDashboard() {
                                 </tr>
                                 <tr className='border-b'>
                                     <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>Funding kid age 14 to cure the cancer</td>
                                     <td className='text-xs'>2070-01-01</td>
                                     <td className={clsx('text-xs',)}>Approved</td>
                                     <td className='text-xs'>2024-04-06</td>
