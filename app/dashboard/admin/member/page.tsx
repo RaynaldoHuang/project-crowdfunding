@@ -49,8 +49,8 @@ export default function AdminMember() {
                         </tr>
                         <tr className='border-b'>
                             <td className='text-xs py-5'>Yeremy</td>
-                            <td className='text-xs'>Ganteng</td>
-                            <td className='text-xs'>yeremyganteng</td>
+                            <td className='text-xs'>Hizkia</td>
+                            <td className='text-xs'>yeremyHizkia</td>
                             <td className={clsx('text-xs', )}>Male</td>
                             <td className='text-xs'>2024-04-06</td>
                             <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
