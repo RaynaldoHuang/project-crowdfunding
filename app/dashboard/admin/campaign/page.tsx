@@ -19,7 +19,7 @@ export default function AdminCampaign() {
                 <Image src={placeholder} width={45} height={45} alt='placeholder' className="rounded-full bg-transparent border px-1 py-1 border-[#336DFF]"/> 
             </div>
 
-            <div className='mt-5 mx-5 bg-white px-5 py-10 mb-10 shadow-xl rounded-xl'>
+            <div className='mt-5 mx-5 bg-white px-5 py-10 mb-10 shadow-lg rounded-xl'>
                 <div className='relative'>
                     <Image src={search} width={20} height={20} alt='icon' className='absolute top-1.5 left-2' />
                     <input type="text" placeholder="Search ..." className='border border-slate-300 pl-10 py-1 pr-3 rounded-lg w-[350px]' />
@@ -53,7 +53,7 @@ export default function AdminCampaign() {
                             <td className='text-xs'>2070-01-01</td>
                             <td className={clsx('text-xs', )}>Approved</td>
                             <td className='text-xs'>2024-04-06</td>
-                            <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                            <td className='text-xs'><Link href='/dashboard/admin/campaign/test' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
                         </tr>
                     </tbody>
                 </table>
