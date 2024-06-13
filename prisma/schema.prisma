@@ -31,7 +31,7 @@ enum Status {
 
 
 model Account {
-  id            BigInt          @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   
   // One to one -> Profile
   profile       Profile?
@@ -43,7 +43,7 @@ model Account {
 
 
 model Profile {
-  id                  BigInt        @id @default(autoincrement())
+  id                  Int        @id @default(autoincrement())
   // One to one -> Account
   accountUsername     String        @unique
   username            Account       @relation(fields: [accountUsername], references: [username])
@@ -69,11 +69,11 @@ model Profile {
 }
 
 model Campaign {
-  id                  BigInt        @id @default(autoincrement())
+  id                  Int           @id @default(autoincrement())
   eventName           String        @db.VarChar(255)
   createdDate         DateTime      @default(now())
-  fundsNeeded         BigInt        @default(0)
-  fundsAccumulated    BigInt        @default(0)
+  fundsNeeded         Int           @default(0)
+  fundsAccumulated    Int           @default(0)
   deadline            DateTime
   eventDescription    String
   // document
