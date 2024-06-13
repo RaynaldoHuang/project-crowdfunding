@@ -1,10 +1,27 @@
-import Image from "next/image"
+'use client'
 
-import placeholder from '@/public/svgs/profile-placeholder.svg'
+import Image from "next/image"
 import clsx from "clsx"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+
+import placeholder from '@/public/svgs/profile-placeholder.svg'
 
 export default function AdminDashboard() {
+    const [members, setMembers] = useState([])
+
+    useEffect(() => {
+        fetchMembers()
+    }, [])
+
+    const fetchMembers = async () => {
+        const res = await fetch('http://localhost:3000/api/member')
+        const data = await res.json()
+
+        console.log(data['members'])
+        setMembers(data['members'])
+    }
+
     return (
         <div className="ml-64">
             <div className="flex justify-between mx-5 h-14 items-center text-2xl font-semibold">

@@ -9,7 +9,7 @@ CREATE TYPE "Status" AS ENUM ('ONGOING', 'PENDING', 'CANCELED');
 
 -- CreateTable
 CREATE TABLE "Account" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "username" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE "Account" (
 
 -- CreateTable
 CREATE TABLE "Profile" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "accountUsername" TEXT NOT NULL,
     "gender" "Gender" NOT NULL DEFAULT 'MALE',
     "role" "Role" NOT NULL DEFAULT 'MEMBER',
@@ -36,11 +36,11 @@ CREATE TABLE "Profile" (
 
 -- CreateTable
 CREATE TABLE "Campaign" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "eventName" VARCHAR(255) NOT NULL,
     "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "fundsNeeded" BIGINT NOT NULL DEFAULT 0,
-    "fundsAccumulated" BIGINT NOT NULL DEFAULT 0,
+    "fundsNeeded" INTEGER NOT NULL DEFAULT 0,
+    "fundsAccumulated" INTEGER NOT NULL DEFAULT 0,
     "deadline" TIMESTAMP(3) NOT NULL,
     "eventDescription" TEXT NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'CANCELED',
