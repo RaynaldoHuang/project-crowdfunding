@@ -6,20 +6,33 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 import placeholder from '@/public/svgs/profile-placeholder.svg'
+import campaign from "@/libs/campaign"
 
 export default function AdminDashboard() {
     const [members, setMembers] = useState([])
+    const [campaigns, setCampaigns] = useState([])
+    const [memberCount, setMemberCount] = useState(0)
+    const [campaignCount, setCampaignCount] = useState(0)
 
     useEffect(() => {
         fetchMembers()
+        fetchCampaigns()
     }, [])
 
     const fetchMembers = async () => {
         const res = await fetch('http://localhost:3000/api/member')
         const data = await res.json()
 
-        console.log(data['members'])
         setMembers(data['members'])
+        setMemberCount(data.count._count.id)
+    }
+
+    const fetchCampaigns = async () => {
+        const res = await fetch('http://localhost:3000/api/campaign')
+        const data = await res.json()
+
+        setCampaigns(data['campaignDashboard'])
+        setCampaignCount(data.count._count.id)
     }
 
     return (
@@ -33,7 +46,7 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-4 gap-2">
                     <div className="flex flex-row items-center justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
                         <div>
-                            <h1 className="font-bold text-2xl mb-1">100</h1>
+                            <h1 className="font-bold text-2xl mb-1">{memberCount}</h1>
                             <p className="text-sm">Jumlah Member</p>
                         </div>
                         <div className="h-20 w-20 bg-blue-100 rounded-full flex justify-center items-center">
@@ -45,7 +58,7 @@ export default function AdminDashboard() {
 
                     <div className="flex flex-row items-center justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
                         <div>
-                            <h1 className="font-bold text-2xl mb-1">90</h1>
+                            <h1 className="font-bold text-2xl mb-1">{campaignCount}</h1>
                             <p className="text-sm">Jumlah Kampanye</p>
                         </div>
                         <div className="h-20 w-20 bg-blue-100 rounded-full flex justify-center items-center">
@@ -83,114 +96,66 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 mt-8">
-                    <div className="flex flex-row justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
-                        <table className='table-auto w-full'>
-                            <thead className='text-left border-b-2'>
-                                <tr className=''>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>First Name</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Last Name</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Username</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Gender</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Andian</td>
-                                    <td className='text-xs'>Bramlie</td>
-                                    <td className='text-xs'>andianbramlie</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Raynaldo</td>
-                                    <td className='text-xs'>Huang</td>
-                                    <td className='text-xs'>raynaldohuang</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Yeremy</td>
-                                    <td className='text-xs'>Hizkia</td>
-                                    <td className='text-xs'>yeremyHizkia</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Yeremy</td>
-                                    <td className='text-xs'>Hizkia</td>
-                                    <td className='text-xs'>yeremyHizkia</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Yeremy</td>
-                                    <td className='text-xs'>Hizkia</td>
-                                    <td className='text-xs'>yeremyHizkia</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Yeremy</td>
-                                    <td className='text-xs'>Hizkia</td>
-                                    <td className='text-xs'>yeremyHizkia</td>
-                                    <td className={clsx('text-xs',)}>Male</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                    <div className="bg-white drop-shadow-md rounded-xl px-6 py-6">
+                        <h1 className="mb-5 text-lg font-bold">Member List</h1>
+                        <div className="flex flex-row justify-between">
+                            <table className='table-auto w-full'>
+                                <thead className='text-left border-b-2'>
+                                    <tr className=''>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Full Name</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Username</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Gender</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        members.map((member: any) => (
+                                            <tr className='border-b'>
+                                                <td className='text-xs py-5'>{member.firstName + " " + member.lastName}</td>
+                                                <td className='text-xs'>{member.accountUsername}</td>
+                                                <td className={clsx('text-xs',)}>{member.gender[0].toUpperCase() + member.gender.slice(1,).toLowerCase()}</td>
+                                                <td className='text-xs'>{member.createdDate.split('T')[0]}</td>
+                                                <td className='text-xs'><Link href={`/dashboard/admin/member/${member.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                                            </tr>
+                                        ))
+                                    }
+                                    
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div className="flex flex-row justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
-                        <table className='table-auto w-full'>
-                            <thead className='text-left border-b-2'>
-                                <tr className=''>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Event Name</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Deadline</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Status</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
-                                    <th className='font-normal text-xs text-slate-500 pb-2'></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>2070-01-01</td>
-                                    <td className={clsx('text-xs',)}>Approved</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>2070-01-01</td>
-                                    <td className={clsx('text-xs',)}>Approved</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>2070-01-01</td>
-                                    <td className={clsx('text-xs',)}>Approved</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                                <tr className='border-b'>
-                                    <td className='text-xs py-5'>Curing Cancer</td>
-                                    <td className='text-xs'>2070-01-01</td>
-                                    <td className={clsx('text-xs',)}>Approved</td>
-                                    <td className='text-xs'>2024-04-06</td>
-                                    <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    
+                    <div className="bg-white drop-shadow-md rounded-xl px-6 py-6">
+                        <h1 className="font-bold text-lg mb-5">Campaign List</h1>
+                        <div className="flex flex-row justify-between">
+                            <table className='table-auto w-full'>
+                                <thead className='text-left border-b-2'>
+                                    <tr className=''>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Event Name</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Deadline</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Status</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
+                                        <th className='font-normal text-xs text-slate-500 pb-2'></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        campaigns.map((campaign: any) => (
+                                            <tr className='border-b'>
+                                                <td className='text-xs py-5'>{campaign.eventName}</td>
+                                                <td className='text-xs'>{campaign.deadline.split('T')[0]}</td>
+                                                <td className={clsx('text-xs',)}>{campaign.status}</td>
+                                                <td className='text-xs'>{campaign.createdDate.split('T')[0]}</td>
+                                                <td className='text-xs'><Link href={`/dashboard/admin/campaign/${campaign.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
