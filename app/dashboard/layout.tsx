@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "@/public/svgs/logo.svg"
+import placeholder from '@/public/svgs/profile-placeholder.svg'
 
 const opnsns = Open_Sans({ subsets: ["latin"] });
 
@@ -28,123 +31,144 @@ export default function RootLayout({
       </Head>
       <html lang="en">
         <body className={`${opnsns.className}`} suppressHydrationWarning={true}>
-            <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
-                <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
-                    <div className="flex items-center justify-center h-14 border-b">
-                    <div>Sedekah</div>
-                    </div>
-                    <div className="overflow-y-auto overflow-x-hidden flex-grow">
-                    <ul className="flex flex-col py-4 space-y-1">
-                        <li className="px-5">
-                          <div className="flex flex-row items-center h-8">
-                              <div className="text-sm font-light tracking-wide text-gray-500">Admin Menu</div>
-                          </div>
-                        </li>
-                        <li>
-                          <Link href="/dashboard/admin" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                              <span className="inline-flex justify-center items-center ml-2">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                              </span>
-                              <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
-                          </Link>
-                        </li>
-                        <li>
-                        <Link href="/dashboard/admin/member" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Member</span>
-                            {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">New</span> */}
-                        </Link>
-                        </li>
-                        <li>
-                        <a href="/dashboard/admin/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Campaign</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="#" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Notifications</span>
-                            {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span> */}
-                        </a>
-                        </li>
-                        <li className="px-5">
-                        <div className="flex flex-row items-center h-8">
-                            <div className="text-sm font-light tracking-wide text-gray-500">Menu Member</div>
-                        </div>
-                        </li>
-                        <li>
-                        <a href="/dashboard" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="/dashboard/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Campaign</span>
-                        </a>
-                        <a href="/dashboard/form-pengajuan" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Form Pengajuan</span>
-                        </a>
-                        <a href="/dashboard/transaction-history" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-[#336DFF] hover:rounded-lg hover:duration-100 text-gray-600 hover:text-white hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Histori Transaksi</span>
-                        </a>
-                        </li>
-                        <li className="px-5">
-                        <div className="flex flex-row items-center h-8">
-                            <div className="text-sm font-light tracking-wide text-gray-500">Settings</div>
-                        </div>
-                        </li>
-                        <li>
-                        <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-4">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-4">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Settings</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                            <span className="inline-flex justify-center items-center ml-4">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                            </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-
-                {children}
+          <div>
+            <div className="flex justify-between px-5 h-14 items-center text-xl font-semibold bg-white fixed top-0 left-64 right-0">
+              <h1 className="text-sky-900">Selamat Datang, Amanda</h1>
+              <Image src={placeholder} width={45} height={45} alt='placeholder' className="rounded-full bg-transparent border px-1 py-1 border-[#336DFF]" />
             </div>
+          </div>
+          <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-[#F5F5F5] text-gray-800">
+            <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+              <div className="flex items-center justify-center h-14 border-b">
+                <Image src={logo} alt={""} height={400} className="md:h-[30px] md:w-[140px]" />
+              </div>
+              <div className="overflow-y-auto overflow-x-hidden flex-grow">
+                <ul className="flex flex-col py-4 space-y-1">
+                  <li className="px-5">
+                    <div className="flex flex-row items-center h-8">
+                      <div className="text-sm font-light tracking-wide text-gray-500">Admin Menu</div>
+                    </div>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/admin" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                          <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/admin/member" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clipRule="evenodd" />
+                          <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Member</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="/dashboard/admin/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
+                          <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Kampanye</span>
+                    </a>
+                  </li>
+                  <li className="px-5">
+                    <div className="flex flex-row items-center h-8">
+                      <div className="text-sm font-light tracking-wide text-gray-500">Menu Member</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="/dashboard" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                          <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/dashboard/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
+                          <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Kampanye</span>
+                    </a>
+                    <a href="/dashboard/form-pengajuan" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
+                          <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Form Pengajuan</span>
+                    </a>
+                    <a href="/dashboard/transaction-history" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
+                        </svg>
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Histori Transaksi</span>
+                    </a>
+                  </li>
+                  <li className="px-5">
+                    <div className="flex flex-row items-center h-8">
+                      <div className="text-sm font-light tracking-wide text-gray-500">Pengaturan</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="#" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                        </svg>
+
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clipRule="evenodd" />
+                        </svg>
+
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Pengaturan</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                      <span className="inline-flex justify-center items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z" clipRule="evenodd" />
+                        </svg>
+
+                      </span>
+                      <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {children}
+          </div>
         </body>
       </html>
     </>
