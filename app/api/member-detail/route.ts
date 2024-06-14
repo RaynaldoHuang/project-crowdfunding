@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 
-export async function POST(res: NextResponse, req: NextRequest) {
-    console.log("FORM DATA")
+import { NextApiRequest, NextApiResponse } from "next";
 
-    return NextResponse.json({ 'success': true })
-}
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
 
-export async function GET(res: NextResponse, req: NextRequest) {
-    return NextResponse.json({ 'success': true })
+export async function POST(request: NextRequest, response: NextResponse) {
+    const data = await request.json();
+
+    const id: any = data.id
+
+    const memberDetail = await prisma.profile.findUnique({
+        where: {
+            id: id
+        },
+    })
+
+    console.log(memberDetail)
+
+    return NextResponse.json({ 'success': true, memberDetail })
 }

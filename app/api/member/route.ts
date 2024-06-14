@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 
+
 export async function GET(req: NextRequest, res: NextResponse) {
     const members = await prisma.profile.findMany()
+
+    console.log(members)
     
     return NextResponse.json({ "success": true, members })
 }

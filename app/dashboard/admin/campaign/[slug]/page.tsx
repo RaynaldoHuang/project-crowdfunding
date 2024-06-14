@@ -12,7 +12,7 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
     const [statusEvent, setStatusEvent] = useState("Status")
     const [descEvent, setDescEvent] = useState("Event Description")
     const [fundNeed, setFunNeed] = useState("Funds Needed")
-    const [dateLine, setDateLine] = useState("Deadline")
+    const [deadline, setDeadline] = useState("Deadline")
 
 
 
@@ -54,7 +54,7 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
 
                     <div className='flex flex-col mb-5'>
                         <label className='mb-1'>Deadline Date</label>
-                        <input type='date' onChange={(e) => setDateLine(e.target.value)} value={dateLine} className='px-3 py-2 rounded-lg border border-slate-300' />
+                        <input type='date' onChange={(e) => setDeadline(e.target.value)} value={deadline} className='px-3 py-2 rounded-lg border border-slate-300' />
                     </div>
 
                     <div className='flex flex-col mb-5'>

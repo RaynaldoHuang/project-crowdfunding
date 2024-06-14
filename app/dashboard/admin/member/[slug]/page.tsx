@@ -7,6 +7,16 @@ import { useState, useEffect } from "react";
 import placeholder from "@/public/svgs/profile-placeholder.svg";
 
 export default function MemberDetail({ params }: { params: { slug: string } }) {
+  const [username, setUsername] = useState('')
+  const [gender, setGender] = useState('')
+  const [city,setCity] = useState('')
+  const [birthdate, setBirthdate] = useState('')
+  const [address, setAddress] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
+  const [first, setFirst] = useState('')
+  const [last, setLast] = useState('')
+  const [created, setCreated] = useState('')
+
   useEffect(() => {
     fetchMemberDetail()
   }, [])
@@ -18,6 +28,16 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
     })
 
     const data = await response.json()
+
+    setUsername(data['memberDetail'].accountUsername)
+    setGender(data['memberDetail'].gender)
+    setCity(data['memberDetail'].city)
+    setBirthdate(data['memberDetail'].birthdate)
+    setAddress(data['memberDetail'].address)
+    setWhatsapp(data['memberDetail'].whatsapp)
+    setFirst(data['memberDetail'].firstName)
+    setLast(data['memberDetail'].lastName)
+    setCreated(data['memberDetail'].createdDate)
   }
 
   return (
@@ -40,7 +60,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Username</label>
               <input
                 type="text"
-                value="Yeremy Ganteng"
+                value={username}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -59,7 +79,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Nama Depan</label>
               <input
                 type="text"
-                value="Yeremy"
+                value={first}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -67,7 +87,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Nama Belakang</label>
               <input
                 type="text"
-                value="Simatupang"
+                value={last}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -78,7 +98,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Tempat Lahir</label>
               <input
                 type="text"
-                value="Jonggol"
+                value={city}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -86,7 +106,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Tanggal Lahir</label>
               <input
                 type="text"
-                value="2024/06/05"
+                value={birthdate.split('T')[0]}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -95,7 +115,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
           <div className="flex flex-col mb-5">
             <label className="mb-1">Alamat</label>
             <textarea
-              value="Jalan Krakatau"
+              value={address}
               className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
             />
           </div>
@@ -105,7 +125,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">Jenis Kelamin</label>
               <input
                 type="text"
-                value="Laki-Laki"
+                value={gender}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -113,7 +133,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1">No. Telp Whatsapp</label>
               <input
                 type="text"
-                value="08139798667988"
+                value={whatsapp}
                 className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
               />
             </div>
@@ -123,7 +143,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
             <label className="mb-1">Tanggal Pembuatan Akun</label>
             <input
               type="text"
-              value="2024/06/05"
+              value={created.split('T')[0]}
               className="px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed" disabled
             />
           </div>
