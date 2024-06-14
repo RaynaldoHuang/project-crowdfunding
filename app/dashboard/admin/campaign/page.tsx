@@ -115,7 +115,7 @@ export default function AdminCampaign() {
                                     <td className='text-xs'>{c.deadline.split('T')[0]}</td>
                                     <td className={clsx('text-xs', )}>{c.status}</td>
                                     <td className='text-xs'>{c.createdDate.split('T')[0]}</td>
-                                    <td className='text-xs'><Link href='/dashboard/admin/campaign/test' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                                    <td className='text-xs'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
                                 </tr>
                             ))
                         }

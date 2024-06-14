@@ -11,6 +11,8 @@ import campaign from "@/libs/campaign"
 export default function AdminDashboard() {
     const [members, setMembers] = useState([])
     const [campaigns, setCampaigns] = useState([])
+    const [memberCount, setMemberCount] = useState(0)
+    const [campaignCount, setCampaignCount] = useState(0)
 
     useEffect(() => {
         fetchMembers()
@@ -22,6 +24,7 @@ export default function AdminDashboard() {
         const data = await res.json()
 
         setMembers(data['members'])
+        setMemberCount(data.count._count.id)
     }
 
     const fetchCampaigns = async () => {
@@ -29,6 +32,7 @@ export default function AdminDashboard() {
         const data = await res.json()
 
         setCampaigns(data['campaignDashboard'])
+        setCampaignCount(data.count._count.id)
     }
 
     return (
@@ -42,7 +46,7 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-4 gap-2">
                     <div className="flex flex-row items-center justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
                         <div>
-                            <h1 className="font-bold text-2xl mb-1">100</h1>
+                            <h1 className="font-bold text-2xl mb-1">{memberCount}</h1>
                             <p className="text-sm">Jumlah Member</p>
                         </div>
                         <div className="h-20 w-20 bg-blue-100 rounded-full flex justify-center items-center">
@@ -54,7 +58,7 @@ export default function AdminDashboard() {
 
                     <div className="flex flex-row items-center justify-between bg-white drop-shadow-md rounded-xl px-6 py-6">
                         <div>
-                            <h1 className="font-bold text-2xl mb-1">90</h1>
+                            <h1 className="font-bold text-2xl mb-1">{campaignCount}</h1>
                             <p className="text-sm">Jumlah Kampanye</p>
                         </div>
                         <div className="h-20 w-20 bg-blue-100 rounded-full flex justify-center items-center">
@@ -113,7 +117,7 @@ export default function AdminDashboard() {
                                                 <td className='text-xs'>{member.accountUsername}</td>
                                                 <td className={clsx('text-xs',)}>{member.gender[0].toUpperCase() + member.gender.slice(1,).toLowerCase()}</td>
                                                 <td className='text-xs'>{member.createdDate.split('T')[0]}</td>
-                                                <td className='text-xs'><Link href='#' className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                                                <td className='text-xs'><Link href={`/dashboard/admin/member/${member.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
                                             </tr>
                                         ))
                                     }
@@ -142,9 +146,9 @@ export default function AdminDashboard() {
                                         campaigns.map((campaign: any) => (
                                             <tr className='border-b'>
                                                 <td className='text-xs py-5'>{campaign.eventName}</td>
-                                                <td className='text-xs'>{campaign.deadline}</td>
+                                                <td className='text-xs'>{campaign.deadline.split('T')[0]}</td>
                                                 <td className={clsx('text-xs',)}>{campaign.status}</td>
-                                                <td className='text-xs'>{campaign.createdDate}</td>
+                                                <td className='text-xs'>{campaign.createdDate.split('T')[0]}</td>
                                                 <td className='text-xs'><Link href={`/dashboard/admin/campaign/${campaign.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
                                             </tr>
                                         ))

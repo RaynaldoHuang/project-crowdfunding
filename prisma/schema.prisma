@@ -77,7 +77,7 @@ model Campaign {
   deadline            DateTime
   eventDescription    String
   // document
-  status              Status        @default(ONGOING)
+  status              Status        @default(PENDING)
 }
 
 // model VirtualBank {
