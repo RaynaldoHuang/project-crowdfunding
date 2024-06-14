@@ -49,7 +49,7 @@ export default function AdminMember() {
                     <tbody>
                         {
                             members.map((member: any) => (
-                                <tr className='border-b'>
+                                <tr key={member.id} className='border-b'>
                                     <td className='text-xs py-5'>{member.firstName}</td>
                                     <td className='text-xs'>{member.lastName}</td>
                                     <td className='text-xs'>{member.accountUsername}</td>

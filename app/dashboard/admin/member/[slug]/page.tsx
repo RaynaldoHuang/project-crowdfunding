@@ -1,11 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import placeholder from "@/public/svgs/profile-placeholder.svg";
-import { Button, Input, Textarea } from "@nextui-org/react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+import placeholder from "@/public/svgs/profile-placeholder.svg";
 
 export default function MemberDetail({ params }: { params: { slug: string } }) {
+  useEffect(() => {
+    fetchMemberDetail()
+  }, [])
+  
+  const fetchMemberDetail = async () => {
+    const response = await fetch('/api/member-detail', {
+      method: 'POST',
+      body: JSON.stringify({ id: params.slug })
+    })
+
+    const data = await response.json()
+  }
+
   return (
     <div className="ml-64">
       <div className="flex justify-between mx-5 h-14 items-center text-2xl font-semibold">
