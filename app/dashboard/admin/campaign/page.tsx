@@ -1,12 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import search from '@/public/svgs/search.svg'
-import placeholder from '@/public/svgs/profile-placeholder.svg'
 
 export default function AdminCampaign() {
     const [campaigns, setCampaigns] = useState([])
@@ -14,9 +11,9 @@ export default function AdminCampaign() {
     const [prev, setPrev] = useState('PENDING')
 
     const categories = [
-        {id: 0, title: 'Waiting for Approval', status: 'PENDING'},
-        {id: 1, title: 'Approved', status: 'ONGOING'},
-        {id: 2, title: 'Rejected', status: 'CANCELED'},
+        { id: 0, title: 'Menunggu Persetujuan', status: 'PENDING' },
+        { id: 1, title: 'Diterima', status: 'ONGOING' },
+        { id: 2, title: 'Ditolak', status: 'CANCELED' },
     ]
 
     useEffect(() => {
@@ -38,24 +35,23 @@ export default function AdminCampaign() {
     const onInitialLoad = () => {
         const btn: any = document.getElementById(prev)
 
-        btn.className = 'bg-[#336DFF] text-white w-fit text-xs mr-4 px-2 py-1 rounded-full'
+        btn.className = 'bg-sky-600 text-white text-xs mr-4 px-4 py-2 rounded-full'
     }
 
     const handleClick = (event: any) => {
-        let arr = campaigns
-        let stats: any
+        const btn = event.currentTarget;
+        const btnText = btn.textContent;
 
-        const btnText: any = event.target.innerHTML
-        console.log(btnText)
+        let stats: string;
 
         const prevBtn: any = document.getElementById(prev)
-        prevBtn.className = 'bg-[#7E84A3] text-white w-fit text-xs mr-4 px-2 py-1 rounded-full'
-        
+        prevBtn.className = 'bg-[#7E84A3] text-white w-fit text-xs mr-4 px-4 py-2 rounded-full'
+
         for (let idx in categories) {
             if (categories[idx]['title'] == btnText) {
                 const btn: any = document.getElementById(categories[idx]['status'])
                 console.log(btn)
-                btn.className = 'bg-[#336DFF] text-white w-fit text-xs mr-4 px-2 py-1 rounded-full'
+                btn.className = 'bg-sky-600 text-white w-fit text-xs mr-4 px-4 py-2 rounded-full'
 
                 setPrev(categories[idx]['status'])
 
@@ -64,31 +60,29 @@ export default function AdminCampaign() {
                 break
             }
         }
-
-        console.log('Stats', stats)
-
-        let result = arr.filter((c: any) => c.status == stats)
-
+        let result = campaigns.filter((c: any) => c.status == stats)
         setDynamicArr(result)
     }
 
     return (
         <div className="ml-64">
-            <div className="flex justify-between mx-5 h-14 items-center text-2xl font-semibold">
-                <h1>Campaign | Admin</h1>
-                <Image src={placeholder} width={45} height={45} alt='placeholder' className="rounded-full bg-transparent border px-1 py-1 border-[#336DFF]"/> 
-            </div>
-
-            <div className='mt-5 mx-5 bg-white px-5 py-10 mb-10 shadow-lg rounded-xl'>
-                <div className='relative'>
-                    <Image src={search} width={20} height={20} alt='icon' className='absolute top-1.5 left-2' />
-                    <input type="text" placeholder="Search ..." className='border border-slate-300 pl-10 py-1 pr-3 rounded-lg w-[350px]' />
+            <div className='mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl'>
+                <div className="flex justify-between items-center mb-10">
+                    <div className="text-lg font-bold">
+                        List Kampanye
+                    </div>
+                    <div className="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 absolute top-2.5 left-3 text-gray-500">
+                            <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
+                        </svg>
+                        <input type="text" id="first_name" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[350px] p-2.5 pl-12" placeholder="Pencarian..." />
+                    </div>
                 </div>
 
                 <div className='flex my-8'>
                     {
                         categories.map((c) => (
-                            <button key={c.id} onClick={(event) => handleClick(event)} className='bg-[#7E84A3] text-white focus:bg-[#336DFF] w-fit text-xs mr-4 px-2 py-1 rounded-full' id={c.status} >
+                            <button key={c.id} onClick={handleClick} className='bg-[#7E84A3] text-white focus:bg-sky-600 text-xs mr-4 px-4 py-2 rounded-full' id={c.status} >
                                 <p>{c.title}</p>
                             </button>
                         ))
@@ -98,24 +92,24 @@ export default function AdminCampaign() {
                 <table className='table-auto w-full'>
                     <thead className='text-left border-b-2'>
                         <tr className=''>
-                            <th className='font-normal text-xs text-slate-500 pb-2'>Event Name</th>
-                            <th className='font-normal text-xs text-slate-500 pb-2'>Event Description</th>
-                            <th className='font-normal text-xs text-slate-500 pb-2'>Deadline</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Judul Kampanye</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Deskripsi</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Batas Waktu</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Status</th>
-                            <th className='font-normal text-xs text-slate-500 pb-2'>Date Created</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Tanggal Dibuat</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            dynamicArr.map((c:any) => (
+                            dynamicArr.map((c: any) => (
                                 <tr key={c.id} className='border-b'>
                                     <td className='text-xs py-5'>{c.eventName}</td>
                                     <td className='text-xs w-2/4'>{c.eventDescription}</td>
                                     <td className='text-xs'>{c.deadline.split('T')[0]}</td>
-                                    <td className={clsx('text-xs', )}>{c.status}</td>
+                                    <td className={clsx('text-xs',)}>{c.status}</td>
                                     <td className='text-xs'>{c.createdDate.split('T')[0]}</td>
-                                    <td className='text-xs'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-[#336DFF] px-3 py-2 rounded'>View Detail</Link></td>
+                                    <td className='text-xs'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
                                 </tr>
                             ))
                         }
