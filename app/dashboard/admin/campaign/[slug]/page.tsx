@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import placeholder from '@/public/svgs/profile-placeholder.svg'
 import { FormEvent, useEffect, useState } from 'react'
@@ -13,6 +14,9 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
     const [descEvent, setDescEvent] = useState('')
     const [fundNeed, setFundNeed] = useState('')
     const [deadline, setDeadline] = useState('')
+    const [errors, setErrors] = useState({eventName: '', descEvent: '', fundNeed: '', deadline: ''})
+    const [isFormValid, setIsFormValid] = useState(false)
+    const [border, setBorder] = useState({eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true'})
 
     useEffect(() => {
         fetchCampaignDetail()
@@ -40,20 +44,84 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
 
         const formData = new FormData(event.currentTarget)
 
-        const res = await fetch('/api/campaign-detail', {
-            method: 'PUT',
-            body: JSON.stringify({
-                eventName: formData.get('event'),
-                status: formData.get('status'),
-                eventDescription: formData.get('desc'),
-                fundsNeeded: formData.get('fundsNeeded'),
-                deadline: formData.get('deadline')
-            })
-        })
+        let valid: any = validateForm(formData)
 
-        const data = await res.json()
+        if (valid) {
+            const res = await fetch('/api/campaign-detail', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    eventName: formData.get('event'),
+                    status: formData.get('status'),
+                    eventDescription: formData.get('desc'),
+                    fundsNeeded: formData.get('fundsNeeded'),
+                    deadline: formData.get('deadline')
+                })
+            })
+            
+            const data = await res.json()
+        }
     }
 
+
+    const styles = {
+        error: { 
+            color: 'red', 
+            fontSize: '14px', 
+            marginTop: '1px', 
+        }
+    }
+
+    const validateForm = (formData: any) => {
+        let valid = true
+        const date = new Date()
+
+        let errors = {eventName: '', descEvent: '', fundNeed: '', deadline: ''}
+        let border = {eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true'}
+        
+        if(formData.get('event') == "") {
+            errors.eventName = 'Nama Campaign diperlukan.'
+            border.eventBorder = 'false'
+
+            valid = false
+        }
+
+        if (formData.get('desc') == "") {
+            errors.descEvent = 'Deskripsi Campaign diperlukan.'
+            border.descBorder = 'false'
+
+            valid = false
+        }
+        else if (formData.get('desc').length > 500) {
+            errors.descEvent = 'Deskripsi Campaign terlalu panjang.'
+            border.descBorder = 'false'
+
+            valid = false
+        }
+
+        if (formData.get('fundsNeeded') == '') {
+            errors.fundNeed  = 'Please enter the funds.'
+            border.fundBorder = 'false'
+
+            valid = false
+        }
+
+        const deadline = new Date(formData.get('deadline'))
+
+        if (deadline.getTime() <= date.getTime()) {
+            errors.deadline = "Date can't be smaller than today's date"
+            border.deadlineBorder = 'false'
+
+            valid = false
+        }
+
+        setErrors(errors)
+        setBorder(border)
+        setIsFormValid(Object.keys(errors).length === 0)
+
+        return valid
+    }
+
+    
 
 
     return (
@@ -68,7 +136,8 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
                     <div className='grid grid-cols-2 gap-x-5 mb-5'>
                         <div className='flex flex-col'>
                             <label className='mb-1'>Event Name</label>
-                            <input type='text' name='event' onChange={(e) => setEventName(e.target.value)} value={eventName} className='px-3 py-2 rounded-lg border border-slate-300' />
+                            <input type='text' name='event' onChange={(e) => setEventName(e.target.value)} value={eventName} className={clsx('px-3 py-2 rounded-lg border', border.eventBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                            {errors.eventName && <p style={styles.error}>{errors.eventName}</p>} 
                         </div>
                         <div className='flex flex-col mb-5'>
                             <label className='mb-1'>Status</label>
@@ -82,23 +151,26 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
 
                     <div className='flex flex-col mb-5'>
                         <label className='mb-1'>Event Description</label>
-                        <textarea name='desc' onChange={(e) => setDescEvent(e.target.value)} value={descEvent}  className='px-3 py-2 rounded-lg border border-slate-300' />
+                        <textarea name='desc' onChange={(e) => setDescEvent(e.target.value)} value={descEvent}  className={clsx('px-3 py-2 rounded-lg border', border.descBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                        {errors.descEvent && <p style={styles.error}>{errors.descEvent}</p>} 
                     </div>
 
                     <div className='grid grid-cols-2 gap-x-5 mb-5'>
                         <div className='flex flex-col'>
                             <label className='mb-1'>Funds Needed</label>
-                            <input type='text' name='fundsNeeded' onChange={(e) => setFundNeed(e.target.value)} value={fundNeed} className='px-3 py-2 rounded-lg border border-slate-300' />
+                            <input type='text' name='fundsNeeded' onChange={(e) => setFundNeed(e.target.value)} value={fundNeed} className={clsx('px-3 py-2 rounded-lg border', border.fundBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                            {errors.fundNeed && <p style={styles.error}>{errors.fundNeed}</p>} 
                         </div>
                         <div className='flex flex-col'>
                             <label className='mb-1'>Accumulated Funds</label>
-                            <input type='text' value='Rp. 10.000.000' className='px-3 py-2 rounded-lg border border-slate-300' />
+                            <input type='text' value='Rp. 10.000.000' className='px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed' disabled/>
                         </div>
                     </div>
 
                     <div className='flex flex-col mb-5'>
                         <label className='mb-1'>Deadline Date</label>
-                        <input type='date' name='deadline' onChange={(e) => setDeadline(e.target.value)} value={deadline.split('T')[0]} className='px-3 py-2 rounded-lg border border-slate-300' />
+                        <input type='date' name='deadline' onChange={(e) => setDeadline(e.target.value)} value={deadline.split('T')[0]} className={clsx('px-3 py-2 rounded-lg border', border.deadlineBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                        {errors.deadline && <p style={styles.error}>{errors.deadline}</p>} 
                     </div>
 
                     <div className='flex flex-col mb-5'>
