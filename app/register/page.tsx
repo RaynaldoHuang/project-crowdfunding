@@ -2,12 +2,15 @@
 
 import { Input } from "@nextui-org/react";
 import React, { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 
 export default function RegisterPage() {
+    const router = useRouter()
+
     const [match, setMatch] = useState(true);
     const [passwordMismatch, setPasswordMismatch] = useState(false);
 
@@ -29,22 +32,27 @@ export default function RegisterPage() {
         const password = formData.get("password") as string;
         const confirmPassword = formData.get("confirmPassword") as string;
 
+        if (password != confirmPassword) {
+            setPasswordMismatch(true)
+            return
+        } else {
+            setPasswordMismatch(false)
+        }
 
         const res = await fetch('/api/register', {
             method: 'POST',
-            body: formData,
+            body: JSON.stringify({
+                username: formData.get('username'),
+                email: formData.get('email'),
+                password: formData.get('password')
+            }),
         })
-
-        if (password !== confirmPassword) {
-            setPasswordMismatch(true);
-            return; // Exit the function
-        }
-
-        setPasswordMismatch(false);
 
         const data = await res.json()
 
-        console.log(data.message)
+        if (data.success) {
+            router.push('/login')
+        }
     }
 
 

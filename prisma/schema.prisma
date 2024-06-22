@@ -39,6 +39,7 @@ model Account {
   username      String          @unique @db.VarChar(255)
   email         String          @db.VarChar(255)
   password      String          @db.VarChar(255)
+  role          Role            @default(MEMBER)
 }
 
 
@@ -55,14 +56,13 @@ model Profile {
 
   // Enums
   gender              Gender        @default(MALE)
-  role                Role          @default(MEMBER)
 
-  city                String        @db.VarChar(255)
-  birthdate           DateTime
-  address             String 
-  whatsapp            String
-  firstName           String
-  lastName            String
+  city                String        @default("")
+  birthdate           DateTime?      
+  address             String        @default("")  
+  whatsapp            String        @default("")
+  firstName           String        @default("") 
+  lastName            String        @default("")
   createdDate         DateTime      @default(now())
 
   // virtualNumber?

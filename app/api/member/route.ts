@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
     const members = await prisma.profile.findMany()
 
     const count = await prisma.profile.aggregate({
@@ -18,6 +18,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ "success": true, members, memberDashboard, count })
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
-    return NextResponse.json({ "success": true })
+export async function GET(req: NextRequest, res: NextResponse) {
+    return NextResponse.json({ message: 'Unauthorized request' }, { status: 403 })
 }

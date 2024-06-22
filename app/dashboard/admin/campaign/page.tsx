@@ -22,7 +22,9 @@ export default function AdminCampaign() {
     }, [])
 
     const fetchCampaign = async () => {
-        const res = await fetch('http://localhost:3000/api/campaign')
+        const res = await fetch('/api/campaign', {
+            method: 'POST'
+        })
         const data = await res.json()
 
         setCampaigns(data['campaigns'])

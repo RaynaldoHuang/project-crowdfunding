@@ -6,8 +6,11 @@ import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import Link from "next/link"
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+    const router = useRouter()
+
     const [isVisible, setIsVisible] = React.useState(false);
 
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -22,14 +25,23 @@ export default function LoginPage() {
         const formData = new FormData(event.currentTarget)
 
         const response = await fetch('/api/login', {
-        method: 'POST',
-        body: formData,
+            method: 'POST',
+            body: JSON.stringify({
+                username: formData.get('username'),
+                password: formData.get('password')
+            }),
         })
     
         // Handle response if necessary
         const data = await response.json()
 
-        console.log(data.message)
+        console.log(data)
+
+        if (data.success && data.role == 'ADMIN') {
+            return router.push('/dashboard/admin')
+        } else {
+            return router.push('/dashboard')
+        }
     }
 
     return (
