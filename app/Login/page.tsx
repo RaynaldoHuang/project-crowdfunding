@@ -37,10 +37,8 @@ export default function LoginPage() {
 
         console.log(data)
 
-        if (data.success && data.role == 'ADMIN') {
+        if (data.success) {
             return router.push('/dashboard/admin')
-        } else {
-            return router.push('/dashboard')
         }
     }
 
