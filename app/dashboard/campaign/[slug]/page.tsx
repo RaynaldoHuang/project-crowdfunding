@@ -163,7 +163,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                     </div>
 
                     <div className="bg-white px-5 py-5 mt-3 rounded-xl">
-
+                        
                     </div>
                 </div>
             </div>
