@@ -44,7 +44,7 @@ export default function RootLayout({
               </div>
               <div className="overflow-y-auto overflow-x-hidden flex-grow">
                 <ul className="flex flex-col py-4 space-y-1">
-                  <li className="px-5">
+                  {/* <li className="px-5">
                     <div className="flex flex-row items-center h-8">
                       <div className="text-sm font-light tracking-wide text-gray-500">Admin Menu</div>
                     </div>
@@ -80,7 +80,7 @@ export default function RootLayout({
                       </span>
                       <span className="ml-2 text-sm tracking-wide truncate">Kampanye</span>
                     </a>
-                  </li>
+                  </li> */}
                   <li className="px-5">
                     <div className="flex flex-row items-center h-8">
                       <div className="text-sm font-light tracking-wide text-gray-500">Menu Member</div>
