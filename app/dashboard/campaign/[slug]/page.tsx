@@ -197,8 +197,6 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                         Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
                                 </div>
                             </AccordionItem>
-
-
                         </Accordion>
                     </div>
                 </div>
