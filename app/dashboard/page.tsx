@@ -7,7 +7,7 @@ import img1 from "@/public/images/img1.jpg";
 export default function Dashboard() {
     return (
         <div className="ml-64">
-            <div className="w-full px-5 mt-20 mb-5">
+            <div className="w-full px-5 mt-20 mb-10">
                 <div className="bg-[url('/svgs/img5.svg')] bg-cover rounded-xl py-10 px-16">
                     <div className="w-1/2">
                         <h1 className="text-black text-5xl font-bold text-white">Donasi Sekarang</h1>

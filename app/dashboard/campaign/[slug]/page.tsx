@@ -8,10 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import img1 from "@/public/images/img1.jpg"
 import img3 from "@/public/images/img3.jpg"
-import { Accordion, AccordionItem, Button, Progress } from "@nextui-org/react";
+import { Button, Progress } from "@nextui-org/react";
 import Link from "next/link";
-import { title } from "process";
-import { Span } from "next/dist/trace";
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any; }) {
     const { className, style, onClick } = props;
@@ -54,7 +52,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                 <div>
                     <div className="flex gap-x-3">
                         <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
-                            <div className="slider-container rounded-lg h-[335px] overflow-hidden">
+                            <div className="slider-container rounded-lg h-[335px] overflow-hidden bg-red-300">
                                 <Slider {...settings}>
                                     <div>
                                         <Image src={img1} alt="" className="object-cover w-full h-full"></Image>
@@ -164,42 +162,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                         </div>
                     </div>
 
-                    <div className="bg-white px-5 py-2 mt-3 rounded-xl">
-                        <Accordion>
-                            <AccordionItem key="1" aria-label="Accordion 1" title={<h1 className="font-bold text-lg">
-                                Cerita Penggalangan Dana
-                            </h1>}>
-                                <p className="text-base">Kondisi tubuh yang penuh dengan benjolan, membuat Teh Sonia, Pak Karniwa juga penderita tumor lainnya menjadi tidak percaya diri, keterbatasan biaya untuk berobat lagi-lagi menjadi kendala bagi mereka hingga tidak melanjutkan pengobatannya. Sedangkan jika tidak berobat, kondisi mereka akan terus memburuk.
-                                    “Kenapa yaa bu, teteh kaya gini, ibu malu gak punya anak kaya teteh?” Teh sonia
-                                    Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
+                    <div className="bg-white px-5 py-5 mt-3 rounded-xl">
 
-                    <div className="bg-white px-5 py-2 mt-3 rounded-xl">
-                        <Accordion>
-                            <AccordionItem key="1" aria-label="Accordion 1" title={<h1 className="font-bold text-lg">
-                                Kabar Terbaru
-                            </h1>}>
-                                <div className="mb-8">
-                                    <h1 className="text-base text-sky-800 font-bold">Judul Berita Begini Begitu</h1>
-                                    <p className="text-xs mt-1 mb-5">Dipublikasikan 30 Juli 2019</p>
-                                    <p className="text-base">Kondisi tubuh yang penuh dengan benjolan, membuat Teh Sonia, Pak Karniwa juga penderita tumor lainnya menjadi tidak percaya diri, keterbatasan biaya untuk berobat lagi-lagi menjadi kendala bagi mereka hingga tidak melanjutkan pengobatannya. Sedangkan jika tidak berobat, kondisi mereka akan terus memburuk.
-                                        “Kenapa yaa bu, teteh kaya gini, ibu malu gak punya anak kaya teteh?” Teh sonia
-                                        Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
-                                </div>
-
-                                <div>
-                                    <h1 className="text-base text-sky-800 font-bold">Judul Berita Begini Begitu</h1>
-                                    <p className="text-xs mt-1 mb-5">Dipublikasikan 30 Juli 2019</p>
-                                    <p className="text-base">Kondisi tubuh yang penuh dengan benjolan, membuat Teh Sonia, Pak Karniwa juga penderita tumor lainnya menjadi tidak percaya diri, keterbatasan biaya untuk berobat lagi-lagi menjadi kendala bagi mereka hingga tidak melanjutkan pengobatannya. Sedangkan jika tidak berobat, kondisi mereka akan terus memburuk.
-                                        “Kenapa yaa bu, teteh kaya gini, ibu malu gak punya anak kaya teteh?” Teh sonia
-                                        Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
-                                </div>
-                            </AccordionItem>
-
-
-                        </Accordion>
                     </div>
                 </div>
             </div>

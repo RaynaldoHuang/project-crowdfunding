@@ -8,7 +8,7 @@ import { Button, Link } from '@nextui-org/react';
 export default function Campaign() {
     return (
         <div className='ml-64'>
-            <div className="w-full px-5 mt-20 mb-5 mb-5">
+            <div className="w-full px-5 mt-20 mb-5 mb-10">
                 <div className='grid grid-cols-4 gap-x-2 gap-y-8'>
                     <div className="bg-white px-3 py-3 rounded-2xl">
                         <Image src={img1} alt={""} width={350} className="rounded-xl"
