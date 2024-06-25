@@ -16,7 +16,9 @@ export default function AdminDashboard() {
     }, [])
 
     const fetchMembers = async () => {
-        const res = await fetch('http://localhost:3000/api/member')
+        const res = await fetch('/api/member', {
+            method: 'POST'
+        })
         const data = await res.json()
 
         setMembers(data['members'])
@@ -24,7 +26,9 @@ export default function AdminDashboard() {
     }
 
     const fetchCampaigns = async () => {
-        const res = await fetch('http://localhost:3000/api/campaign')
+        const res = await fetch('/api/campaign', {
+            method: 'POST'
+        })
         const data = await res.json()
 
         setCampaigns(data['campaignDashboard'])
@@ -38,7 +42,7 @@ export default function AdminDashboard() {
                     <div className="flex flex-row bg-white rounded-xl">
                         <div className="bg-orange-500 w-2 h-full rounded-l-xl">
                         </div>
-                        <div className="flex flex-row items-center w-full flex justify-between px-5 py-3">
+                        <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Member</p>
                                 <h1 className="font-bold text-xl mb-1">{memberCount} <span className="text-base font-semibold">Orang</span></h1>
@@ -70,7 +74,7 @@ export default function AdminDashboard() {
                     <div className="flex flex-row bg-white rounded-xl">
                         <div className="bg-blue-500 w-2 h-full rounded-l-xl">
                         </div>
-                        <div className="flex flex-row items-center w-full flex justify-between px-5 py-3">
+                        <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Donasi</p>
                                 <h1 className="font-bold text-xl mb-1">1.000.000.000 <span className="text-base font-semibold">IDR</span></h1>
@@ -86,7 +90,7 @@ export default function AdminDashboard() {
                     <div className="flex flex-row bg-white rounded-xl">
                         <div className="bg-yellow-500 w-2 h-full rounded-l-xl">
                         </div>
-                        <div className="flex flex-row items-center w-full flex justify-between px-5 py-3">
+                        <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Pengajuan</p>
                                 <h1 className="font-bold text-xl mb-1">8 <span className="text-base font-semibold">Formulir</span></h1>
@@ -127,8 +131,6 @@ export default function AdminDashboard() {
                                             </tr>
                                         ))
                                     }
-
-
                                 </tbody>
                             </table>
                         </div>

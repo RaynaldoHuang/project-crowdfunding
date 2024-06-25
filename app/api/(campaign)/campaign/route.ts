@@ -7,7 +7,7 @@ export const config = {
     },
 };
 
-export async function GET(req: NextRequest, res:NextResponse) {
+export async function POST(req: NextRequest, res:NextResponse) {
     const campaigns = await prisma.campaign.findMany()
 
     const count = await prisma.campaign.aggregate({
@@ -21,4 +21,8 @@ export async function GET(req: NextRequest, res:NextResponse) {
     })
 
     return NextResponse.json({ "success": true, campaignDashboard, campaigns, count })
+}
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    return NextResponse.json({ message: 'Unauthorized request.' })
 }

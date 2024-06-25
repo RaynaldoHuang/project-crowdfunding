@@ -1,12 +1,43 @@
+import { hashPassword } from "@/auth";
 import prisma from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 
+export const config = {
+    api: {
+        bodyParser: false
+    }
+}
+
 export async function POST(req: NextRequest, res: NextResponse) {
-    const data = await req.formData()
+    const data = await req.json()
 
-    const username = data.get('username')
-    const email = data.get('email')
-    const password = data.get('password')
+    const checkAccount = await prisma.account.findUnique({
+        where: {
+            username: data.username
+        }
+    })
 
-    return NextResponse.json({ "success": true, "message": "User created successfully", "data": data })
+    if (checkAccount != null) {
+        return NextResponse.json({ success: false, message: 'Username already exist.' }, { status: 403 })
+    }
+
+    const createAccount = await prisma.account.create({
+        data: {
+            username: data.username,
+            email: data.email,
+            password: hashPassword(data.password),
+        },
+    })
+
+    const createProfile = await prisma.profile.create({
+        data: {
+            accountUsername: data.username,
+        }
+    })
+
+    return NextResponse.json({ success: true, message: 'New account created successfully. Please sign in with your newly created account to continue.' }, { status: 201 })
+}
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    return NextResponse.json({ success: true, message: 'Unauthorized request' }, { status: 403 })
 }

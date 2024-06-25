@@ -12,7 +12,9 @@ export default function AdminMember() {
     }, [])
 
     const fetchMembers = async () => {
-        const res = await fetch('http://localhost:3000/api/member')
+        const res = await fetch('/api/member', {
+            method: 'POST'
+        })
         const data = await res.json()
 
         setMembers(data['members'])

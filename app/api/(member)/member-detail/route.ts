@@ -24,3 +24,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     return NextResponse.json({ 'success': true, memberDetail })
 }
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    return NextResponse.json({ success: true, message: 'Unauthorized request' }, { status: 403 })
+}

@@ -13,22 +13,22 @@ CREATE TABLE "Account" (
     "username" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'MEMBER',
 
     CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Profile" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "accountUsername" TEXT NOT NULL,
     "gender" "Gender" NOT NULL DEFAULT 'MALE',
-    "role" "Role" NOT NULL DEFAULT 'MEMBER',
-    "city" VARCHAR(255) NOT NULL,
-    "birthdate" TIMESTAMP(3) NOT NULL,
-    "address" TEXT NOT NULL,
-    "whatsapp" TEXT NOT NULL,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
+    "city" TEXT NOT NULL DEFAULT '',
+    "birthdate" TIMESTAMP(3),
+    "address" TEXT NOT NULL DEFAULT '',
+    "whatsapp" TEXT NOT NULL DEFAULT '',
+    "firstName" TEXT NOT NULL DEFAULT '',
+    "lastName" TEXT NOT NULL DEFAULT '',
     "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Profile_pkey" PRIMARY KEY ("id")
@@ -36,14 +36,14 @@ CREATE TABLE "Profile" (
 
 -- CreateTable
 CREATE TABLE "Campaign" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "eventName" VARCHAR(255) NOT NULL,
     "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "fundsNeeded" INTEGER NOT NULL DEFAULT 0,
     "fundsAccumulated" INTEGER NOT NULL DEFAULT 0,
     "deadline" TIMESTAMP(3) NOT NULL,
     "eventDescription" TEXT NOT NULL,
-    "status" "Status" NOT NULL DEFAULT 'CANCELED',
+    "status" "Status" NOT NULL DEFAULT 'PENDING',
 
     CONSTRAINT "Campaign_pkey" PRIMARY KEY ("id")
 );
