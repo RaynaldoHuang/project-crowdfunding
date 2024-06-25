@@ -4,7 +4,7 @@ import clsx from 'clsx'
 export default function FormPengajuan() {
     return (
         <div className="ml-64">
-            <div className='mt-20 mx-5 bg-white px-5 py-10 mb-5 rounded-xl'>
+            <div className='mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl'>
                 <div className='flex justify-between mb-10'>
                     <div className="text-lg font-bold">
                         List Pengajuan Kampanye
