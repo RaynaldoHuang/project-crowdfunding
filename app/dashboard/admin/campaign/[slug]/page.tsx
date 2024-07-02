@@ -1,22 +1,20 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import placeholder from '@/public/svgs/profile-placeholder.svg'
 import { FormEvent, useEffect, useState } from 'react'
 
 
-export default function CampaignDetail({params}: {params: {slug: string}}) {
+export default function CampaignDetail({ params }: { params: { slug: string } }) {
     const [eventName, setEventName] = useState('')
     const [statusEvent, setStatusEvent] = useState('')
     const [descEvent, setDescEvent] = useState('')
     const [fundNeed, setFundNeed] = useState('')
     const [deadline, setDeadline] = useState('')
-    const [errors, setErrors] = useState({eventName: '', descEvent: '', fundNeed: '', deadline: ''})
+    const [errors, setErrors] = useState({ eventName: '', descEvent: '', fundNeed: '', deadline: '' })
     const [isFormValid, setIsFormValid] = useState(false)
-    const [border, setBorder] = useState({eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true'})
+    const [border, setBorder] = useState({ eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true' })
 
     useEffect(() => {
         fetchCampaignDetail()
@@ -57,17 +55,17 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
                     deadline: formData.get('deadline')
                 })
             })
-            
+
             const data = await res.json()
         }
     }
 
 
     const styles = {
-        error: { 
-            color: 'red', 
-            fontSize: '14px', 
-            marginTop: '1px', 
+        error: {
+            color: 'red',
+            fontSize: '14px',
+            marginTop: '1px',
         }
     }
 
@@ -75,10 +73,10 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
         let valid = true
         const date = new Date()
 
-        let errors = {eventName: '', descEvent: '', fundNeed: '', deadline: ''}
-        let border = {eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true'}
-        
-        if(formData.get('event') == "") {
+        let errors = { eventName: '', descEvent: '', fundNeed: '', deadline: '' }
+        let border = { eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true' }
+
+        if (formData.get('event') == "") {
             errors.eventName = 'Nama Campaign diperlukan.'
             border.eventBorder = 'false'
 
@@ -99,7 +97,7 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
         }
 
         if (formData.get('fundsNeeded') == '') {
-            errors.fundNeed  = 'Please enter the funds.'
+            errors.fundNeed = 'Please enter the funds.'
             border.fundBorder = 'false'
 
             valid = false
@@ -121,27 +119,22 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
         return valid
     }
 
-    
+
 
 
     return (
         <div className="ml-64">
-            <div className="flex justify-between mx-5 h-14 items-center text-2xl font-semibold">
-                <h1>Campaign Detail | Admin</h1>
-                <Image src={placeholder} width={45} height={45} alt='placeholder' className="rounded-full bg-transparent border px-1 py-1 border-[#336DFF]"/> 
-            </div>
-
-            <div className='mt-5 mx-5 bg-white px-5 py-10 mb-10 shadow-xl rounded-xl'>
+            <div className='mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl'>
                 <form onSubmit={handleSubmit}>
                     <div className='grid grid-cols-2 gap-x-5 mb-5'>
                         <div className='flex flex-col'>
-                            <label className='mb-1'>Event Name</label>
-                            <input type='text' name='event' onChange={(e) => setEventName(e.target.value)} value={eventName} className={clsx('px-3 py-2 rounded-lg border', border.eventBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
-                            {errors.eventName && <p style={styles.error}>{errors.eventName}</p>} 
+                            <label className="mb-1 text-sm">Judul Kampanye</label>
+                            <input type='text' name='event' onChange={(e) => setEventName(e.target.value)} value={eventName} className={clsx('px-3 py-2 rounded-lg bg-gray-100', border.eventBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                            {errors.eventName && <p style={styles.error}>{errors.eventName}</p>}
                         </div>
                         <div className='flex flex-col mb-5'>
-                            <label className='mb-1'>Status</label>
-                            <select name='status' onChange={(e) => setStatusEvent(e.target.value)} value={statusEvent} className='px-3 py-2 rounded-lg border border-slate-300'>
+                            <label className='mb-1 text-sm'>Status</label>
+                            <select name='status' onChange={(e) => setStatusEvent(e.target.value)} value={statusEvent} className='px-3 py-2 rounded-lg bg-gray-100'>
                                 <option value='PENDING'>Pending</option>
                                 <option value='ONGOING'>Approve</option>
                                 <option value='CANCELED'>Reject</option>
@@ -150,44 +143,44 @@ export default function CampaignDetail({params}: {params: {slug: string}}) {
                     </div>
 
                     <div className='flex flex-col mb-5'>
-                        <label className='mb-1'>Event Description</label>
-                        <textarea name='desc' onChange={(e) => setDescEvent(e.target.value)} value={descEvent}  className={clsx('px-3 py-2 rounded-lg border', border.descBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
-                        {errors.descEvent && <p style={styles.error}>{errors.descEvent}</p>} 
+                        <label className='mb-1 text-sm'>Deskripsi Kampanye</label>
+                        <textarea name='desc' onChange={(e) => setDescEvent(e.target.value)} value={descEvent} className={clsx('px-3 py-2 rounded-lg bg-gray-100', border.descBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                        {errors.descEvent && <p style={styles.error}>{errors.descEvent}</p>}
                     </div>
 
                     <div className='grid grid-cols-2 gap-x-5 mb-5'>
                         <div className='flex flex-col'>
-                            <label className='mb-1'>Funds Needed</label>
-                            <input type='text' name='fundsNeeded' onChange={(e) => setFundNeed(e.target.value)} value={fundNeed} className={clsx('px-3 py-2 rounded-lg border', border.fundBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
-                            {errors.fundNeed && <p style={styles.error}>{errors.fundNeed}</p>} 
+                            <label className='mb-1 text-sm'>Dana Yang Dibutuhkan</label>
+                            <input type='text' name='fundsNeeded' onChange={(e) => setFundNeed(e.target.value)} value={fundNeed} className={clsx('px-3 py-2 rounded-lg bg-gray-100', border.fundBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                            {errors.fundNeed && <p style={styles.error}>{errors.fundNeed}</p>}
                         </div>
                         <div className='flex flex-col'>
-                            <label className='mb-1'>Accumulated Funds</label>
-                            <input type='text' value='Rp. 10.000.000' className='px-3 py-2 rounded-lg border border-slate-300 cursor-not-allowed' disabled/>
+                            <label className='mb-1 text-sm'>Dana Terkumpul</label>
+                            <input type='text' value='Rp. 10.000.000' className='px-3 py-2 rounded-lg bg-gray-100 border-slate-300 cursor-not-allowed' disabled />
                         </div>
                     </div>
 
                     <div className='flex flex-col mb-5'>
-                        <label className='mb-1'>Deadline Date</label>
-                        <input type='date' name='deadline' onChange={(e) => setDeadline(e.target.value)} value={deadline.split('T')[0]} className={clsx('px-3 py-2 rounded-lg border', border.deadlineBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
-                        {errors.deadline && <p style={styles.error}>{errors.deadline}</p>} 
+                        <label className='mb-1 text-sm'>Batas Waktu Kampanye</label>
+                        <input type='date' name='deadline' onChange={(e) => setDeadline(e.target.value)} value={deadline.split('T')[0]} className={clsx('px-3 py-2 rounded-lg bg-gray-100', border.deadlineBorder == 'true' ? 'border-slate-300' : 'border-red-600')} />
+                        {errors.deadline && <p style={styles.error}>{errors.deadline}</p>}
                     </div>
 
                     <div className='flex flex-col mb-5'>
-                        <label className='mb-1'>Upload Image</label>
+                        <label className='mb-1'>Gambar Pendukung</label>
                         <div className='border border-dashed border-slate-300 rounded-lg py-20 flex justify-center'>
-                            <input type='file' accept='.png, .jpg, .jpeg'/>
+                            <input type='file' accept='.png, .jpg, .jpeg' />
                         </div>
                     </div>
 
                     <div className='flex justify-end items-center'>
-                        <Link href='/dashboard/admin/campaign' className='border border-red-500 px-3 py-2 text-red-500 mx-5 rounded-lg'>Cancel</Link>
-                        <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Edit Campaign</button>
+                        <Link href='/dashboard/admin/campaign' className='border border-red-500 px-2 py-2 text-red-500 mx-5 rounded-lg'>Cancel</Link>
+                        <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
-                
-            
+
+
         </div>
     )
 }
