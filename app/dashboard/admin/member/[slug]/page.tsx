@@ -94,8 +94,8 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
             <div className="flex flex-col">
               <label className="mb-1 text-sm">Tanggal Lahir</label>
               <input
-                type="text"
-                value={birthdate.split('T')[0]}
+                type="date"
+                value={birthdate == null ? '' : birthdate.split('T')[0]}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
             </div>
@@ -131,7 +131,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
           <div className="flex flex-col mb-8">
             <label className="mb-1 text-sm">Tanggal Pembuatan Akun</label>
             <input
-              type="text"
+              type="date"
               value={created.split('T')[0]}
               className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
             />
