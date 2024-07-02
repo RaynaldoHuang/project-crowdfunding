@@ -12,7 +12,7 @@ export const config = {
 export async function POST(req: NextRequest, res: NextResponse) {
     const data = await req.json()
 
-    const userExist = await prisma.account.findUnique({
+    const userExist: any= await prisma.account.findUnique({
         where: {
             username: data.username
         }
