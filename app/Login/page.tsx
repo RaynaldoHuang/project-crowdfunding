@@ -1,17 +1,20 @@
 "use client"
 
 import { Input } from "@nextui-org/react";
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
 import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import Link from "next/link"
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
     const router = useRouter()
 
-    const [isVisible, setIsVisible] = React.useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errMessage, setErrMessage] = useState('')
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -21,7 +24,8 @@ export default function LoginPage() {
      */
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        
+        setIsLoading(true);
+
         const formData = new FormData(event.currentTarget)
 
         const response = await fetch('/api/login', {
@@ -31,19 +35,24 @@ export default function LoginPage() {
                 password: formData.get('password')
             }),
         })
-    
+
         // Handle response if necessary
         const data = await response.json()
 
         console.log(data)
 
         if (data.success) {
+            setIsLoading(false)
             return router.push('/dashboard/admin')
         }
+
+        setErrMessage(data.message)
+        setIsLoading(false)
     }
 
     return (
         <>
+            {/* {errMessage == '' ? <div></div> : <div className="text-red-600">{errMessage}</div>} */}
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
                 <div className="drop-shadow-md bg-white rounded-lg px-5 py-5 w-[520px]">
                     <div className="flex flex-col">
@@ -88,11 +97,15 @@ export default function LoginPage() {
                             />
                         </div>
                         <Link href={""} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
-                        <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit">
-                            Login
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" color="white" />
-                            </svg>
+                        <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit" disabled={isLoading}>
+                            {isLoading ? (<div className="flex items-center justify-center">
+                                <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V2.83a1 1 0 00-1.57-.83l-4 3a1 1 0 000 1.66l4 3A1 1 0 0012 8.83V7a6 6 0 100 12v-1.83a1 1 0 00-1.57-.83l-4 3a1 1 0 000 1.66l4 3A1 1 0 0012 20.83V20a8 8 0 01-8-8z"></path>
+                                </svg>
+                                <span>Memuat...</span>
+                            </div>) : (<>Login
+                            </>)}
                         </Button>
                     </form>
                     <div className="flex flex-row mt-10 items-center justify-between">

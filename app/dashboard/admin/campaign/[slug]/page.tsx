@@ -134,7 +134,7 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
                         </div>
                         <div className='flex flex-col mb-5'>
                             <label className='mb-1 text-sm'>Status</label>
-                            <select name='status' onChange={(e) => setStatusEvent(e.target.value)} value={statusEvent} className='px-3 py-2 rounded-lg bg-gray-100'>
+                            <select name='status' onChange={(e) => setStatusEvent(e.target.value)} value={statusEvent} className='px-3 py-2 rounded-lg bg-gray-100' style={{ borderRight: "12px solid rgb(243 244 246)" }}>
                                 <option value='PENDING'>Pending</option>
                                 <option value='ONGOING'>Approve</option>
                                 <option value='CANCELED'>Reject</option>
