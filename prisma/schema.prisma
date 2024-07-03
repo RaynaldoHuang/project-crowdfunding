@@ -31,109 +31,82 @@ enum Status {
 
 
 model Account {
-  id            Int          @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   
+  username      String          @unique
+  email         String          
+  password      String          
+  role          Role            @default(MEMBER)
+
   // One to one -> Profile
   profile       Profile?
-  
-  username      String          @unique @db.VarChar(255)
-  email         String          @db.VarChar(255)
-  password      String          @db.VarChar(255)
-  role          Role            @default(MEMBER)
 }
 
 
 model Profile {
   id                  String        @id @default(uuid())
-  // One to one -> Account
+  
   accountUsername     String        @unique
   username            Account       @relation(fields: [accountUsername], references: [username])
 
-  // One to Many -> Donation, TopUp, DonationHistory
-  // donation            Donation[]
-  // topUp               TopUp[]
-  // donationHistory     DonationHistory[]
+  campaign            Campaign[]
+  campaignId          String
 
-  // Enums
+  firstName           String        @default("")
+  lastName            String        @default("")
+  city                String        @default("")
+  birthdate           DateTime      @default(now())
+  address             String        @default("")
+  phoneNumber         String        @default("")
+
   gender              Gender        @default(MALE)
 
-  city                String        @default("")
-  birthdate           DateTime?      
-  address             String        @default("")  
-  whatsapp            String        @default("")
-  firstName           String        @default("") 
-  lastName            String        @default("")
   createdDate         DateTime      @default(now())
-
-  // virtualNumber?
 }
 
 model Campaign {
-  id                  String        @id @default(uuid())
-  eventName           String        @db.VarChar(255)
-  createdDate         DateTime      @default(now())
-  fundsNeeded         Int           @default(0)
+  id                  String        @id @unique @default(uuid())
+
+  profile             Profile       @relation(fields: [profileId], references: [id])
+  profileId           String
+
+  campaignImage       CampaignImage[]
+
+  news                News[]
+
+  eventName           String        
+  eventDescription    String
+  fundsNeeded         Int           
   fundsAccumulated    Int           @default(0)
   deadline            DateTime
-  eventDescription    String
-  // document
+  createdDate         DateTime      @default(now())
+
   status              Status        @default(PENDING)
 }
 
-// model VirtualBank {
-//   id    BigInt    @id @default(autoincrement())
-//   // virtual number 
-//   amount  BigInt  @default(0)
-// }
+model CampaignImage {
+  id                  Int           @id @default(autoincrement())
 
-// model TopUp {
-//   id    BigInt    @id @default(autoincrement())
+  campaign            Campaign      @relation(fields: [campaignId], references: [id])
+  campaignId          String
 
-//   // One to Many -> Profile
-//   profileId   BigInt
-//   profile     Profile   @relation(fields: [profileId], references: [id])
+  imageLink           String
+}
 
-//   date  DateTime  @default(now())
-//   amount  BigInt
-//   news    String?
-// }
+model News {
+  id                  Int          @id @default(autoincrement())
 
-// model DonationHistory {
-//   id    BigInt    @id @default(autoincrement())
+  campaign            Campaign     @relation(fields: [campaignId], references: [id])
+  campaignId          String
 
-//   // One To Many -> Profile
-//   profileId     BigInt
-//   profile       Profile     @relation(fields: [profileId], references: [id])
-// }
+  updateNews          String
 
-// model CampaignDocument {
-//   id  BigInt  @id @default(autoincrement())
-//   images  Bytes
-//   pdf   Bytes
-// }
+  createdDate         DateTime     @default(now())
+}
 
-// model DonationRequest {
-//   id  BigInt  @id @default(autoincrement())
-//   // profile
-//   requestedDate DateTime
-//   fundsNeeded   BigInt  @default(0)
-//   description   String
-//   // document id
-// }
-
-// model DocumentRequest {
-//   id  BigInt  @id @default(autoincrement())
-//   image Bytes
-//   pdf Bytes
-// }
-
+// Note: Waiting for Midtrans
 // model Donation {
-//   id  BigInt  @id @default(autoincrement())
-//   // campaign id
-//   // One to Many -> Profile
-//   profileId   BigInt
-//   profile     Profile   @relation(fields: [profileId], references: [id])
+//   id                  Int          @id @default(autoincrement())
 
-//   donationDate DateTime
-//   amount BigInt @default(0)
+      
 // }
