@@ -50,7 +50,7 @@ model Profile {
   username            Account       @relation(fields: [accountUsername], references: [username])
 
   campaign            Campaign[]
-  campaignId          String
+  campaignId          String?
 
   firstName           String        @default("")
   lastName            String        @default("")

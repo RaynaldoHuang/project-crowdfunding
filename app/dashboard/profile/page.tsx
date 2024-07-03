@@ -113,8 +113,8 @@ export default function profileAcc() {
                                 <div className='flex flex-col'>
                                     <label className="mb-2 text-sm">Tanggal Bergabung</label>
                                     <input
-                                        type="text"
-                                        value={"12-23-2402"}
+                                        type="date"
+                                        value={"2024-01-01"}
                                         disabled={true}
                                         readOnly
                                         // required={true}

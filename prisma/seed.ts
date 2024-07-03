@@ -16,9 +16,9 @@ async function main() {
 
     const systemAdminProfile = await prisma.profile.create({
         data: {
-            accountUsername: 'systemadmin',
-            firstName: 'System Admin',
-            lastName: 'System Admin',
+          accountUsername: 'systemadmin',
+          firstName: 'System',
+          lastName: 'Admin',
         }
     })
 
