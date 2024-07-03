@@ -1,9 +1,4 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
-
-import placeholder from '@/public/svgs/profile-placeholder.svg'
-import search from '@/public/svgs/search.svg'
 
 export default function Wallet() {
     return (
@@ -37,7 +32,6 @@ export default function Wallet() {
                             <td className='text-xs py-5'>Curing Cancer</td>
                             <td className='text-xs'>Rp. 1.000.000</td>
                             <td className='text-xs'>2070-01-01</td>
-                            <td className='text-xs'><Link href='#' className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
                         </tr>
                     </tbody>
                 </table>

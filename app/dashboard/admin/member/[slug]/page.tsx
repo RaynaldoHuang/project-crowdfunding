@@ -54,10 +54,10 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               />
             </div>
             <div className="flex flex-col">
-              <label className="mb-1 text-sm">Jumlah Saldo</label>
+              <label className="mb-1 text-sm">Alamat Email</label>
               <input
                 type="text"
-                value="Rp. 1.000.000"
+                value="huangraynaldo@gmail.com"
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
             </div>
@@ -94,7 +94,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
             <div className="flex flex-col">
               <label className="mb-1 text-sm">Tanggal Lahir</label>
               <input
-                type="date"
+                type="Date"
                 value={birthdate == null ? '' : birthdate.split('T')[0]}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
@@ -113,13 +113,13 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
             <div className="flex flex-col">
               <label className="mb-1 text-sm">Jenis Kelamin</label>
               <input
-                type="text"
+                type="select"
                 value={gender}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
             </div>
             <div className="flex flex-col">
-              <label className="mb-1 text-sm">Nomor WhatsApp</label>
+              <label className="mb-1 text-sm">Nomor Telepon</label>
               <input
                 type="text"
                 value={whatsapp}
@@ -131,7 +131,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
           <div className="flex flex-col mb-8">
             <label className="mb-1 text-sm">Tanggal Pembuatan Akun</label>
             <input
-              type="date"
+              type="text"
               value={created.split('T')[0]}
               className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
             />
