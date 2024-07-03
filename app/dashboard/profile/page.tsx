@@ -132,7 +132,7 @@ export default function profileAcc() {
                                         // required={true}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
-                                    <Link href={""} className="mt-2 text-xs text-sky-600">Klik disini untuk ganti kata sandi</Link>
+                                    <Link href={"profile/katasandi"} className="mt-2 text-xs text-sky-600">Klik disini untuk ganti kata sandi</Link>
                                 </div>
                             </div>
 
