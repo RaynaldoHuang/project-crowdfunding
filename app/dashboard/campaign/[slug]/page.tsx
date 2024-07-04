@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +12,7 @@ import { Button, Progress } from "@nextui-org/react";
 import Link from "next/link";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import img6 from "@/public/svgs/img6.svg"
+
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any; }) {
     const { className, style, onClick } = props;
@@ -41,6 +42,37 @@ function SamplePrevArrow(props: { className: any; style: any; onClick: any; }) {
 
 export default function DetailCampaign({ params }: { params: { slug: string } }) {
     const [kabarTerbaruAda, setKabarTerbaruAda] = useState(false);
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [dateCreated, setDateCreated] = useState('')
+    const [eventName, setEventName] = useState('')
+    const [fundAccumulated, setFundAccumulated]: [any, any] = useState(0)
+    const [fundsNeeded, setFundNeedded]: [any, any] = useState(0)
+    const [eventDescription, setEventDescription] = useState('')
+
+    useEffect(() => {
+        fetchCampaigDetail()
+    }, [])
+
+    const fetchCampaigDetail = async () => {
+        const res = await fetch('/api/campaign-detail-member', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: params.slug
+            })
+        })
+        
+        const data = await res.json()
+        console.log(data)
+        setFirstName(data['campaignDetailMember'][0].profile.firstName)
+        setLastName(data['campaignDetailMember'][0].profile.lastName)
+        setDateCreated(data['campaignDetailMember'][0].profile.createdDate.split('T')[0])
+        setEventName(data['campaignDetailMember'][0].eventName)
+        setFundAccumulated(data['campaignDetailMember'][0].fundsAccumulated)
+        setFundNeedded(data['campaignDetailMember'][0].fundsNeeded)
+        setEventDescription(data['campaignDetailMember'][0].eventDescription)
+
+    }
 
     const settings = {
         infinite: true,
@@ -69,13 +101,13 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                 </Slider>
                             </div>
                             <div className="py-5">
-                                <h1 className="text-2xl font-bold mb-1">HELP! Bantu Sembuhkan Para Penderita Tumor HELP! Bantu Sembuhkan Para Penderita Tumor</h1>
+                                <h1 className="text-2xl font-bold mb-1">{eventName}</h1>
                                 <p className="text-xs">Batas Waktu: <span className="font-semibold text-red-600">49 Hari Lagi</span></p>
                             </div>
                             <div className="flex items-center justify-between mb-7">
                                 <div>
-                                    <h1 className="font-bold text-sky-600 text-xl mb-1">Rp59.250.000</h1>
-                                    <p className="text-xs">Terkumpul dari <span className="font-bold">Rp100.000.000</span></p>
+                                    <h1 className="font-bold text-sky-600 text-xl mb-1">Rp{fundAccumulated.toLocaleString()}</h1>
+                                    <p className="text-xs">Terkumpul dari <span className="font-bold">Rp{fundsNeeded.toLocaleString()}</span></p>
                                 </div>
                                 <div>
                                     <Button variant="bordered" className="border-sky-600 text-white px-8 py-4 rounded-xl mr-2 text-sky-600">
@@ -92,8 +124,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                             <Progress
                                 aria-label="Close"
                                 size="sm"
-                                value={59250000}
-                                maxValue={100000000}
+                                value={fundAccumulated}
+                                maxValue={fundsNeeded}
                                 color="warning"
                             />
                         </div>
@@ -107,8 +139,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                         </svg>
                                     </div>
                                     <div className="ml-5">
-                                        <h1 className="font-bold text-sm">Yayasan Cahaya Sedekah Kebaikan</h1>
-                                        <p className="text-xs mt-1">Mulai aktif 30 Juli 2019</p>
+                                        <h1 className="font-bold text-sm">{`${firstName} ${lastName}`}</h1>
+                                        <p className="text-xs mt-1">Mulai aktif {dateCreated}</p>
                                     </div>
                                 </div>
                             </div>
@@ -173,9 +205,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                             <AccordionItem key="1" aria-label="Accordion 1" title={<h1 className="font-bold text-lg">
                                 Cerita Penggalangan Dana
                             </h1>}>
-                                <p className="text-base">Kondisi tubuh yang penuh dengan benjolan, membuat Teh Sonia, Pak Karniwa juga penderita tumor lainnya menjadi tidak percaya diri, keterbatasan biaya untuk berobat lagi-lagi menjadi kendala bagi mereka hingga tidak melanjutkan pengobatannya. Sedangkan jika tidak berobat, kondisi mereka akan terus memburuk.
-                                    “Kenapa yaa bu, teteh kaya gini, ibu malu gak punya anak kaya teteh?” Teh sonia
-                                    Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
+                                <p className="text-base">{eventDescription}</p>
                             </AccordionItem>
                         </Accordion>
                     </div>

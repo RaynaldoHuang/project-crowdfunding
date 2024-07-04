@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, res:NextResponse) {
         take: 5
     })
 
-    return NextResponse.json({ "success": true, campaignDashboard, campaigns, count })
+    return NextResponse.json({ "success": true, campaignDashboard, campaigns, count }, { status: 200 })
 }
 
 export async function GET(req: NextRequest, res: NextResponse) {
