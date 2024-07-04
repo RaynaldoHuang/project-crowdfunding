@@ -14,5 +14,18 @@ export async function GET(req: NextRequest, res: NextResponse) {
         }
     })
 
-    return NextResponse.json({ success: true, campaignMember }, { status: 200 })
+    const dashboardCampaign = await prisma.campaign.findMany({
+        take: 4,
+        where: {
+            status: 'ONGOING'
+        },
+        select: {
+            id: true,
+            eventName: true,
+            eventDescription: true,
+            fundsNeeded: true,
+        }
+    })
+
+    return NextResponse.json({ success: true, campaignMember, dashboardCampaign}, { status: 200 })
 }

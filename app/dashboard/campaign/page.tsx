@@ -6,7 +6,7 @@ import img1 from "@/public/images/img1.jpg";
 
 import { Button, Link } from '@nextui-org/react';
 
-export default function Campaign() {
+export default function CampaignMember() {
     const [campaigns, setCampaigns] = useState([])
 
     useEffect(() => {
