@@ -1,9 +1,15 @@
 "use client"
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function profileAcc() {
-      
+    const [isEditing, setIsEditing] = useState(false);
+
+    const toggleEdit = () => {
+        setIsEditing(!isEditing);
+    };
+
     return (
         <>
             <div className="ml-64">
@@ -22,7 +28,7 @@ export default function profileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan username kamu'
-                                        // required={true}
+                                        disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
                                 </div>
@@ -33,7 +39,7 @@ export default function profileAcc() {
                                         <input
                                             type="text"
                                             placeholder='Masukkan nama depan kamu'
-                                            // required={true}
+                                            disabled={!isEditing}
                                             className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                         />
                                     </div>
@@ -43,7 +49,7 @@ export default function profileAcc() {
                                         <input
                                             type="text"
                                             placeholder='Masukkan nama belakang kamu'
-                                            // required={true}
+                                            disabled={!isEditing}
                                             className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                         />
                                     </div>
@@ -51,7 +57,7 @@ export default function profileAcc() {
 
                                 <div className='flex flex-col'>
                                     <label className="mb-2 text-sm">Jenis Kelamin</label>
-                                    <select name='jenis-kelamin' className='px-3 py-2 rounded-lg bg-gray-100 text-sm' style={{ borderRight: "12px solid rgb(243 244 246)" }}>
+                                    <select name='jenis-kelamin' className='px-3 py-2 rounded-lg bg-gray-100 text-sm' style={{ borderRight: "12px solid rgb(243 244 246)" }} disabled={!isEditing}>
                                         <option value='laki-laki'>Laki-Laki</option>
                                         <option value='Perempuan'>Perempuan</option>
                                     </select>
@@ -62,7 +68,7 @@ export default function profileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan alamat kamu'
-                                        // required={true}
+                                        disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
                                 </div>
@@ -73,7 +79,7 @@ export default function profileAcc() {
                                         <input
                                             type="text"
                                             placeholder='Masukkan tempat lahir'
-                                            // required={true}
+                                            disabled={!isEditing}
                                             className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                         />
                                     </div>
@@ -83,7 +89,7 @@ export default function profileAcc() {
                                         <input
                                             type="date"
                                             placeholder='Masukkan tanggal lahir'
-                                            // required={true}
+                                            disabled={!isEditing}
                                             className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm "
                                             style={{ padding: "9px 12px 9px 12px" }}
                                         />
@@ -95,7 +101,7 @@ export default function profileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan email kamu'
-                                        // required={true}
+                                        disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
                                 </div>
@@ -105,7 +111,7 @@ export default function profileAcc() {
                                     <input
                                         type="number"
                                         placeholder='Masukkan nomor telepon kamu'
-                                        // required={true}
+                                        disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm [&::-webkit-inner-spin-button]:appearance-none"
                                     />
                                 </div>
@@ -115,9 +121,8 @@ export default function profileAcc() {
                                     <input
                                         type="date"
                                         value={"2024-01-01"}
-                                        disabled={true}
+                                        disabled={!isEditing}
                                         readOnly
-                                        // required={true}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm cursor-not-allowed"
                                     />
                                 </div>
@@ -127,69 +132,23 @@ export default function profileAcc() {
                                     <input
                                         type="password"
                                         value={"asasasas"}
-                                        disabled={true}
+                                        disabled={!isEditing}
                                         readOnly
-                                        // required={true}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
                                     <Link href={"profile/katasandi"} className="mt-2 text-xs text-sky-600">Klik disini untuk ganti kata sandi</Link>
                                 </div>
                             </div>
 
-                            <div className="flex justify-end items-end mt-5">
-                                <Link href="#" className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm">Kembali</Link>
-                                <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white text-sm '>Simpan</button>
-                            </div>
+                            {isEditing ? (<div className="flex justify-end items-end mt-5">
+                                <button onClick={() => location.reload()} className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm">Kembali</button>
+                                <button type='submit' onClick={toggleEdit} className='bg-sky-600 px-3 py-2 rounded-lg text-white text-sm '>Simpan</button>
+                            </div>) : (<div className='flex justify-end items-end mt-5'>
+                                <button type='submit' onClick={toggleEdit} className='bg-sky-600 px-3 py-2 rounded-lg text-white text-sm '>Edit Profile</button>
+                            </div>)}
                         </div>
                     </div>
-                    {/* <div className="w-1/3">
-                        <div className="mt-20 mr-5 bg-white px-5 py-7 mb-7 rounded-xl">
-                            <h1 className="text-lg font-bold mb-1">
-                                Ubah Kata Sandi
-                            </h1>
-                            <p className="text-xs text-slate-500">Silahkan masukkan kata sandi lama dan kata sandi baru Anda.</p>
-                            <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-
-                            <div className="grid gap-y-5">
-                                <div className='flex flex-col'>
-                                    <label className="mb-2 text-sm">Kata Sandi Lama</label>
-                                    <input
-                                        type="text"
-                                        placeholder='Masukkan kata sandi lama'
-                                        // required={true}
-                                        className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
-                                    />
-                                </div>
-
-                                <div className='flex flex-col'>
-                                    <label className="mb-2 text-sm">Kata Sandi Baru</label>
-                                    <input
-                                        type="text"
-                                        placeholder='Masukkan kata sandi baru'
-                                        // required={true}
-                                        className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
-                                    />
-                                </div>
-
-                                <div className='flex flex-col'>
-                                    <label className="mb-2 text-sm">Konfirmasi Kata Sandi Baru</label>
-                                    <input
-                                        type="text"
-                                        placeholder='Konfirmasi kata sandi baru'
-                                        // required={true}
-                                        className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end items-end mt-5">
-                                <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white text-sm w-full'>Ubah kata sandi</button>
-                            </div>
-                        </div>
-
-                    </div> */}
                 </div>
-
             </div>
         </>
     )

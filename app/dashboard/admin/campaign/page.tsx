@@ -14,6 +14,7 @@ export default function AdminCampaign() {
         { id: 0, title: 'Menunggu Persetujuan', status: 'PENDING' },
         { id: 1, title: 'Diterima', status: 'ONGOING' },
         { id: 2, title: 'Ditolak', status: 'CANCELED' },
+        { id: 3, title: 'Selesai', status: 'FINISHED' },
     ]
 
     useEffect(() => {
@@ -91,7 +92,7 @@ export default function AdminCampaign() {
                     }
                 </div>
 
-                <table className='table-auto w-full'>
+                <table className='table-fixed w-full'>
                     <thead className='text-left border-b-2'>
                         <tr className=''>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Judul Kampanye</th>

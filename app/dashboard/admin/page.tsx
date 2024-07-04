@@ -37,7 +37,7 @@ export default function AdminDashboard() {
 
     return (
         <div className="ml-64">
-            <div className="w-full px-5 mt-20">
+            <div className="w-full px-5 mt-20 mb-10">
                 <div className="grid grid-cols-4 gap-3">
                     <div className="flex flex-row bg-white rounded-xl">
                         <div className="bg-orange-500 w-2 h-full rounded-l-xl">
@@ -139,7 +139,7 @@ export default function AdminDashboard() {
                     <div className="bg-white rounded-xl px-6 py-6">
                         <h1 className="font-bold text-lg mb-5">List Kampanye</h1>
                         <div className="flex flex-row justify-between">
-                            <table className='table-auto w-full'>
+                            <table className='table-fixed w-full'>
                                 <thead className='text-left border-b-2'>
                                     <tr className=''>
                                         <th className='font-normal text-xs text-slate-500 pb-2'>Judul Kampanye</th>

@@ -76,7 +76,7 @@ export default function LoginPage() {
 
                         {/* Password */}
                         <div>
-                            <Input className="pb-6"
+                            <Input className="pb-3"
                                 key="outside"
                                 type={isVisible ? "text" : "password"}
                                 label="Password"
@@ -96,7 +96,7 @@ export default function LoginPage() {
                                 errorMessage="Silahkan diisi kolom ini."
                             />
                         </div>
-                        <Link href={""} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
+                        <Link href={"/lupapassword"} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
                         <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit" disabled={isLoading}>
                             {isLoading ? (<div className="flex items-center justify-center">
                                 <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
