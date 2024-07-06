@@ -3,6 +3,7 @@
 import { Button, Link } from "@nextui-org/react";
 import Image from 'next/image'
 import img1 from "@/public/images/img1.jpg";
+import { useEffect } from "react";
 
 export default function Dashboard() {
     return (
