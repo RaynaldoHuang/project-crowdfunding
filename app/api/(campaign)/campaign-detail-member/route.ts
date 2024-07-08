@@ -16,6 +16,7 @@ export async function POST (req: NextRequest, res: NextResponse) {
             
             profile: {
                 select: {
+                    accountUsername: true,
                     firstName: true,
                     lastName: true,
                     createdDate: true,

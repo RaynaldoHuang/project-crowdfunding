@@ -42,6 +42,7 @@ function SamplePrevArrow(props: { className: any; style: any; onClick: any; }) {
 
 export default function DetailCampaign({ params }: { params: { slug: string } }) {
     const [kabarTerbaruAda, setKabarTerbaruAda] = useState(false);
+    const [accountUsername, setAccountUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [dateCreated, setDateCreated] = useState('')
@@ -64,6 +65,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         
         const data = await res.json()
         console.log(data)
+        setAccountUsername (data['campaignDetailMember'][0].profile.accountUsername)
         setFirstName(data['campaignDetailMember'][0].profile.firstName)
         setLastName(data['campaignDetailMember'][0].profile.lastName)
         setDateCreated(data['campaignDetailMember'][0].profile.createdDate.split('T')[0])
@@ -139,7 +141,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                         </svg>
                                     </div>
                                     <div className="ml-5">
-                                        <h1 className="font-bold text-sm">{`${firstName} ${lastName}`}</h1>
+                                        <h1 className="font-bold text-sm">{accountUsername}</h1>
+                                        <p className="text-xs mt-1">{`${firstName} ${lastName}`}</p>
                                         <p className="text-xs mt-1">Mulai aktif {dateCreated}</p>
                                     </div>
                                 </div>

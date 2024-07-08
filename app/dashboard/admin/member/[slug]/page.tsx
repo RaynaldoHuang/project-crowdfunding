@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function MemberDetail({ params }: { params: { slug: string } }) {
   const [username, setUsername] = useState('')
+
   const [gender, setGender] = useState('')
   const [city, setCity] = useState('')
   const [birthdate, setBirthdate] = useState('')
