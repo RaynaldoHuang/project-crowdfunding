@@ -64,7 +64,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         })
         
         const data = await res.json()
-        console.log(data)
+
         setAccountUsername (data['campaignDetailMember'][0].profile.accountUsername)
         setFirstName(data['campaignDetailMember'][0].profile.firstName)
         setLastName(data['campaignDetailMember'][0].profile.lastName)
@@ -73,7 +73,6 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         setFundAccumulated(data['campaignDetailMember'][0].fundsAccumulated)
         setFundNeedded(data['campaignDetailMember'][0].fundsNeeded)
         setEventDescription(data['campaignDetailMember'][0].eventDescription)
-
     }
 
     const settings = {
@@ -118,9 +117,9 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                         </svg>
                                         <h1>Bagikan</h1>
                                     </Button>
-                                    <Button className="bg-sky-600 text-white px-10 py-4 rounded-xl">
+                                    <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-sky-600 text-white px-10 py-4 rounded-xl">
                                         Donasi Sekarang
-                                    </Button>
+                                    </Link>
                                 </div>
                             </div>
                             <Progress

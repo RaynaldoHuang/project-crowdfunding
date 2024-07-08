@@ -1,6 +1,6 @@
 "use client"
 
-import { Input } from "@nextui-org/react";
+import { CircularProgress, Input } from "@nextui-org/react";
 import { FormEvent } from "react";
 import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
@@ -99,10 +99,7 @@ export default function LoginPage() {
                         <Link href={"/lupapassword"} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
                         <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit" disabled={isLoading}>
                             {isLoading ? (<div className="flex items-center justify-center">
-                                <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V2.83a1 1 0 00-1.57-.83l-4 3a1 1 0 000 1.66l4 3A1 1 0 0012 8.83V7a6 6 0 100 12v-1.83a1 1 0 00-1.57-.83l-4 3a1 1 0 000 1.66l4 3A1 1 0 0012 20.83V20a8 8 0 01-8-8z"></path>
-                                </svg>
+                                <CircularProgress aria-label="Loading..." size="sm" className="me-3"/>
                                 <span>Memuat...</span>
                             </div>) : (<>Login
                             </>)}
