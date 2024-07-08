@@ -159,20 +159,28 @@ export default function RootLayout({
                     </a>
                   </li>
                   <li>
-                    <Link href='/' className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                    <button className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
                       <span className="inline-flex justify-center items-center ml-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                           <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z" clipRule="evenodd" />
                         </svg>
                       </span>
                       <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>
             </div>
             {children}
           </div>
+
+          {/* <div className="relative">
+            <div className="absolute position-fixed bg-red-100 py-5 px-5 flex justify-center items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-10">
+                <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </div> */}
         </body>
       </html>
     </>
