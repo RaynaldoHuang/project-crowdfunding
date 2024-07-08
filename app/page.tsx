@@ -10,6 +10,7 @@ import Categories from "@/components/main/categories";
 import Causes from "@/components/main/causes";
 import Volunteer from "@/components/main/volunteer";
 import Footer from "@/components/footer";
+import AboutUs from "@/components/main/aboutus";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <FeaturesV2 />
       <Categories />
       <Causes />
+      <AboutUs />
       <Volunteer />
       <Footer/>
     </NextUIProvider>
