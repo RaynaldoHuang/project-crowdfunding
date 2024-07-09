@@ -14,32 +14,6 @@ import { Accordion, AccordionItem } from "@nextui-org/react";
 import img6 from "@/public/svgs/img6.svg"
 
 
-function SampleNextArrow(props: { className: any; style: any; onClick: any; }) {
-    const { className, style, onClick } = props;
-
-
-    return (
-        <div>
-            <div
-                className={className}
-                style={{ ...style, display: "block", position: "absolute", top: "33%", right: "10px", zIndex: 2 }}
-                onClick={onClick}
-            />
-        </div>
-    );
-}
-
-function SamplePrevArrow(props: { className: any; style: any; onClick: any; }) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", position: "absolute", top: "33%", left: "10px", zIndex: 2 }}
-            onClick={onClick}
-        />
-    );
-}
-
 export default function DetailCampaign({ params }: { params: { slug: string } }) {
     const [kabarTerbaruAda, setKabarTerbaruAda] = useState(false);
     const [accountUsername, setAccountUsername] = useState('')
@@ -82,8 +56,6 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
-        nextArrow: <SampleNextArrow className="" style={{}} onClick={() => { }} />,
-        prevArrow: <SamplePrevArrow className="" style={{}} onClick={() => { }} />
     };
     return (
         <div className='ml-64'>
@@ -111,13 +83,13 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                     <p className="text-xs">Terkumpul dari <span className="font-bold">Rp{fundsNeeded.toLocaleString()}</span></p>
                                 </div>
                                 <div>
-                                    <Button variant="bordered" className="border-sky-600 text-white px-8 py-4 rounded-xl mr-2 text-sky-600">
+                                    <Button variant="bordered" className="border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-3">
                                             <path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" />
                                         </svg>
                                         <h1>Bagikan</h1>
                                     </Button>
-                                    <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-sky-600 text-white px-10 py-4 rounded-xl">
+                                    <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm">
                                         Donasi Sekarang
                                     </Link>
                                 </div>
