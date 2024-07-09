@@ -1,14 +1,33 @@
 "use client"
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function profileAcc() {
     const [isEditing, setIsEditing] = useState(false);
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
 
     const toggleEdit = () => {
         setIsEditing(!isEditing);
     };
+
+    useEffect(() => {
+        fetchProfileAcc()
+    }, [])
+
+    const fetchProfileAcc = async () => {
+        const response = await fetch('/api/profile', {
+          method: 'POST',
+         
+        })
+    
+        const data = await response.json()
+    
+        setUsername(data['profileAcc'].accountUsername)
+        setEmail(data['profileAcc'].email)
+        
+      }
 
     return (
         <>
@@ -28,6 +47,7 @@ export default function profileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan username kamu'
+                                        value={username}
                                         disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
@@ -101,6 +121,7 @@ export default function profileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan email kamu'
+                                        value={email}
                                         disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
