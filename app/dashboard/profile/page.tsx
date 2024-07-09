@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-export default function profileAcc() {
+export default function ProfileAcc() {
     const [isEditing, setIsEditing] = useState(false);
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -49,6 +49,7 @@ export default function profileAcc() {
                                         placeholder='Masukkan username kamu'
                                         value={username}
                                         disabled={!isEditing}
+                                        value={username}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />
                                 </div>

@@ -11,7 +11,6 @@ export const config = {
 };
 
 export async function POST(request: NextRequest, response: NextResponse) {
-
     const user: any = cookies().get('user')?.value
 
     const profileAcc = await prisma.profile.findMany({
