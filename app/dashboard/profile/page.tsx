@@ -1,35 +1,33 @@
 "use client"
 
 import Link from 'next/link';
-import { useState, useEffect } from "react";
-
+import { useState, useEffect } from 'react';
 
 export default function ProfileAcc() {
-    const [isEditing, setIsEditing] = useState(false)
+    const [isEditing, setIsEditing] = useState(false);
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
-    const [gender, setGender] = useState('')
-
-    useEffect(() => {
-        fetchProfileAcc()
-      }, [])
-    
 
     const toggleEdit = () => {
         setIsEditing(!isEditing);
     };
 
-    const fetchProfileAcc = async() =>  {
-        const response = await fetch('/api/profile', {
-            method: 'POST',
-        })   
-        
-        // const data = await response.json()
+    useEffect(() => {
+        fetchProfileAcc()
+    }, [])
 
-        // setUsername(data['profileAcc'].accountUsername)
-        // setEmail(data['profileAcc'].username.email)
-        // setGender(data['profileAcc'].gender)
-    }
+    const fetchProfileAcc = async () => {
+        const response = await fetch('/api/profile', {
+          method: 'POST',
+         
+        })
+    
+        const data = await response.json()
+    
+        setUsername(data['profileAcc'].accountUsername)
+        setEmail(data['profileAcc'].email)
+        
+      }
 
     return (
         <>
@@ -49,6 +47,7 @@ export default function ProfileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan username kamu'
+                                        value={username}
                                         disabled={!isEditing}
                                         value={username}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
@@ -123,6 +122,7 @@ export default function ProfileAcc() {
                                     <input
                                         type="text"
                                         placeholder='Masukkan email kamu'
+                                        value={email}
                                         disabled={!isEditing}
                                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                                     />

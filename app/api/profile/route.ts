@@ -11,26 +11,24 @@ export const config = {
 };
 
 export async function POST(request: NextRequest, response: NextResponse) {
-    const data = await request.json();
-
     const user: any = cookies().get('user')?.value
 
-    // const profileAcc = await prisma.profile.findMany({
-    //     where: {
-    //         accountUsername: user
-    //     },
-    //     include: {
-    //         username: {
-    //             select: {
-    //                 email: true,
-    //             }
-    //         }
-    //     }
-    // })
+    const profileAcc = await prisma.profile.findMany({
+        where: {
+            accountUsername: user
+        },
+        include: {
+            username: {
+                select: {
+                    email: true,
+                }
+            }
+        }
+    })
 
-    console.log(user)
+    console.log(profileAcc)
 
-    return NextResponse.json({ 'success': true })
+    return NextResponse.json({ 'success': true, profileAcc })
 }
 
 export async function GET(req: NextRequest, res: NextResponse) {
