@@ -2,6 +2,7 @@ import { comparePassword, encrypt } from "@/auth";
 import prisma from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { user } from "@nextui-org/react";
 
 export const config = {
     api: {
@@ -32,13 +33,23 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     let date = new Date()
 
-    console.log(date.toUTCString())
+    const profileName = await prisma.profile.findMany({
+        where: {
+            accountUsername: data.username
+        },
+        select: {
+            firstName: true,
+            lastName: true
+        }
+    })
 
     let expiryTime = date.getTime() + 1*2*60*60*1000
 
     cookies().set('session', token, { expires: expiryTime })
     cookies().set('user', data.username, { expires: expiryTime })
     cookies().set('role', userExist.role, { expires: expiryTime })
+    cookies().set('firstName', profileName[0].firstName, { expires: expiryTime })
+    cookies().set('lastName', profileName[0].lastName, { expires: expiryTime })
 
     return NextResponse.json({ success: true, message: 'Logged in successfully' }, { status: 201 })
 }
