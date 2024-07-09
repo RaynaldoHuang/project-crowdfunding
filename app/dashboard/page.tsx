@@ -24,7 +24,7 @@ export default function DashboardMember() {
             <div className="w-full px-5 mt-20 mb-10">
                 <div className="bg-[url('/svgs/img5.svg')] bg-cover rounded-xl py-10 px-16">
                     <div className="w-1/2">
-                        <h1 className="text-black text-5xl font-bold text-white">Donasi Sekarang</h1>
+                        <h1 className="text-5xl font-bold text-white">Donasi Sekarang</h1>
                         <p className="text-white py-4 font-medium
                          text-sm">Untuk membuat dunia menjadi lebih baik</p>
                         <p className="text-white py-4 font-light text-balance w-3/5
@@ -42,7 +42,7 @@ export default function DashboardMember() {
                                 <Image src={img1} alt={""} width={350} className="rounded-xl"
                                 />
                                 <div className="pb-0 pt-2 flex-col items-start">
-                                    <h1 className="text-xl font-bold mt-2 text-balance line-clamp-2 text-balance">
+                                    <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                         {c.eventName}</h1>
                                     <p className="text-slate-500 text-sm mt-4 line-clamp-2 text-balance"> {c.eventDescription}</p>
                                     <p className="text-orange-500 text-base mt-2">Dana Dibutuhkan Rp{c.fundsNeeded.toLocaleString()}</p>

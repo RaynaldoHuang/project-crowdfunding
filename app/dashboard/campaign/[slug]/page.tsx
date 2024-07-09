@@ -59,7 +59,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
     };
     return (
         <div className='ml-64'>
-            <div className="w-full px-5 mt-20 mb-5 mb-10">
+            <div className="w-full px-5 mt-20 mb-10">
                 <div>
                     <div className="flex gap-x-3">
                         <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
