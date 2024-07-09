@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 
 export default function MemberDetail({ params }: { params: { slug: string } }) {
   const [username, setUsername] = useState('')
-
+  const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
   const [city, setCity] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [address, setAddress] = useState('')
-  const [whatsapp, setWhatsapp] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
   const [created, setCreated] = useState('')
@@ -28,11 +28,12 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
     const data = await response.json()
 
     setUsername(data['memberDetail'].accountUsername)
+    setEmail(data['memberDetail'].username.email)
     setGender(data['memberDetail'].gender)
     setCity(data['memberDetail'].city)
     setBirthdate(data['memberDetail'].birthdate)
     setAddress(data['memberDetail'].address)
-    setWhatsapp(data['memberDetail'].whatsapp)
+    setPhoneNumber(data['memberDetail'].phoneNumber)
     setFirst(data['memberDetail'].firstName)
     setLast(data['memberDetail'].lastName)
     setCreated(data['memberDetail'].createdDate)
@@ -58,7 +59,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1 text-sm">Alamat Email</label>
               <input
                 type="text"
-                value="huangraynaldo@gmail.com"
+                value={email}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
             </div>
@@ -123,7 +124,7 @@ export default function MemberDetail({ params }: { params: { slug: string } }) {
               <label className="mb-1 text-sm">Nomor Telepon</label>
               <input
                 type="text"
-                value={whatsapp}
+                value={phoneNumber}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed" disabled
               />
             </div>

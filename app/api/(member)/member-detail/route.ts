@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
     api: {
@@ -18,6 +17,13 @@ export async function POST(request: NextRequest, response: NextResponse) {
         where: {
             id: id
         },
+        include: {
+            username: {
+                select: {
+                    email: true,
+                }
+            }
+        }
     })
 
     console.log(memberDetail)
