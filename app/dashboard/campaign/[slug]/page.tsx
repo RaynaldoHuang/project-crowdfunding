@@ -120,7 +120,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                             </div>
 
                             <div className="bg-white px-5 py-5 rounded-xl">
-                                <Link href={"#"} aria-label="Close">
+                                <Link href={`/dashboard/campaign/${params.slug}/donatur`} aria-label="Close">
                                     <div className="mb-5 flex items-center justify-between">
                                         <div className="flex">
                                             <h1 className="text-lg font-bold mr-3">Para Donatur</h1>

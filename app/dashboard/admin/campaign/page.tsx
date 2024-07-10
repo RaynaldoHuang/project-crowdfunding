@@ -107,12 +107,12 @@ export default function AdminCampaign() {
                         {
                             dynamicArr.map((c: any) => (
                                 <tr key={c.id} className='border-b'>
-                                    <td className='text-xs py-5'>{c.eventName}</td>
-                                    <td className='text-xs w-2/4'>{c.eventDescription}</td>
-                                    <td className='text-xs'>{c.deadline.split('T')[0]}</td>
-                                    <td className={clsx('text-xs',)}>{c.status}</td>
-                                    <td className='text-xs'>{c.createdDate.split('T')[0]}</td>
-                                    <td className='text-xs'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
+                                    <td className='text-xs pe-5 py-5 truncate'>{c.eventName}</td>
+                                    <td className='text-xs pe-5 w-2/4 truncate'>{c.eventDescription}</td>
+                                    <td className='text-xs pe-5'>{c.deadline.split('T')[0]}</td>
+                                    <td className={clsx('text-xs pe-5',)}>{c.status}</td>
+                                    <td className='text-xs pe-5'>{c.createdDate.split('T')[0]}</td>
+                                    <td className='text-xs pe-5'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
                                 </tr>
                             ))
                         }

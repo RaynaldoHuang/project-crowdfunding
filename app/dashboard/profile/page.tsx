@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 
 export default function ProfileAcc() {
     const [isEditing, setIsEditing] = useState(false);
@@ -18,16 +19,18 @@ export default function ProfileAcc() {
 
     const fetchProfileAcc = async () => {
         const response = await fetch('/api/profile', {
-          method: 'POST',
-         
+            method: 'POST',
+
         })
-    
+
         const data = await response.json()
-    
+
         setUsername(data['profileAcc'].accountUsername)
         setEmail(data['profileAcc'].email)
-        
-      }
+
+    }
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
         <>
@@ -35,12 +38,38 @@ export default function ProfileAcc() {
                 <div className="flex">
                     <div className="w-full">
                         <div className="mt-20 mx-5 bg-white px-5 py-7 mb-7 rounded-xl">
-                            <h1 className="text-lg font-bold mb-1">
-                                Informasi Akun
-                            </h1>
-                            <p className="text-xs text-slate-500">Ubah informasi akun Anda di sini untuk memperbarui profile, kata sandi, dana preferensi lainnya.</p>
+                            <div className='flex justify-between items-center'>
+                                <div>
+                                    <h1 className="text-lg font-bold mb-1">
+                                        Informasi Akun
+                                    </h1>
+                                    <p className="text-xs text-slate-500">Ubah informasi akun Anda di sini untuk memperbarui profile, kata sandi, dana preferensi lainnya.</p>
+                                </div>
+                                <button onClick={onOpen} className='bg-sky-600 px-4 h-10 rounded-lg text-white text-sm'>Keluar</button>
+                                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                                    <ModalContent>
+                                        {(onClose) => (
+                                            <>
+                                                <ModalHeader className="flex flex-col gap-1">Konfirmasi Keluar</ModalHeader>
+                                                <ModalBody>
+                                                    <p>
+                                                        Apakah anda yakin ingin keluar?
+                                                    </p>
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    <Button color="danger" variant="light" onPress={onClose}>
+                                                        Kembali
+                                                    </Button>
+                                                    <Button color="primary" onPress={onClose}>
+                                                        Keluar
+                                                    </Button>
+                                                </ModalFooter>
+                                            </>
+                                        )}
+                                    </ModalContent>
+                                </Modal>
+                            </div>
                             <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-
                             <div className="grid gap-y-5">
                                 <div className='flex flex-col'>
                                     <label className="mb-2 text-sm">Username</label>
