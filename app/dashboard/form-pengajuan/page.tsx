@@ -38,6 +38,7 @@ export default function FormPengajuan() {
                             <td className='text-xs'>2024-09-10</td>
                             <td className={clsx('text-xs',)}>Approved</td>
                             <td className='text-xs'>2024-04-06</td>
+                            <td className='text-xs'><Link href={``} className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
                         </tr>
                     </tbody>
                 </table>

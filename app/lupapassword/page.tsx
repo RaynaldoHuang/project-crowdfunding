@@ -4,7 +4,6 @@ import { Button, Input, Link } from "@nextui-org/react";
 import { useRef, useState } from "react";
 import img7 from "@/public/svgs/img7.svg"
 import Image from "next/image"
-import clsx from "clsx";
 
 export default function forgotPassword() {
     const [success, setSuccess] = useState(false)
@@ -58,23 +57,16 @@ export default function forgotPassword() {
                     <div className={hideOTP ? 'hidden' : 'block'}>
                         {
                             success
-                            ?
+                                ?
                                 <div className='flex flex-col justify-center items-center'>
                                     <Image src={img7} alt={""} className="mb-5" width={300}></Image>
                                     <h1 className="font-bold text-xl mb-2">Periksa Email Kamu</h1>
                                     <p className="text-xs text-center w-9/12">Kami telah mengirimkan verifikasi OTP untuk mengubah kata sandi anda, silahkan cek email kamu.</p>
-
-                                    
-                                    <div>
-                                        <div>
-                                            <label className="text-left">Kode OTP (6 digit)</label>
-                                            <input type='text' name='otp' onChange={(event: any) => setOneTimePass(event.currentTarget.value)} />
-                                        </div>
-
-                                        <button onClick={handleClick}>Submit</button>
-                                    </div>
-
-
+                                    <Input type='text' name='otp' className="w-full mt-5 mb-2 text-center" maxLength={6} style={{ textAlign: 'center' }} onChange={(event: any) => setOneTimePass(event.currentTarget.value)} />
+                                    <p className="text-xs text-center w-9/12 mb-5">Tidak mendapatkan kode? <Link><span className="text-sky-600 text-xs">klik untuk kirim ulang kode</span></Link></p>
+                                    <Button fullWidth className="bg-sky-600 text-white" type="submit" onClick={handleClick}>
+                                        Submit
+                                    </Button>
                                 </div>
                                 :
                                 <div className="flex flex-col justify-center items-center">
@@ -99,16 +91,34 @@ export default function forgotPassword() {
                     </div>
                     <div className={hideOTP ? 'block' : 'hidden'}>
                         <form onSubmit={handleSubmitNewPassword}>
+                            <h1 className="font-bold text-xl">Ganti Password Baru</h1>
                             <div>
-                                <label>New Password</label>
-                                <input type='text' name='newPassword' />
+                                <Input className="pb-8 pt-5"
+                                    key="outside"
+                                    type="password"
+                                    label="Password Baru"
+                                    labelPlacement="outside"
+                                    placeholder="Masukkan password baru"
+                                    isRequired
+                                    name="newPassword"
+                                    errorMessage="Silahkan diisi kolom ini."
+                                />
                             </div>
                             <div>
-                                <label>Confirm New Password</label>
-                                <input type='text' name='confirmNewPassword' />
+                                <Input
+                                    key="outside"
+                                    type="password"
+                                    label="Konfirmasi Password Baru"
+                                    labelPlacement="outside"
+                                    placeholder="Konfirmasi password baru"
+                                    isRequired
+                                    name="newPassword"
+                                    errorMessage="Silahkan diisi kolom ini."
+                                />
                             </div>
-
-                            <button type='submit'>Submit</button>
+                            <Button fullWidth className="mt-5 bg-sky-600 text-white" type="submit">
+                                Ganti Password
+                            </Button>
                         </form>
                     </div>
                 </div>

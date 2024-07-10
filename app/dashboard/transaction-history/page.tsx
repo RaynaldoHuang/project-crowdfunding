@@ -22,6 +22,7 @@ export default function Wallet() {
                     <thead className='text-left border-b-2'>
                         <tr className=''>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Judul Kampanye</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Deskripsi</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Jumlah Donasi</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Tanggal Donasi</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'></th>
@@ -30,6 +31,7 @@ export default function Wallet() {
                     <tbody>
                         <tr className='border-b'>
                             <td className='text-xs py-5'>Curing Cancer</td>
+                            <td className='text-xs w-2/4'>a</td>
                             <td className='text-xs'>Rp. 1.000.000</td>
                             <td className='text-xs'>2070-01-01</td>
                         </tr>
