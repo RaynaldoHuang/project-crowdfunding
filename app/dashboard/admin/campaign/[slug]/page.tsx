@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import clsx from 'clsx'
-
+import { Button } from "@nextui-org/react";
+import { CircularProgress, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from 'react'
 
 
@@ -11,10 +12,13 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
     const [statusEvent, setStatusEvent] = useState('')
     const [descEvent, setDescEvent] = useState('')
     const [fundNeed, setFundNeed] = useState('')
+    const [fundAccumulated, setFundAccumulated] = useState('')
     const [deadline, setDeadline] = useState('')
     const [errors, setErrors] = useState({ eventName: '', descEvent: '', fundNeed: '', deadline: '' })
     const [isFormValid, setIsFormValid] = useState(false)
     const [border, setBorder] = useState({ eventBorder: 'true', descBorder: 'true', fundBorder: 'true', deadlineBorder: 'true' })
+
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         fetchCampaignDetail()
@@ -34,12 +38,13 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
         setStatusEvent(data['campaign'].statusEvent)
         setDescEvent(data['campaign'].eventDescription)
         setFundNeed(data['campaign'].fundsNeeded)
+        setFundAccumulated(data['campaign'].fundAccumulated)
         setDeadline(data['campaign'].deadline)
     }
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
+        setIsLoading(true);
         const formData = new FormData(event.currentTarget)
 
         let valid: any = validateForm(formData)
@@ -52,12 +57,14 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
                     status: formData.get('status'),
                     eventDescription: formData.get('desc'),
                     fundsNeeded: formData.get('fundsNeeded'),
-                    deadline: formData.get('deadline')
+                    deadline: formData.get('deadline'),
+                    id: params.slug
                 })
             })
 
             const data = await res.json()
         }
+        setIsLoading(false);
     }
 
 
@@ -89,7 +96,7 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
 
             valid = false
         }
-        else if (formData.get('desc').length > 500) {
+        else if (formData.get('desc').length > 10000) {
             errors.descEvent = 'Deskripsi Campaign terlalu panjang.'
             border.descBorder = 'false'
 
@@ -156,7 +163,7 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
                         </div>
                         <div className='flex flex-col'>
                             <label className='mb-1 text-sm'>Dana Terkumpul</label>
-                            <input type='text' value='Rp. 10.000.000' className='px-3 py-2 rounded-lg bg-gray-100 border-slate-300 cursor-not-allowed' disabled />
+                            <input type='text' value={fundAccumulated} className='px-3 py-2 rounded-lg bg-gray-100 border-slate-300 cursor-not-allowed' disabled />
                         </div>
                     </div>
 
@@ -175,7 +182,12 @@ export default function CampaignDetail({ params }: { params: { slug: string } })
 
                     <div className='flex justify-end items-center'>
                         <Link href='/dashboard/admin/campaign' className='border border-red-500 px-2 py-2 text-red-500 mx-5 rounded-lg'>Cancel</Link>
-                        <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Simpan Perubahan</button>
+                        <Button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white' disabled={isLoading}>{isLoading ? (<div className="flex items-center justify-center">
+                                <CircularProgress aria-label="Loading..." size="sm" className="me-3"/>
+                                <span>Memuat...</span>
+                            </div>) : (<>Simpan Data
+                            </>)}</Button>
+
                     </div>
                 </form>
             </div>
