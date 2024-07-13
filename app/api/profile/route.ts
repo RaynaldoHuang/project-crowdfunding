@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 import { cookies } from "next/headers";
+import { profile } from "console";
 
 
 
@@ -23,6 +24,37 @@ export async function POST(request: NextRequest, response: NextResponse) {
                     email: true,
                 }
             }
+        }
+    })
+
+    console.log(profileAcc)
+
+    return NextResponse.json({ 'success': true, profileAcc })
+}
+
+export async function PUT(req: NextRequest, res: NextResponse) {
+    const user: any = cookies().get('user')?.value
+
+    const profileAcc = await prisma.profile.update({
+        where: {
+            accountUsername: user
+        },
+        include: {
+            username: {
+                select: {
+                    email: true,
+                }
+            }
+        },
+        data: {
+            firstName: user.first,
+            lastName: user.last,
+            gender: user.gender,
+            address: user.address,
+            city: user.city,
+            birthdate: user.birthDate,
+            phoneNumber: user.phoneNumber
+
         }
     })
 
