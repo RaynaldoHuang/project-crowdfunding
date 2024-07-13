@@ -6,10 +6,13 @@ export async function middleware(req: NextRequest) {
     try {
         const valid = await decrypt(cookies().get('session')?.value)
 
-        console.log(cookies().get('user'), cookies().get('session'))
-
         if (req.nextUrl.pathname.includes('admin') && cookies().get('role')?.value != 'ADMIN') {
             return NextResponse.redirect(new URL('/dashboard', req.url))
+        }
+
+        if (cookies().get('session')?.value != null && req.nextUrl.pathname.includes('login')) {
+            console.log('login page')
+            return NextResponse.redirect(new URL('/dashboard/admin', req.url))
         }
 
         return NextResponse.next()

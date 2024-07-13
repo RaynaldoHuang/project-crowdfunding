@@ -10,6 +10,25 @@ export const config = {
     }
 }
 
+export async function GET(req: NextRequest, res: NextResponse) {
+    const user = cookies().get('user')?.value
+
+    try {
+        const userExist = await prisma.account.findUnique({
+            where: {
+                username: user
+            },
+            select: {
+                username: true
+            }
+        })
+
+        return NextResponse.json({ success: true, message: 'You are logged in' })
+    } catch (e) {
+        return NextResponse.json({ success: false, message: 'You are not logged in' })
+    }
+}
+
 export async function POST(req: NextRequest, res: NextResponse) {
     const data = await req.json()
 

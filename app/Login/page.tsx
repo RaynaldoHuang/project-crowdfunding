@@ -7,7 +7,7 @@ import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import Link from "next/link"
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LoginPage() {
     const router = useRouter()
@@ -15,6 +15,19 @@ export default function LoginPage() {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errMessage, setErrMessage] = useState('')
+
+    useEffect(() => {
+        checkSession()
+    }, [])
+
+    const checkSession = async () => {
+        const res = await fetch('/api/login')
+        const data = await res.json()
+
+        if (data.success) {
+            router.push('/dashboard/admin')
+        }
+    }
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 

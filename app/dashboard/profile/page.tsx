@@ -12,6 +12,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import clsx from "clsx";
 
 export default function ProfileAcc() {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,15 +27,31 @@ export default function ProfileAcc() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [created, setCreated] = useState("");
 
+  const [message, setMessage] = useState('')
+  const [success, setSuccess] = useState(false)
+
   const [isLoading, setIsLoading] = useState(false);
+
+  
+  useEffect(() => {
+    fetchProfileAcc();
+  }, []);
+
+  const logout = async () => {
+    const res = await fetch('/api/logout', {
+      method: 'POST'
+    })
+
+    const data = await res.json()
+
+    if (data.success) {
+      location.reload()
+    }
+  }
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
-
-  useEffect(() => {
-    fetchProfileAcc();
-  }, []);
 
   const fetchProfileAcc = async () => {
     const response = await fetch("/api/profile", {
@@ -60,6 +77,7 @@ export default function ProfileAcc() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+
     const formData = new FormData(event.currentTarget);
 
     const res = await fetch("/api/profile", {
@@ -70,15 +88,20 @@ export default function ProfileAcc() {
         gender: formData.get('jenisKelamin'),
         address: formData.get('alamat'),
         city: formData.get('tempatLahir'),
-        birthDate: formData.get('tanggalLahir'),
+        birthDate: formData.get('tanggalLahir') + "T00:00:00.000Z",
         email: formData.get('email'),
         phoneNumber: formData.get('noTelp'),
       }),
     });
 
     const data = await res.json();
-    console.log(data);
-    setIsLoading(false);
+
+    setIsLoading(false)
+    setMessage(data.message)
+
+    if (data.success) {
+      setSuccess(true)
+    }
   };
 
   return (
@@ -87,6 +110,7 @@ export default function ProfileAcc() {
         <div className="flex">
           <div className="w-full">
             <div className="mt-20 mx-5 bg-white px-5 py-7 mb-7 rounded-xl">
+              {message && <p className={clsx('px-3 py-2 w-full rounded-md mb-5', success ? "text-green-700 bg-green-200" : "text-red-700 bg-red-200")}>{message}</p>}
               <div className="flex justify-between items-center">
                 <div>
                   <h1 className="text-lg font-bold mb-1">Informasi Akun</h1>
@@ -119,7 +143,7 @@ export default function ProfileAcc() {
                           >
                             Kembali
                           </Button>
-                          <Button color="primary" onPress={onClose}>
+                          <Button color="primary" onClick={logout} onPress={onClose}>
                             Keluar
                           </Button>
                         </ModalFooter>
@@ -276,52 +300,49 @@ export default function ProfileAcc() {
                     />
                     <Link
                       href={"profile/katasandi"}
-                      className="mt-2 text-xs text-sky-600"
+                      className="mt-2 text-xs text-sky-600 w-fit"
                     >
                       Klik disini untuk ganti kata sandi
                     </Link>
                   </div>
                 </div>
-                <button type="submit">Submit</button>
-                {/* {isEditing ? (
-                  <div className="flex justify-end items-end mt-5">
-                    <button
-                      onClick={() => location.reload()}
-                      className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm"
-                    >
-                      Kembali
-                    </button>
-                    <Button
-                      type="submit"
-                      className="bg-sky-600 px-3 py-2 rounded-lg text-white"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <div className="flex items-center justify-center">
-                          <CircularProgress
-                            aria-label="Loading..."
-                            size="sm"
-                            className="me-3"
-                          />
-                          <span>Memuat...</span>
-                        </div>
-                      ) : (
-                        <>Simpan Data</>
-                      )}
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex justify-end items-end mt-5">
-                    <button
-                      
-                      onClick={toggleEdit}
-                      className="bg-sky-600 px-3 py-2 rounded-lg text-white text-sm "
-                    >
-                      Edit Profile
-                    </button>
-                  </div>
-                )} */}
+
+                <div className={isEditing ? "flex justify-end items-end mt-5" : 'hidden'}>
+                  <button
+                    onClick={() => location.reload()}
+                    className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm"
+                  >
+                    Kembali
+                  </button>
+                  <Button
+                    type="submit"
+                    className="bg-sky-600 px-3 py-2 rounded-lg text-white"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <CircularProgress
+                          aria-label="Loading..."
+                          size="sm"
+                          className="me-3"
+                        />
+                        <span>Memuat...</span>
+                      </div>
+                    ) : (
+                      <>Simpan Data</>
+                    )}
+                  </Button>
+                </div>
+                
               </form>
+              <div className="flex justify-end items-end">
+                <button
+                  onClick={toggleEdit}
+                  className={isEditing ? "hidden" : "bg-sky-600 px-3 py-2 rounded-lg text-white text-sm mt-5"}
+                >
+                  Edit Profile
+                </button>
+              </div>
             </div>
           </div>
         </div>

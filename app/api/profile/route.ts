@@ -33,34 +33,38 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {
+    const data = await req.json()
+
     const user: any = cookies().get('user')?.value
 
-    const profileAcc = await prisma.profile.update({
+    const profileAcc: any = await prisma.profile.update({
         where: {
             accountUsername: user
         },
-        include: {
-            username: {
-                select: {
-                    email: true,
-                }
-            }
-        },
         data: {
-            firstName: user.first,
-            lastName: user.last,
-            gender: user.gender,
-            address: user.address,
-            city: user.city,
-            birthdate: user.birthDate,
-            phoneNumber: user.phoneNumber
-
+            firstName: data.first,
+            lastName: data.last,
+            gender: data.gender,
+            address: data.address,
+            city: data.city,
+            birthdate: data.birthDate,
+            phoneNumber: data.phoneNumber,
         }
     })
 
-    console.log(profileAcc)
+    const updateAccount: any = await prisma.account.update({
+        where: {
+            username: user
+        },
+        data: {
+            email: data.email
+        }
+    })
 
-    return NextResponse.json({ 'success': true, profileAcc })
+    console.log('Profile', profileAcc)
+    console.log('Account', updateAccount)
+
+    return NextResponse.json({ 'success': true, message: 'Akun Profil telah berhasil di update' }, { status: 201 })
 }
 
 export async function GET(req: NextRequest, res: NextResponse) {
