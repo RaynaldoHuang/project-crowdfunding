@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
-import { Status } from "@prisma/client";
 
 export const config = {
     api: {
