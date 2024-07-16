@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 import { cookies } from "next/headers";
-import { profile } from "console";
 
 
 
@@ -60,7 +59,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             email: data.email
         }
     })
-
+    console.log(data)
     console.log('Profile', profileAcc)
     console.log('Account', updateAccount)
 
