@@ -96,11 +96,14 @@ export default function ProfileAcc() {
 
     const data = await res.json();
 
+    console.log(data);
+
     setIsLoading(false)
     setMessage(data.message)
 
     if (data.success) {
       setSuccess(true)
+      console.log(data);
     }
   };
 

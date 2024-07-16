@@ -3,22 +3,69 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import img1 from "@/public/images/img1.jpg";
+import clsx from 'clsx'
+
 
 import { Button, Link } from '@nextui-org/react';
 
 export default function CampaignMember() {
     const [campaigns, setCampaigns] = useState([])
+    const [dynamicArr, setDynamicArr] = useState([])
+    const [prev, setPrev] = useState('ONGOING')
+
+    const categories = [
+        { id: 0, title: 'Sedang Berjalan', status: 'ONGOING' },
+        { id: 1, title: 'Selesai', status: 'FINISHED' }
+    ]
 
     useEffect(() => {
         fetchCampaignData()
+        onInitialLoad()
     }, [])
 
     const fetchCampaignData = async () => {
-        const res = await fetch('/api/campaign-member')
-
+        const res = await fetch('/api/campaign', {
+            method: 'POST'
+        })
         const data = await res.json()
 
-        setCampaigns(data['campaignMember'])
+        setCampaigns(data['campaigns'])
+
+        let result = data['campaigns'].filter((campaign: any) => campaign.status == 'ONGOING')
+
+        setDynamicArr(result)
+    }
+
+    const onInitialLoad = () => {
+        const btn: any = document.getElementById(prev)
+
+        btn.className = 'bg-sky-600 text-white text-xs mr-4 px-4 py-2 rounded-full'
+    }
+
+    const handleClick = (event: any) => {
+        const btn = event.currentTarget;
+        const btnText = btn.textContent;
+
+        let stats: string;
+
+        const prevBtn: any = document.getElementById(prev)
+        prevBtn.className = 'bg-[#7E84A3] text-white w-fit text-xs mr-4 px-4 py-2 rounded-full'
+
+        for (let idx in categories) {
+            if (categories[idx]['title'] == btnText) {
+                const btn: any = document.getElementById(categories[idx]['status'])
+                console.log(btn)
+                btn.className = 'bg-sky-600 text-white w-fit text-xs mr-4 px-4 py-2 rounded-full'
+
+                setPrev(categories[idx]['status'])
+
+                stats = categories[idx]['status']
+
+                break
+            }
+        }
+        let result = campaigns.filter((c: any) => c.status == stats)
+        setDynamicArr(result)
     }
 
     return (
@@ -37,8 +84,17 @@ export default function CampaignMember() {
                         </div>
                     </div>
                 </div>
+                <div className='flex my-8'>
+                    {
+                        categories.map((c) => (
+                            <button key={c.id} onClick={handleClick} className='bg-[#7E84A3] text-white focus:bg-sky-600 text-xs mr-4 px-4 py-2 rounded-full' id={c.status} >
+                                <p>{c.title}</p>
+                            </button>
+                        ))
+                    }
+                </div>
                 <div className='grid grid-cols-4 gap-x-2 gap-y-4'>
-                    {campaigns.map((c: any, idx) => (
+                    {dynamicArr.map((c: any, idx) => (
                         <div key={idx} className="bg-white px-3 py-3 rounded-2xl">
                             <Image src={img1} alt={""} width={350} className="rounded-xl"
                             />
