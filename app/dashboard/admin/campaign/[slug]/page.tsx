@@ -6,6 +6,8 @@ import { Button } from "@nextui-org/react";
 import { CircularProgress, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 //RichText Quill
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
@@ -17,6 +19,8 @@ export default function CampaignDetail({
 }: {
   params: { slug: string };
 }) {
+  const router = useRouter()
+
   const [eventName, setEventName] = useState("");
   const [statusEvent, setStatusEvent] = useState("");
   const [descEvent, setDescEvent] = useState("");
@@ -77,10 +81,15 @@ export default function CampaignDetail({
           fundsNeeded: formData.get("fundsNeeded"),
           deadline: formData.get("deadline"),
           id: params.slug,
+          news: content
         }),
       });
 
       const data = await res.json();
+
+      if (data.success) {
+        router.push('/dashboard/admin/campaign')
+      }
     }
     setIsLoading(false);
   };

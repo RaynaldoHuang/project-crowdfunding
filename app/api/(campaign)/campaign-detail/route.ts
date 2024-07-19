@@ -37,7 +37,16 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         }
     })
 
-    console.log(data)
+    if (data.news != "") {
+        const insertNews = await prisma.news.create({
+            data: {
+                campaignId: data.id,
+                updateNews: data.news
+            }
+        })
+    }
 
-    return NextResponse.json({ 'success': true, campaign })
+
+
+    return NextResponse.json({ 'success': true })
 }

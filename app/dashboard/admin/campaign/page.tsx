@@ -15,6 +15,7 @@ export default function AdminCampaign() {
         { id: 1, title: 'Diterima', status: 'ONGOING' },
         { id: 2, title: 'Ditolak', status: 'CANCELED' },
         { id: 3, title: 'Selesai', status: 'FINISHED' },
+        { id: 4, title: 'Semua', status: 'ALL' }
     ]
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function AdminCampaign() {
         const btn = event.currentTarget;
         const btnText = btn.textContent;
 
-        let stats: string;
+        let stats: any;
 
         const prevBtn: any = document.getElementById(prev)
         prevBtn.className = 'bg-[#7E84A3] text-white w-fit text-xs mr-4 px-4 py-2 rounded-full'
@@ -63,6 +64,12 @@ export default function AdminCampaign() {
                 break
             }
         }
+
+        if (stats == "ALL") {
+            setDynamicArr(campaigns)
+            return
+        }
+
         let result = campaigns.filter((c: any) => c.status == stats)
         setDynamicArr(result)
     }
