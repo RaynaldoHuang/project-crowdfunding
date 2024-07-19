@@ -53,6 +53,8 @@ model Profile {
   campaign            Campaign[]
   campaignId          String?
 
+  donation            Donation[]
+
   firstName           String        @default("")
   lastName            String        @default("")
   city                String        @default("")
@@ -74,6 +76,8 @@ model Campaign {
   campaignImage       CampaignImage[]
 
   news                News[]
+
+  donation            Donation[]
 
   eventName           String        
   eventDescription    String
@@ -106,8 +110,15 @@ model News {
 }
 
 // Note: Waiting for Midtrans
-// model Donation {
-//   id                  Int          @id @default(autoincrement())
+model Donation {
+  id                  Int          @id @default(autoincrement())
 
-      
-// }
+  profileId           String
+  profile             Profile      @relation(fields: [profileId], references: [id])
+
+  campaignId          String
+  campaign            Campaign     @relation(fields: [campaignId], references: [id])
+
+  donateDate          DateTime
+  amount              Int
+}
