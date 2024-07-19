@@ -11,6 +11,8 @@ import Link from "next/link";
 export default function RegisterPage() {
     const router = useRouter()
 
+    const [error, setError] = useState({ message: "" })
+
     const [match, setMatch] = useState(true);
     const [passwordMismatch, setPasswordMismatch] = useState(false);
 
@@ -50,14 +52,22 @@ export default function RegisterPage() {
 
         const data = await res.json()
 
+        let error = { message: "" }
+
         if (data.success) {
             router.push('/login')
+            return
         }
+
+        error.message = data.message
+
+        setError(error)
     }
 
 
     return (
-        <>
+        <>  
+            {error.message && <p className="w-full text-red-600 bg-red-200 px-5 py-2 rounded-lg mb-5">{error.message}</p>}
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
                 <div className="drop-shadow-md bg-white rounded-lg px-5 py-5 w-[520px]">
                     <div className="flex flex-col">

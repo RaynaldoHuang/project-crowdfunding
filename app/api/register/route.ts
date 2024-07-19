@@ -18,7 +18,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     })
 
     if (checkAccount != null) {
-        return NextResponse.json({ success: false, message: 'Username already exist.' }, { status: 403 })
+        return NextResponse.json({ success: false, message: 'Username ini sudah terdaftar. Silahkan cari username yang lain.' }, { status: 403 })
     }
 
     const createAccount = await prisma.account.create({

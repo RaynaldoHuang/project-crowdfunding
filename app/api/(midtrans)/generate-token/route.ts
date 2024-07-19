@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import prisma from "@/db";
 const midtrans = require('midtrans-client')
 
@@ -10,12 +11,13 @@ let snap = new midtrans.Snap({
 export async function POST(req: NextRequest, res: NextResponse) {
     const data = await req.json()
 
-    const campaignName = await prisma.campaign.findUnique({
+    const campaignName: any = await prisma.campaign.findUnique({
         where: {
             id: data.id
         },
         select: {
-            eventName: true
+            eventName: true,
+            fundsAccumulated: true
         }
     })
 
@@ -34,7 +36,33 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const token = await snap.createTransactionToken(parameter)
 
     if (token != undefined || token != '') {
-        //TODO: Save the information to our database
+        let total = campaignName.fundsAccumulated + data.amount
+
+        const updateDonationFunds = await prisma.campaign.update({
+            where: {
+                id: data.id,
+            },
+            data: {
+                fundsAccumulated: total
+            }
+        })
+
+        const getUserId: any = await prisma.profile.findUnique({
+            where: {
+                accountUsername: cookies().get('user')?.value
+            },
+            select: {
+                id: true
+            }
+        })
+
+        const createDonation = await prisma.donation.create({
+            data: {
+                campaignId: data.id,
+                amount: data.amount,
+                profileId: getUserId.id
+            }
+        })
     }
 
     return NextResponse.json({ success: true, token }, {status: 200})

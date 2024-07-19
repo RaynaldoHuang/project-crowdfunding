@@ -119,6 +119,6 @@ model Donation {
   campaignId          String
   campaign            Campaign     @relation(fields: [campaignId], references: [id])
 
-  donateDate          DateTime
+  donateDate          DateTime     @default(now())
   amount              Int
 }

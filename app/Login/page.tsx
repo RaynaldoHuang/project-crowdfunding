@@ -52,8 +52,6 @@ export default function LoginPage() {
         // Handle response if necessary
         const data = await response.json()
 
-        console.log(data)
-
         if (data.success) {
             setIsLoading(false)
             return router.push('/dashboard/admin')
@@ -65,7 +63,7 @@ export default function LoginPage() {
 
     return (
         <>
-            {/* {errMessage == '' ? <div></div> : <div className="text-red-600">{errMessage}</div>} */}
+            {errMessage == '' ? <div></div> : <div className="text-red-600 w-full bg-red-200 text-red-600 rounded-lg">{errMessage}</div>}
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
                 <div className="drop-shadow-md bg-white rounded-lg px-5 py-5 w-[520px]">
                     <div className="flex flex-col">
