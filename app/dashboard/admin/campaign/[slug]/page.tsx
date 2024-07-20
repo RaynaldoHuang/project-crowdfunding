@@ -5,6 +5,8 @@ import clsx from "clsx";
 import { Button } from "@nextui-org/react";
 import { CircularProgress, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "@/app/config";
 
 import { useRouter } from "next/navigation";
 
@@ -67,9 +69,15 @@ export default function CampaignDetail({
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    const formData = new FormData(event.currentTarget);
+    const formData: any = new FormData(event.currentTarget);
 
     let valid: any = validateForm(formData);
+
+    console.log(formData.get('file'))
+
+    if (formData.get('file').size == 0) {
+      
+    }
 
     if (valid) {
       const res = await fetch("/api/campaign-detail", {
@@ -295,7 +303,7 @@ export default function CampaignDetail({
           <div className="flex flex-col mb-5">
             <label className="mb-1">Gambar Pendukung</label>
             <div className="border border-dashed border-slate-300 rounded-lg py-20 flex justify-center">
-              <input type="file" accept=".png, .jpg, .jpeg" />
+              <input name='file' type="file" accept=".png, .jpg, .jpeg" />
             </div>
           </div>
         
