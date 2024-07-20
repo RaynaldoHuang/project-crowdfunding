@@ -9,6 +9,8 @@ export default function AdminDashboard() {
     const [campaigns, setCampaigns] = useState([])
     const [memberCount, setMemberCount] = useState(0)
     const [campaignCount, setCampaignCount] = useState(0)
+    const [fundAccumulatedCount, setFundAccumulatedCount] = useState(0)
+    const [campaignRequestCount, setCampaignRequestCount] = useState(0)
 
     useEffect(() => {
         fetchMembers()
@@ -26,13 +28,13 @@ export default function AdminDashboard() {
     }
 
     const fetchCampaigns = async () => {
-        const res = await fetch('/api/campaign', {
-            method: 'POST'
-        })
+        const res = await fetch('/api/campaign')
         const data = await res.json()
 
         setCampaigns(data['campaignDashboard'])
         setCampaignCount(data.count._count.id)
+        setFundAccumulatedCount(data.totalDonation._sum.amount)
+        setCampaignRequestCount(data.totalRequest._count.status)
     }
 
     return (
@@ -77,7 +79,7 @@ export default function AdminDashboard() {
                         <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Donasi</p>
-                                <h1 className="font-bold text-xl mb-1">1.000.000.000 <span className="text-base font-semibold">IDR</span></h1>
+                                <h1 className="font-bold text-xl mb-1">{fundAccumulatedCount.toLocaleString()} <span className="text-base font-semibold">IDR</span></h1>
                             </div>
                             <div className="h-12 w-12 bg-blue-100 rounded-full flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-6 text-blue-500">
@@ -93,7 +95,7 @@ export default function AdminDashboard() {
                         <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Pengajuan</p>
-                                <h1 className="font-bold text-xl mb-1">8 <span className="text-base font-semibold">Formulir</span></h1>
+                                <h1 className="font-bold text-xl mb-1">{campaignRequestCount} <span className="text-base font-semibold">Formulir</span></h1>
                             </div>
                             <div className="h-12 w-12 bg-blue-100 rounded-full flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-6 text-blue-500">
