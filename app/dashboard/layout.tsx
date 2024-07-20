@@ -4,7 +4,6 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/svgs/logo.svg"
-import placeholder from '@/public/svgs/profile-placeholder.svg'
 import { cookies } from "next/headers";
 
 const opnsns = Open_Sans({ subsets: ["latin"] });
@@ -32,13 +31,24 @@ export default function RootLayout({
       </Head>
       <html lang="en">
         <body className={`${opnsns.className}`} suppressHydrationWarning={true}>
-          <div>
-            <div className="flex justify-between px-5 h-14 items-center text-xl font-semibold bg-white fixed top-0 left-64 right-0 z-20">
-              <h1 className="text-sky-900 text-base">Selamat Datang, {cookies().get('firstName')?.value + ' ' + cookies().get('lastName')?.value}</h1>
+          {/* dekstop-view */}
+          <div className="h-screen">
+            <div className="fixed lg:flex lg:justify-between lg:px-5 lg:h-14 items-center text-xl font-semibold bg-white top-0 lg:left-64 w-full lg:right-0 lg:z-20">
+              <div className="hidden lg:block">
+                <h1 className="text-sky-900 text-base">Selamat Datang, {cookies().get('firstName')?.value + ' ' + cookies().get('lastName')?.value}</h1>
+              </div>
+              <div className="lg:hidden">
+                <div className="flex justify-between items-center px-5 py-5">
+                  <Image src={logo} alt={""} height={30} />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-sky-600">
+                    <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
           <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-[#F5F5F5] text-gray-800">
-            <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+            <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r hidden lg:block">
               <div className="flex items-center justify-center h-14 border-b">
                 <Image src={logo} alt={""} height={400} className="md:h-[30px] md:w-[140px]" />
               </div>
@@ -146,7 +156,6 @@ export default function RootLayout({
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                           <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
                         </svg>
-
                       </span>
                       <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
                     </a>
@@ -154,16 +163,44 @@ export default function RootLayout({
                 </ul>
               </div>
             </div>
-            {children}
+            <div className="overflow-y-auto">
+              {children}
+            </div>
           </div>
 
-          {/* <div className="relative">
-            <div className="absolute position-fixed bg-red-100 py-5 px-5 flex justify-center items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-10">
-                <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div> */}
+          {/* mobile-view */}
+          <div className="lg:hidden">
+            <nav className="fixed z-50 bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+              <div className="flex justify-around items-center h-16">
+                <Link href={""} className="flex flex-col items-center">
+                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
+                    <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
+                  </svg></span>
+                  <span className="text-sm">Dashboard</span>
+                </Link>
+                <Link href={""} className="flex flex-col items-center">
+                  <span className="material-icons"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
+                    <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
+                    <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+                  </svg> </span>
+                  <span className="text-sm">Kampanye</span>
+                </Link>
+                <Link href={""} className="flex flex-col items-center">
+                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
+                    <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
+                    <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                  </svg></span>
+                  <span className="text-sm">Form Donasi</span>
+                </Link>
+                <Link href={""} className="flex flex-col items-center">
+                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
+                    <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
+                  </svg></span>
+                  <span className="text-sm">Histori</span>
+                </Link>
+              </div>
+            </nav>
+          </div>
         </body>
       </html>
     </>
