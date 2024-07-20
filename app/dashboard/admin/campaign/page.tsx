@@ -24,9 +24,7 @@ export default function AdminCampaign() {
     }, [])
 
     const fetchCampaign = async () => {
-        const res = await fetch('/api/campaign', {
-            method: 'POST'
-        })
+        const res = await fetch('/api/campaign')
         const data = await res.json()
 
         setCampaigns(data['campaigns'])
@@ -107,6 +105,7 @@ export default function AdminCampaign() {
                             <th className='font-normal text-xs text-slate-500 pb-2'>Batas Waktu</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Status</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'>Tanggal Dibuat</th>
+                            <th className='font-normal text-xs text-slate-500 pb-2'>Username Pengaju</th>
                             <th className='font-normal text-xs text-slate-500 pb-2'></th>
                         </tr>
                     </thead>
@@ -119,6 +118,7 @@ export default function AdminCampaign() {
                                     <td className='text-xs pe-5'>{c.deadline.split('T')[0]}</td>
                                     <td className={clsx('text-xs pe-5',)}>{c.status}</td>
                                     <td className='text-xs pe-5'>{c.createdDate.split('T')[0]}</td>
+                                    <td className='text-xs pe-5'>{c.profile.accountUsername}</td>
                                     <td className='text-xs pe-5'><Link href={`/dashboard/admin/campaign/${c.id}`} className='text-white bg-sky-600 px-3 py-2 rounded'>Lihat Detail</Link></td>
                                 </tr>
                             ))
