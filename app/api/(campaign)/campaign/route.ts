@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
-import { select } from "@nextui-org/react";
-import { eventNames } from "process";
 
 export const config = {
     api: {
@@ -13,9 +11,11 @@ export async function GET(req: NextRequest, res:NextResponse) {
     const campaigns = await prisma.campaign.findMany(
        {
         select: {
+            id: true,
             eventName: true,
             eventDescription: true,
             deadline: true,
+            fundsNeeded: true,
             createdDate: true,
             status: true,
 
