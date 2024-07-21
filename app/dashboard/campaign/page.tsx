@@ -21,9 +21,7 @@ export default function CampaignMember() {
     }, [])
 
     const fetchCampaignData = async () => {
-        const res = await fetch('/api/campaign', {
-            method: 'POST'
-        })
+        const res = await fetch('/api/campaign')
         const data = await res.json()
 
         setCampaigns(data['campaigns'])
