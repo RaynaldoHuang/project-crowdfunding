@@ -30,8 +30,8 @@ export default function ajukanForm() {
     }
     
     return (
-        <div className="ml-64">
-            <div className='mt-20 mx-5 bg-white px-5 mb-10 pb-10 rounded-xl'>
+        <div className="lg:ml-64">
+            <div className='lg:mt-20 mt-24 mx-5 bg-white px-5 lg:mb-10 mb-24 pb-10 rounded-xl'>
                 <div className="text-lg font-bold py-10">
                     Form Pengajuan
                 </div>

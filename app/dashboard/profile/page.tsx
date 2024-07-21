@@ -109,15 +109,15 @@ export default function ProfileAcc() {
 
   return (
     <>
-      <div className="ml-64">
+      <div className="lg:ml-64">
         <div className="flex">
           <div className="w-full">
-            <div className="mt-20 mx-5 bg-white px-5 py-7 mb-7 rounded-xl">
+            <div className="lg:mt-20 mt-24 mb-24 mx-5 bg-white px-5 py-7 lg:mb-7 rounded-xl">
               {message && <p className={clsx('px-3 py-2 w-full rounded-md mb-5', success ? "text-green-700 bg-green-200" : "text-red-700 bg-red-200")}>{message}</p>}
               <div className="flex justify-between items-center">
                 <div>
                   <h1 className="text-lg font-bold mb-1">Informasi Akun</h1>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 text-balance">
                     Ubah informasi akun Anda di sini untuk memperbarui profile,
                     kata sandi, dana preferensi lainnya.
                   </p>

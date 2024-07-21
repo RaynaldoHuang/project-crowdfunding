@@ -58,7 +58,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         autoplaySpeed: 5000,
     };
     return (
-        <div className='ml-64'>
+        <div className='lg:ml-64'>
             <div className="w-full px-5 mt-20 mb-10">
                 <div>
                     <div className="flex gap-x-3">
