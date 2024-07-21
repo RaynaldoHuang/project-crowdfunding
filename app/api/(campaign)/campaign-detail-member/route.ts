@@ -24,9 +24,49 @@ export async function POST (req: NextRequest, res: NextResponse) {
             }
         },
         
+    });
+    const totalDonator = await prisma.donation.aggregate({
+        where: {
+            campaignId: data.id
+        },
+      
+        _count: {
+            profileId: true
+        },
+        
     })
 
-    console.log(campaignDetailMember)
+    const donators = await prisma.donation.findMany({
+        take: 3,
+        where: {
+            campaignId: data.id
+        },
+        select: {
+            amount: true,
+            profile: {
+                select: {
+                    accountUsername: true
+                }
+            }
+        }
+    })
 
-    return NextResponse.json({ success: true, campaignDetailMember }, { status: 200 })
+    const allDonators = await prisma.donation.findMany({
+        where: {
+            campaignId: data.id
+        },
+        select: {
+            amount: true,
+            donateDate: true,
+            profile: {
+                select: {
+                    accountUsername: true
+                }
+            }
+        }
+    })
+
+    console.log(campaignDetailMember, totalDonator, donators,)
+
+    return NextResponse.json({ success: true, campaignDetailMember, totalDonator, donators, allDonators }, { status: 200 })
 }

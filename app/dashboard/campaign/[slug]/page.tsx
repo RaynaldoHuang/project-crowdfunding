@@ -1,5 +1,6 @@
 "use client"
 
+
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick"
@@ -24,6 +25,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
     const [fundAccumulated, setFundAccumulated]: [any, any] = useState(0)
     const [fundsNeeded, setFundNeedded]: [any, any] = useState(0)
     const [eventDescription, setEventDescription] = useState('')
+    const [donatorAccumulated, setDonatorAccumulated] = useState(0)
+    const [dynamicArr, setDynamicArr] = useState([])
 
     useEffect(() => {
         fetchCampaigDetail()
@@ -47,6 +50,9 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         setFundAccumulated(data['campaignDetailMember'][0].fundsAccumulated)
         setFundNeedded(data['campaignDetailMember'][0].fundsNeeded)
         setEventDescription(data['campaignDetailMember'][0].eventDescription)
+        setDonatorAccumulated(data.totalDonator._count.profileId)
+        let donator = data['donators']
+        setDynamicArr(donator)
     }
 
     const settings = {
@@ -124,13 +130,15 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                     <div className="mb-5 flex items-center justify-between">
                                         <div className="flex">
                                             <h1 className="text-lg font-bold mr-3">Para Donatur</h1>
-                                            <div className="bg-sky-200 px-2 py-1 rounded-md flex justify-center items-center"><h1 className="font-bold text-sky-800 text-sm">310</h1></div>
+                                            <div className="bg-sky-200 px-2 py-1 rounded-md flex justify-center items-center"><h1 className="font-bold text-sky-800 text-sm">{donatorAccumulated}</h1></div>
                                         </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                                             <path fillRule="evenodd" d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clipRule="evenodd" />
                                         </svg>
                                     </div></Link>
-                                <div className="grid gap-y-3">
+                               { 
+                                dynamicArr.map((c: any) => (
+                                <div key={c.id} className="grid gap-y-3">
                                     <div className="flex items-center bg-gray-100 rounded-lg px-5 py-5">
                                         <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-gray-500">
@@ -138,38 +146,15 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                             </svg>
                                         </div>
                                         <div className="ml-5">
-                                            <h1 className="font-bold text-base">Orang Baik</h1>
-                                            <p className="text-xs">berdonasi Sebesar <span className="font-bold text-sm">Rp10.000</span></p>
-                                            <p className="text-xs mt-2">10 menit yang lalu</p>
+                                            <h1 className="font-bold text-base">{c.profile.accountUsername}</h1>
+                                            <p className="text-xs">berdonasi Sebesar <span className="font-bold text-sm">Rp{c.amount}</span></p>
+                                            {/* <p className="text-xs mt-2">{c.donationDate.split('T')[0]}</p> */}
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center bg-gray-100 rounded-lg px-5 py-5">
-                                        <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-gray-500">
-                                                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <div className="ml-5">
-                                            <h1 className="font-bold text-base">Orang Baik</h1>
-                                            <p className="text-xs">berdonasi Sebesar <span className="font-bold text-sm">Rp10.000</span></p>
-                                            <p className="text-xs mt-2">10 menit yang lalu</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center bg-gray-100 rounded-lg px-5 py-5">
-                                        <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-gray-500">
-                                                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <div className="ml-5">
-                                            <h1 className="font-bold text-base">Orang Baik</h1>
-                                            <p className="text-xs">berdonasi Sebesar <span className="font-bold text-sm">Rp10.000</span></p>
-                                            <p className="text-xs mt-2">10 menit yang lalu</p>
-                                        </div>
-                                    </div>
                                 </div>
+                                ))
+                                }
                             </div>
                         </div>
                     </div>
