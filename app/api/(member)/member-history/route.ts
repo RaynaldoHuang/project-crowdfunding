@@ -6,29 +6,33 @@ import { cookies } from "next/headers";
 export async function GET(req: NextRequest, res: NextResponse) {
     const user: any = cookies().get('user')?.value
 
-    const historyMember = await prisma.profile.findMany(
-        {
-            where: {
-                accountUsername: user 
-            },
-            include: {
-                campaign: {
-                    select: {
-                        eventName: true,
-                        eventDescription: true
-                    }
-                },
-                donation: {
-                    select: {
-                        donateDate: true,
-                        amount: true
-                    }
-                }
-            }
+    const getProfileId: any = await prisma.profile.findUnique({
+        where: {
+            accountUsername: user
+        },
+        select: {
+            id: true
         }
-    )
-    console.log(historyMember)
+    })
+
+    const getDonationHistory = await prisma.donation.findMany({
+        where: {
+            profileId: getProfileId.id
+        },
+        select: {
+            campaign: {
+                select: {
+                    eventName: true,
+                    eventDescription: true
+                }
+            },
+            amount: true,
+            donateDate: true
+        }
+    })
+
+    console.log(getDonationHistory)
     
     
-    return NextResponse.json({ "success": true, historyMember}, { status: 200 })
+    return NextResponse.json({ "success": true, getDonationHistory }, { status: 200 })
 }

@@ -34,7 +34,7 @@ export default function Donate() {
         const res = await fetch('/api/generate-token', {
             method: "POST",
             body: JSON.stringify({
-                order_id: Math.floor(Math.random() * 100) + 1, // need to reformat the order id
+                order_id: Math.floor(Math.random() * 10000) + 1, // need to reformat the order id
                 amount: parseInt(form.get('amount')),
                 id: path.split('/')[3]
             })
@@ -42,8 +42,26 @@ export default function Donate() {
 
         const data = await res.json()
 
+        console.log(data.campaignName)
+
         if (data.success) {
-            window.snap.pay(data.token)
+            window.snap.pay(data.token, {
+                onSuccess: async function (result) {
+                    const response = await fetch('/api/update-donation', {
+                        method: "POST",
+                        body: JSON.stringify({
+                            amount: data.donationAmount,
+                            campaignId: data.campaignName.id,
+                            fundsAccumulated: data.campaignName.fundsAccumulated
+                        })
+                    })
+                    const data = await response.json()
+                    
+                },
+                onClose: function () {
+                    console.log("Closed the popup")
+                }
+            })
         }
     }
 

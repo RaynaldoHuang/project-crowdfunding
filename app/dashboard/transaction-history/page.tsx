@@ -15,17 +15,9 @@ export default function ListHistory() {
 
   const fetchHistory = async () => {
     const response = await fetch("/api/member-history");
-    console.log(response)
     const data = await response.json();
-
-    let result = data['historyMember'];
     
-    setDynamicArr(result);
-
-    setEventName(data["historyMember"][0].campaign.eventName);
-    setEventDesc(data["historyMember"][0].campaign.eventDescription);
-    setAmount(data["historyMember"][0].donation.amount);
-    setDate(data["historyMember"][0].donation.donateDate);
+    setDynamicArr(data.getDonationHistory);
   };
   return (
     <div className="ml-64">
@@ -77,10 +69,10 @@ export default function ListHistory() {
           <tbody>
             {dynamicArr.map((c: any, idx) => (
               <tr key={idx} className="border-b">
-                <td className="text-xs py-5">{c.eventName}</td>
-                <td className="text-xs w-2/4">{c.eventDesc}</td>
-                <td className="text-xs">Rp{c.amount}</td>
-                <td className="text-xs">{c.date}</td>
+                <td className="text-xs py-5">{c.campaign.eventName}</td>
+                <td className="text-xs w-2/4">{c.campaign.eventDescription}</td>
+                <td className="text-xs">Rp{c.amount.toLocaleString()}</td>
+                <td className="text-xs">{c.donateDate.split("T")[0]}</td>
               </tr>
             ))}
             
