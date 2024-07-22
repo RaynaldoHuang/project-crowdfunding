@@ -92,7 +92,6 @@ export default function Donate() {
 
                     </div>
                 </div>
-                <button onClick={onOpen} className="mt-5 bg-sky-600 text-white py-2.5 rounded-xl text-sm">tes</button>
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                     <ModalContent>
                         {(onClose) => (
