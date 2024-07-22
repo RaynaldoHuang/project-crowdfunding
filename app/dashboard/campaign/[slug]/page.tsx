@@ -7,7 +7,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import img1 from "@/public/images/img1.jpg"
+import img9 from "@/public/images/img9.jpg"
 import img3 from "@/public/images/img3.jpg"
 import { Button, Progress } from "@nextui-org/react";
 import Link from "next/link";
@@ -16,7 +16,7 @@ import img6 from "@/public/svgs/img6.svg"
 
 
 export default function DetailCampaign({ params }: { params: { slug: string } }) {
-    const [kabarTerbaruAda, setKabarTerbaruAda] = useState(false);
+    const [kabarTerbaruAda, setKabarTerbaruAda] = useState(true);
     const [accountUsername, setAccountUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -71,9 +71,6 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                         <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
                             <div className="slider-container rounded-lg h-[335px] overflow-hidden bg-red-300">
                                 <Slider {...settings}>
-                                    <div>
-                                        <Image src={img1} alt="" className="object-cover w-full h-full"></Image>
-                                    </div>
                                     <div>
                                         <Image src={img3} alt="" className="object-cover w-full h-full"></Image>
                                     </div>
@@ -138,7 +135,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                     </div></Link>
                                { 
                                 dynamicArr.map((c: any) => (
-                                <div key={c.id} className="grid gap-y-3">
+                                <div key={c.id} className="grid mb-3">
                                     <div className="flex items-center bg-gray-100 rounded-lg px-5 py-5">
                                         <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-gray-500">
@@ -176,11 +173,11 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                             </h1>}>
                                 {kabarTerbaruAda ? (
                                     <div className="mb-8">
-                                        <h1 className="text-base text-sky-800 font-bold">Judul Berita Begini Begitu</h1>
-                                        <p className="text-xs mt-1 mb-5">Dipublikasikan 30 Juli 2019</p>
-                                        <p className="text-base">Kondisi tubuh yang penuh dengan benjolan, membuat Teh Sonia, Pak Karniwa juga penderita tumor lainnya menjadi tidak percaya diri, keterbatasan biaya untuk berobat lagi-lagi menjadi kendala bagi mereka hingga tidak melanjutkan pengobatannya. Sedangkan jika tidak berobat, kondisi mereka akan terus memburuk.
-                                            “Kenapa yaa bu, teteh kaya gini, ibu malu gak punya anak kaya teteh?” Teh sonia
-                                            Teh Sonia (30) berdomisili di kota Kuningan, Jawa Barat, sejak lahir teh sonia mengalami kelainan di bagian wajahnya, awalnya hanya terdapat bercak-bercak coklat kehitaman saja namun seiring bertambahnya usia bercak tersebut malah semakin membesar dan sekarang bahkan sudah menutupi sebagian wajahnya.</p>
+                                        <h1 className="text-base text-sky-800 font-bold">Penarikan Dana Donasi</h1>
+                                        <p className="text-xs mt-1 mb-5">Dipublikasikan 30 Juli 2024</p>
+                                        <p className="text-base mb-4">penarikan dana dilakukan untuk membantu membeli buku yang akan digunakan anak-anak untuk belajar</p>
+
+                                        <Image src={img9} alt="" width={300}></Image>
                                     </div>
                                 ) : (
                                     <div className="text-base items-center flex flex-col justify-center mb-5">

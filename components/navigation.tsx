@@ -7,9 +7,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    "Fitur",
-    "Kampanye",
-    "Sukarelawan",
+    "Login",
   ];
 
   return (
@@ -22,24 +20,6 @@ export default function App() {
         <NavbarBrand>
           <Image src={logo} alt={""} height={400} className="md:h-[30px] md:w-[140px]"/>
         </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem className="mx-5">
-          <Link color="foreground" href="#">
-            Fitur
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="mx-5">
-          <Link color="foreground" href="#">
-            Kampanye
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="mx-5">
-          <Link color="foreground" href="#">
-            Sukarelawan
-          </Link>
-        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">

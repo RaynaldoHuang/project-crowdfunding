@@ -38,7 +38,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
             </button>
           </div>
           {dynamicArr.map((c: any) => (
-            <div key={c.id} className="grid gap-y-3">
+            <div key={c.id} className="grid mb-3">
               <div className="flex items-center bg-gray-100 rounded-lg px-5 py-5">
                 <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
                   <svg
