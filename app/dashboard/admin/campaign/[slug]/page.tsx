@@ -6,7 +6,7 @@ import { Button } from "@nextui-org/react";
 import { CircularProgress, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "@/app/config";
+import { storage } from "@/firebase";
 
 import { useRouter } from "next/navigation";
 
@@ -23,6 +23,7 @@ export default function CampaignDetail({
 }) {
   const router = useRouter()
 
+  const [url, setURL] = useState("")
   const [eventName, setEventName] = useState("");
   const [statusEvent, setStatusEvent] = useState("");
   const [descEvent, setDescEvent] = useState("");
@@ -76,30 +77,75 @@ export default function CampaignDetail({
     console.log(formData.get('file'))
 
     if (formData.get('file').size == 0) {
-      
+      setIsLoading(false)
+      return
     }
 
-    if (valid) {
-      const res = await fetch("/api/campaign-detail", {
-        method: "PUT",
-        body: JSON.stringify({
-          eventName: formData.get("event"),
-          status: formData.get("status"),
-          eventDescription: formData.get("desc"),
-          fundsNeeded: formData.get("fundsNeeded"),
-          deadline: formData.get("deadline"),
-          id: params.slug,
-          news: content
-        }),
-      });
+    if (valid) { 
+      const storageRef = ref(storage, 'images/' + formData.get('file').name)
+      const uploadTask = uploadBytesResumable(storageRef, formData.get('file'));
 
-      const data = await res.json();
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        }, 
+        (error) => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          console.log('Error: ', error)
+          return
+        }, 
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => { 
+            const res = await fetch("/api/campaign-detail", {
+              method: "PUT",
+              body: JSON.stringify({
+                eventName: formData.get("event"),
+                status: formData.get("status"),
+                eventDescription: formData.get("desc"),
+                fundsNeeded: formData.get("fundsNeeded"),
+                deadline: formData.get("deadline"),
+                id: params.slug,
+                news: content,
+                imgUrl: downloadURL,
+              }),
+            });
 
-      if (data.success) {
-        router.push('/dashboard/admin/campaign')
-      }
+            const data = await res.json();
+
+            if (data.success) {
+              router.push('/dashboard/admin/campaign')
+            }
+
+            setIsLoading(false)
+          });
+        }
+      );
     }
-    setIsLoading(false);
+
+      // const res = await fetch("/api/campaign-detail", {
+      //   method: "PUT",
+      //   body: JSON.stringify({
+      //     eventName: formData.get("event"),
+      //     status: formData.get("status"),
+      //     eventDescription: formData.get("desc"),
+      //     fundsNeeded: formData.get("fundsNeeded"),
+      //     deadline: formData.get("deadline"),
+      //     id: params.slug,
+      //     news: content,
+      //     imgUrl: url,
+      //   }),
+      // });
+
+    //   const data = await res.json();
+
+    //   if (data.success) {
+    //     router.push('/dashboard/admin/campaign')
+    //   }
+    // }
+    // setIsLoading(false);
   };
 
   const styles = {
@@ -303,7 +349,7 @@ export default function CampaignDetail({
           <div className="flex flex-col mb-5">
             <label className="mb-1">Gambar Pendukung</label>
             <div className="border border-dashed border-slate-300 rounded-lg py-20 flex justify-center">
-              <input name='file' type="file" accept=".png, .jpg, .jpeg" />
+              <input name='file' type="file" accept=".png, .jpg, .jpeg" multiple/>
             </div>
           </div>
         
