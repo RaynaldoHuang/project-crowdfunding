@@ -48,34 +48,33 @@ export default function ListHistory() {
           </div>
         </div>
 
-        <table className="table-auto w-full">
+        <table className="table-fixed w-full">
           <thead className="text-left border-b-2">
             <tr className="">
-              <th className="font-normal text-xs text-slate-500 pb-2">
+              <th className="font-normal text-xs w-1/4 text-slate-500 pb-2 pe-2">
                 Judul Kampanye
               </th>
-              <th className="font-normal text-xs text-slate-500 pb-2">
+              <th className="font-normal text-xs w-1/2 text-slate-500 pb-2 pe-2">
                 Deskripsi
               </th>
-              <th className="font-normal text-xs text-slate-500 pb-2">
+              <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
                 Jumlah Donasi
               </th>
-              <th className="font-normal text-xs text-slate-500 pb-2">
+              <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
                 Tanggal Donasi
               </th>
-              <th className="font-normal text-xs text-slate-500 pb-2"></th>
+              <th className="font-normal text-xs text-slate-500 pb-2 pe-2"></th>
             </tr>
           </thead>
           <tbody>
             {dynamicArr.map((c: any, idx) => (
               <tr key={idx} className="border-b">
-                <td className="text-xs py-5">{c.campaign.eventName}</td>
-                <td className="text-xs w-2/4">{c.campaign.eventDescription}</td>
-                <td className="text-xs">Rp{c.amount.toLocaleString()}</td>
-                <td className="text-xs">{c.donateDate.split("T")[0]}</td>
+                <td className="text-xs py-5 pe-5 truncate">{c.campaign.eventName}</td>
+                <td className="text-xs pe-10 truncate ">{c.campaign.eventDescription}</td>
+                <td className="text-xs pe-5 ">Rp{c.amount.toLocaleString()}</td>
+                <td className="text-xs pe-5">{c.donateDate.split("T")[0]}</td>
               </tr>
             ))}
-            
           </tbody>
         </table>
       </div>
