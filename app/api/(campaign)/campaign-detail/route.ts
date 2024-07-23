@@ -24,6 +24,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 export async function PUT(req: NextRequest, res: NextResponse) {
     const data = await req.json()
 
+    console.log("Image URL", data.imgUrl)
+
     const campaign = await prisma.campaign.update({
         where: {
             id: data.id
@@ -46,7 +48,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         })
     }
 
-
+    const setCampaignImage = await prisma.campaignImage.create({
+        data: {
+            campaignId: data.id,
+            imageLink: data.imgUrl
+        }
+    })
 
     return NextResponse.json({ 'success': true })
 }
