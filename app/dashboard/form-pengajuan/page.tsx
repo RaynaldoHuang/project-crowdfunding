@@ -61,7 +61,7 @@ export default function FormPengajuan() {
                 id="first_name"
                 onChange={handleInputChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[350px] p-2.5 pl-12"
-                placeholder="Pencarian..."
+                placeholder="Pencarian Judul Kampanye..."
               />
             </div>
             <Link
