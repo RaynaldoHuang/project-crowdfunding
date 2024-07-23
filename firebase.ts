@@ -6,12 +6,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA21VnDMwi4dh9zkMl_kX2Gj8iHXOpi3Pw",
-  authDomain: "sedekah-d267d.firebaseapp.com",
-  projectId: "sedekah-d267d",
-  storageBucket: "sedekah-d267d.appspot.com",
-  messagingSenderId: "689409304446",
-  appId: "1:689409304446:web:88389f4cb8443fbe17b52f"
+  apiKey: "AIzaSyCx2j8i-_K8aqpc7KAqCp3B1LpudPHq7ao",
+  authDomain: "sedekah-78091.firebaseapp.com",
+  projectId: "sedekah-78091",
+  storageBucket: "sedekah-78091.appspot.com",
+  messagingSenderId: "233668492220",
+  appId: "1:233668492220:web:9a8356a1d95c98224f49b9"
 };
 
 // Initialize Firebase
