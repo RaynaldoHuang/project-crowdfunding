@@ -100,7 +100,7 @@ export default function ajukanForm() {
                             <p>* Setelah Anda mengirim formulir pengajuan, Anda akan segera dihubungin oleh admin untuk memproses pengajuan kampanye lebih lanjut.</p>
                         </div>
                         <div className='flex justify-end items-center'>
-                            <Link href='/dashboard/admin/campaign' className='border border-red-500 px-3 py-2 text-red-500 mx-5 rounded-lg'>Batal</Link>
+                            <Link href='/dashboard/form-pengajuan' className='border border-red-500 px-3 py-2 text-red-500 mx-5 rounded-lg'>Batal</Link>
                             <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Kirim Formulir</button>
                         </div>
                     </div>

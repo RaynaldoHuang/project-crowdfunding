@@ -18,12 +18,10 @@ export default function AdminDashboard() {
     }, [])
 
     const fetchMembers = async () => {
-        const res = await fetch('/api/member', {
-            method: 'POST'
-        })
+        const res = await fetch('/api/member')
         const data = await res.json()
 
-        setMembers(data['members'])
+        setMembers(data['memberDashboard'])
         setMemberCount(data.count._count.id)
     }
 

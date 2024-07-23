@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Donatur({ params }: { params: { slug: string } }) {
+  const path = usePathname()
   const [dynamicArr, setDynamicArr] = useState([]);
   const [donatorAccumulated, setDonatorAccumulated] = useState(0)
   useEffect(() => {
@@ -10,7 +13,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
   }, []);
 
   const fetchAllDonator = async () => {
-    const res = await fetch("/api/campaign-detail-member", {
+      const res = await fetch("/api/campaign-detail-member", {
       method: "POST",
       body: JSON.stringify({
         id: params.slug,
@@ -33,9 +36,9 @@ export default function Donatur({ params }: { params: { slug: string } }) {
                 <h1 className="font-bold text-sky-800 text-sm">{donatorAccumulated}</h1>
               </div>
             </div>
-            <button className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm">
+            <Link href={`/dashboard/campaign/${path.split("/")[3]}`} className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm">
               Kembali
-            </button>
+            </Link>
           </div>
           {dynamicArr.map((c: any) => (
             <div key={c.id} className="grid mb-3">

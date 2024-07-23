@@ -5,25 +5,19 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 export default function FormPengajuan() {
+  const [initial, setInitial] = useState([])
   const [dynamicArr, setDynamicArr] = useState([]);
-  const [query, setQuery] = useState('')
-  //   const [eventName, setEventName] = useState("");
-  //   const [fundNeeded, setFundNeeded] = useState("");
-  //   const [deadline, setDeadline] = useState("");
-  //   const [status, setStatus] = useState("");
-  //   const [createdDate, setCreatedDate] = useState("");
 
   useEffect(() => {
     fetchRequest();
   }, []);
-  
-  useEffect (() => {
-    
-  }, [])
 
   
   const handleInputChange = (event: any) => {
-    console.log(event.currentTarget.value)
+    const data = initial
+    
+    const filtered = data.filter((item: any) => item.eventName.toLowerCase().includes(event.currentTarget.value));
+    setDynamicArr(filtered);
   };
 
 
@@ -35,6 +29,7 @@ export default function FormPengajuan() {
     console.log(data)
 
     setDynamicArr(data.getCampaign)
+    setInitial(data.getCampaign)
 
     // setEventName(data["listCampaignMember"][0].eventName);
     // setFundNeeded(data["listCampaignMember"][0].fundNeeded);
