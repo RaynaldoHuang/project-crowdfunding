@@ -2,11 +2,12 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
-import { useState } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import Link from "next/link";
 
 export default function Donate() {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { isOpen, onOpenChange } = useDisclosure();
+    const path = usePathname()
 
     useEffect(() => {
         const srcScript = 'https://app.sandbox.midtrans.com/snap/snap.js'
@@ -24,7 +25,7 @@ export default function Donate() {
         }
     }, [])
 
-    const path = usePathname()
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -56,7 +57,7 @@ export default function Donate() {
                         })
                     })
                     const data = await response.json()
-                    
+
                 },
                 onClose: function () {
                     console.log("Closed the popup")
@@ -86,7 +87,12 @@ export default function Donate() {
                                         className="flex-1 outline-none bg-gray-100 w-full [&::-webkit-inner-spin-button]:appearance-none"
                                     />
                                 </div>
-                                <button type='submit' className="mt-5 bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm w-48">Donasi Sekarang</button>
+                                <div className="flex justify-between items-center mt-5">
+                                    <button type='submit' className="bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm w-48">Donasi Sekarang</button>
+                                    <Link className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm flex items-center" href={`/dashboard/campaign/${path.split("/")[3]}`}>
+                                        Kembali
+                                    </Link>
+                                </div>
                             </div>
                         </form>
 
