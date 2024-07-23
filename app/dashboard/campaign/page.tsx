@@ -65,7 +65,7 @@ export default function CampaignMember() {
 
     return (
         <div className='lg:ml-64'>
-            <div className="lg:w-full px-5 lg:mt-20 mt-24 mb-24">
+            <div className="lg:w-full px-5 lg:mt-20 mt-24 mb-24 lg:mb-10">
                 <div className='mb-5 bg-white py-5 rounded-xl px-3 lg:flex lg:justify-between lg:items-center'>
                     <div className="text-xl font-bold mb-5 lg:mb-0">
                         Bantu Siapa Hari Ini?
