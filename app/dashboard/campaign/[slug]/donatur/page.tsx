@@ -36,7 +36,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
                 <h1 className="font-bold text-sky-800 text-sm">{donatorAccumulated}</h1>
               </div>
             </div>
-            <Link href={`/dashboard/campaign/${path.split("/")[3]}`} className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm">
+            <Link href={`/dashboard/campaign/${path.split("/")[3]}`} className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm flex items-center">
               Kembali
             </Link>
           </div>
