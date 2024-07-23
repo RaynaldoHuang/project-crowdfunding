@@ -53,7 +53,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
             deadline: data.deadline,
         }
     })
+
+    console.log(createCampaign)
     
 
-    return NextResponse.json({ message: "Pengajuan kampanye telah berhasil.", success: true }, { status: 201 })
+    return NextResponse.json({ message: "Pengajuan kampanye telah berhasil.", success: true, }, { status: 201 })
 }

@@ -101,7 +101,7 @@ export default function ajukanForm() {
                         </div>
                         <div className='flex justify-end items-center'>
                             <Link href='/dashboard/admin/campaign' className='border border-red-500 px-3 py-2 text-red-500 mx-5 rounded-lg'>Batal</Link>
-                            <Link type='submit' href='/dashboard/form-pengajuan/2' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Kirim Formulir</Link>
+                            <button type='submit' className='bg-sky-600 px-3 py-2 rounded-lg text-white'>Kirim Formulir</button>
                         </div>
                     </div>
                 </form>

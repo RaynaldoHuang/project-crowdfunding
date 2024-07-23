@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function FormPengajuan() {
   const [dynamicArr, setDynamicArr] = useState([]);
+  const [query, setQuery] = useState('')
   //   const [eventName, setEventName] = useState("");
   //   const [fundNeeded, setFundNeeded] = useState("");
   //   const [deadline, setDeadline] = useState("");
@@ -15,6 +16,16 @@ export default function FormPengajuan() {
   useEffect(() => {
     fetchRequest();
   }, []);
+  
+  useEffect (() => {
+    
+  }, [])
+
+  
+  const handleInputChange = (event: any) => {
+    console.log(event.currentTarget.value)
+  };
+
 
   const fetchRequest = async () => {
     const res = await fetch('/api/form-pengajuan');
@@ -53,6 +64,7 @@ export default function FormPengajuan() {
               <input
                 type="text"
                 id="first_name"
+                onChange={handleInputChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[350px] p-2.5 pl-12"
                 placeholder="Pencarian..."
               />
