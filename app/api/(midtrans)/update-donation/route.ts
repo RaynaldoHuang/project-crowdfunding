@@ -18,13 +18,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
     })
 
-    const createDonation = await prisma.donation.create({
-        data: {
-            profileId: getProfileId.id,
-            campaignId: data.campaignId,
-            amount: data.amount
-        }
-    })
+    // const createDonation = await prisma.donation.create({
+    //     data: {
+    //         profileId: getProfileId.id,
+    //         campaignId: data.campaignId,
+    //         amount: data.amount
+    //     }
+    // })
 
     let total = data.fundsAccumulated + data.amount
 
