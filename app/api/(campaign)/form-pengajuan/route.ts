@@ -21,6 +21,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         },
         select: {
             eventName: true,
+            eventDescription: true,
             fundsNeeded: true,
             deadline: true,
             status: true,
