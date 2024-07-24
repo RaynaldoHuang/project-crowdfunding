@@ -5,9 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image'
 import img1 from "@/public/images/img1.jpg";
 import img2 from "@/public/svgs/imghero.svg";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
+import React from 'react';
 
 export default function DashboardMember() {
     const [campaigns, setCampaigns] = useState([])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchCampaignData()
@@ -19,6 +23,7 @@ export default function DashboardMember() {
         const data = await res.json()
 
         setCampaigns(data['dashboardCampaign'])
+        setLoading(false);
     }
     return (
         <div className="lg:ml-64">
@@ -60,19 +65,30 @@ export default function DashboardMember() {
                 <div className="mb-5">
                     <h1 className="lg:text-xl text-2xl font-bold text-sky-900 mt-10">Kampanye Terbaru</h1>
                     <div className='lg:grid lg:grid-cols-4 gap-x-2 gap-y-6 mt-6 flex flex-col'>
-                        {campaigns.map((c: any, idx) => (
-                            <div key={idx} className="bg-white px-3 py-3 rounded-2xl">
-                                <Image src={img1} alt={""} width={350} className="rounded-xl"
-                                />
-                                <div className="pb-0 pt-2 flex-col items-start">
-                                    <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
-                                        {c.eventName}</h1>
-                                    <p className="text-slate-500 text-sm mt-4 line-clamp-2 text-balance"> {c.eventDescription}</p>
-                                    <p className="text-orange-500 text-base mt-2">Dana Dibutuhkan Rp{c.fundsNeeded.toLocaleString()}</p>
-                                    <Link href={`/dashboard/campaign/${c.id}`}><button className='text-white px-8 mt-6 py-2 bg-sky-600 rounded-xl text-sm text-center w-full'>Lihat Detail</button></Link>
+                        {loading
+                            ? Array.from({ length: 4 }).map((_, idx) => (
+                                <div key={idx} className="bg-white px-3 py-3 rounded-2xl">
+                                    <Skeleton height={200} />
+                                    <div className="pb-0 pt-2 flex-col items-start">
+                                        <Skeleton count={2} />
+                                        <Skeleton height={30} width={150} />
+                                        <Skeleton height={40} width={200} style={{ marginTop: '20px' }} />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                            : campaigns.map((c: any, idx) => (
+                                <div key={idx} className="bg-white px-3 py-3 rounded-2xl">
+                                    <Image src={img1} alt={""} width={350} className="rounded-xl"
+                                    />
+                                    <div className="pb-0 pt-2 flex-col items-start">
+                                        <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
+                                            {c.eventName}</h1>
+                                        <p className="text-slate-500 text-sm mt-4 line-clamp-2 text-balance"> {c.eventDescription}</p>
+                                        <p className="text-orange-500 text-base mt-2">Dana Dibutuhkan Rp{c.fundsNeeded.toLocaleString()}</p>
+                                        <Link href={`/dashboard/campaign/${c.id}`}><button className='text-white px-8 mt-6 py-2 bg-sky-600 rounded-xl text-sm text-center w-full'>Lihat Detail</button></Link>
+                                    </div>
+                              </div>
+                            ))}
                     </div>
                 </div>
             </div>
