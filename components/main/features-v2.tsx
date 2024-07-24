@@ -1,6 +1,7 @@
 import Image from "next/image";
 import img1 from "@/public/images/img1.jpg";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
 export default function FeaturesV2() {
     return (
@@ -17,7 +18,7 @@ export default function FeaturesV2() {
                             tandanya kamu sudah menjadi manusia yang berguna
                             menjadi untuk sesama manusia dan untuk Anda.</p>
                         <div>
-                            <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl">
+                            <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl" as={Link} href="/login">
                                 Donasi Sekarang
                             </Button>
                         </div>

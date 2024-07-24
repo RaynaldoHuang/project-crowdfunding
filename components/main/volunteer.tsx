@@ -1,6 +1,7 @@
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import img4 from "@/public/svgs/img4.svg";
+import Link from "next/link";
 
 export default function Volunteer() {
     return (
@@ -19,7 +20,7 @@ export default function Volunteer() {
                             dan bermanfaat, jadilah bagian dari kami dan berkontribusilah
                             bangsa dan negara dan paling sederhana.</p>
                         <div>
-                            <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl">
+                            <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl" as={Link} href="/register">
                                 Gabung Sekarang
                             </Button>
                         </div>

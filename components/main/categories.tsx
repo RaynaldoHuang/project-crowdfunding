@@ -10,6 +10,7 @@ import toys from '@/public/svgs/toys.svg'
 import money from '@/public/svgs/money.svg'
 import medicine from '@/public/svgs/medicine.svg'
 import food from '@/public/svgs/food.svg'
+import Link from "next/link";
 
 export default function Categories() {
     const settings = {
@@ -34,7 +35,7 @@ export default function Categories() {
                         <p className="text-slate-500 text-base mt-4 lg:w-1/2 lg:text-center">Ada banyak hal yang mereka butuhkan dari mainan,
                             makanan, pakaian dan sebagainya. Mereka sangat senang
                             ketika mereka memiliki hal-hal yang mereka miliki.</p>
-                        <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl">
+                        <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl" as={Link} href="/login">
                             Donasi Sekarang
                         </Button>
                     </div>
