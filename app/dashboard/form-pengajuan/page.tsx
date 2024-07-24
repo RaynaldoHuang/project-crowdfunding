@@ -3,10 +3,13 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function FormPengajuan() {
   const [initial, setInitial] = useState([]);
   const [dynamicArr, setDynamicArr] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchRequest();
@@ -30,6 +33,7 @@ export default function FormPengajuan() {
 
     setDynamicArr(data.getCampaign);
     setInitial(data.getCampaign);
+    setLoading(false);
 
     // setEventName(data["listCampaignMember"][0].eventName);
     // setFundNeeded(data["listCampaignMember"][0].fundNeeded);
@@ -95,23 +99,36 @@ export default function FormPengajuan() {
             </tr>
           </thead>
           <tbody>
-            {dynamicArr.map((c: any, idx) => (
-              <tr key={idx} className="border-b">
-                <td className="text-xs py-5">{c.eventName}</td>
-                <td className="text-xs">Rp {c.fundsNeeded.toLocaleString()}</td>
-                <td className="text-xs">{c.deadline.split("T")[0]}</td>
-                <td className={clsx("text-xs")}>{c.status}</td>
-                <td className="text-xs">{c.createdDate.split("T")[0]}</td>
-                <td className="text-xs">
-                <Link
-                    href={`/dashboard/form-pengajuan/${c.id}`}
-                    className="text-white bg-sky-600 px-3 py-2 rounded"
-                  >
-                    Lihat Detail
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, idx) => (
+                <tr key={idx} className="border-b">
+                  <td className="text-xs py-5 pe-5"><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                </tr>
+              ))
+            ) : (
+              dynamicArr.map((c: any, idx) => (
+                <tr key={idx} className="border-b">
+                  <td className="text-xs py-5">{c.eventName}</td>
+                  <td className="text-xs">Rp {c.fundsNeeded.toLocaleString()}</td>
+                  <td className="text-xs">{c.deadline.split("T")[0]}</td>
+                  <td className={clsx("text-xs")}>{c.status}</td>
+                  <td className="text-xs">{c.createdDate.split("T")[0]}</td>
+                  <td className="text-xs">
+                    <Link
+                      href={`/dashboard/form-pengajuan/${c.id}`}
+                      className="text-white bg-sky-600 px-3 py-2 rounded"
+                    >
+                      Lihat Detail
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
