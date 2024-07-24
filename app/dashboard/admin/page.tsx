@@ -58,7 +58,7 @@ export default function AdminDashboard() {
                     <div className="flex flex-row bg-white rounded-xl">
                         <div className="bg-green-500 w-2 h-full rounded-l-xl">
                         </div>
-                        <div className="flex flex-row items-center w-full flex justify-between px-5 py-3">
+                        <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Kampanye</p>
                                 <h1 className="font-bold text-xl mb-1">{campaignCount} <span className="text-base font-semibold">Kampanye</span></h1>
@@ -122,7 +122,7 @@ export default function AdminDashboard() {
                                 <tbody>
                                     {
                                         members.map((member: any) => (
-                                            <tr className='border-b'>
+                                            <tr key={member.id} className='border-b'>
                                                 <td className='text-xs py-5'>{member.firstName + " " + member.lastName}</td>
                                                 <td className='text-xs'>{member.accountUsername}</td>
                                                 <td className={clsx('text-xs',)}>{member.gender[0].toUpperCase() + member.gender.slice(1,).toLowerCase()}</td>
@@ -152,7 +152,7 @@ export default function AdminDashboard() {
                                 <tbody>
                                     {
                                         campaigns.map((campaign: any) => (
-                                            <tr className='border-b'>
+                                            <tr key={campaign.id} className='border-b'>
                                                 <td className='text-xs py-5'>{campaign.eventName}</td>
                                                 <td className='text-xs'>{campaign.deadline.split('T')[0]}</td>
                                                 <td className={clsx('text-xs',)}>{campaign.status}</td>
