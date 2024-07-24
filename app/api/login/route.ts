@@ -4,12 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { user } from "@nextui-org/react";
 
-export const config = {
-    api: {
-        bodyParser: false
-    }
-}
-
 export async function GET(req: NextRequest, res: NextResponse) {
     const user = cookies().get('user')?.value
 

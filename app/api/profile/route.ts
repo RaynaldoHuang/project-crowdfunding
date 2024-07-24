@@ -2,14 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 import { cookies } from "next/headers";
 
-
-
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
-
 export async function POST(request: NextRequest, response: NextResponse) {
     const user: any = cookies().get('user')?.value
 

@@ -41,19 +41,26 @@ export default function CampaignMember() {
 
         setCampaigns(data["campaigns"]);
 
-        let result = data["campaigns"].filter(
-            (campaign: any) => campaign.status == "ONGOING"
-        );
+        // let result = data["campaigns"].filter(
+        //     (campaign: any) => campaign.status == "ONGOING"
+        // );
 
-        setDynamicArr(result);
-        setInitial(result);
+        // setDynamicArr(result);
+        // setInitial(result);
         setLoading(false);
     };
 
     const onInitialLoad = () => {
         const btn: any = document.getElementById(prev);
-
         btn.className = "bg-sky-600 text-white text-xs mr-4 px-4 py-2 rounded-full";
+
+        const data = initialDynamic
+        const result = data.filter((item: any) =>
+            item.status == "ONGOING"
+        );
+
+        setDynamicArr(result)
+        setInitial(result)
     };
 
     const handleClick = (event: any) => {

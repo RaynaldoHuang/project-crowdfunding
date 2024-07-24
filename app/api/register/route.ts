@@ -2,12 +2,6 @@ import { hashPassword } from "@/auth";
 import prisma from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-    api: {
-        bodyParser: false
-    }
-}
-
 export async function POST(req: NextRequest, res: NextResponse) {
     const data = await req.json()
 
