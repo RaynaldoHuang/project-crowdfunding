@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import img7 from "@/public/svgs/img7.svg"
 import Image from "next/image"
 
-export default function forgotPassword() {
+export default function ForgotPassword() {
     const [success, setSuccess] = useState(false)
     const [hideOTP, setHideOTP] = useState(false)
     const [oneTimePass, setOneTimePass] = useState('')

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 
-export default function changePassword() {
+export default function ChangePassword() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     return (
         <>
