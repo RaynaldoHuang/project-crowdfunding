@@ -63,6 +63,21 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         autoplay: true,
         autoplaySpeed: 5000,
     };
+
+    const shareCampaign = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: eventName,
+                text: eventDescription,
+                url: window.location.href,
+            })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+        } else {
+            alert('Web Share API is not supported in your browser.');
+        }
+    };
+
     return (
         <div className='lg:ml-64'>
             <div className="w-full px-5 mt-20 mb-10">
@@ -86,7 +101,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                     <p className="text-xs">Terkumpul dari <span className="font-bold">Rp{fundsNeeded.toLocaleString()}</span></p>
                                 </div>
                                 <div>
-                                    <Button variant="bordered" className="border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600">
+                                    <Button variant="bordered" className="border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600" onClick={shareCampaign}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-3">
                                             <path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" />
                                         </svg>
