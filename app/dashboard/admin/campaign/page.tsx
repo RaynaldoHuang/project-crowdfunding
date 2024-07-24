@@ -27,7 +27,7 @@ export default function AdminCampaign() {
     const data = initial;
 
     const filtered = data.filter((item: any) =>
-      item.eventName.toLowerCase().includes(event.currentTarget.value)
+      item.eventName.toLowerCase().includes(event.currentTarget.value.toLowerCase())
     );
     setDynamicArr(filtered);
   };

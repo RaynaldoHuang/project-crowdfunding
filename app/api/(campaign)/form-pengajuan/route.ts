@@ -20,6 +20,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
             profileId: getProfileId.id
         },
         select: {
+            id: true,
             eventName: true,
             eventDescription: true,
             fundsNeeded: true,

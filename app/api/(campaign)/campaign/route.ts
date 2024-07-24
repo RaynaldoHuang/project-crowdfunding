@@ -8,7 +8,7 @@ export const config = {
 };
 
 export async function GET(req: NextRequest, res:NextResponse) {
-    const campaigns = await prisma.campaign.findMany(
+    const campaigns: any = await prisma.campaign.findMany(
        {
         select: {
             id: true,
@@ -18,15 +18,17 @@ export async function GET(req: NextRequest, res:NextResponse) {
             fundsNeeded: true,
             createdDate: true,
             status: true,
-
             profile : {
                 select: {
                     accountUsername: true,
                 }
+            },
+            campaignImage: {
+                select: {
+                    imageLink: true
+                }
             }
        },}
-
-       
     )
 
     const count = await prisma.campaign.aggregate({

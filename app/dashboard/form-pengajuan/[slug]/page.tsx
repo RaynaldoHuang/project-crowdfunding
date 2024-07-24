@@ -4,12 +4,12 @@ import Link from "next/link";
 
 import { useEffect, useState } from "react";
 
-export default function DetailForm() {
+export default function DetailForm({ params }: { params: { slug: string } }) {
   const [eventName, setEventName] = useState('') 
   const [eventDesc, setEventDesc] = useState('')
   const [fundsNeeded, setFundNeeded] = useState('')
   const [status, setStatus] = useState('')
-  const [dealine, setDeadline] = useState('')
+  const [deadline, setDeadline] = useState('')
 
   useEffect(() => {
     fetchCampaign();
@@ -17,14 +17,21 @@ export default function DetailForm() {
 
 
   const fetchCampaign = async () => {
-    const res = await fetch("/api/form-pengajuan");
+    const res = await fetch("/api/form-pengajuan-detail", {
+        method: "POST",
+        body: JSON.stringify({
+            id: params.slug
+        })
+    });
     const data = await res.json();
 
-    setEventName(data['getCampaign'][0].eventName)
-    setEventDesc(data['getCampaign'][0].eventDescription)
-    setFundNeeded(data['getCampaign'][0].fundsNeeded)
-    setStatus(data['getCampaign'][0].status)
-    setDeadline(data['getCammpaign'][0].deadline)
+    console.log(data.getFormDetail)
+
+    setEventName(data.getFormDetail.eventName)
+    setEventDesc(data.getFormDetail.eventDescription)
+    setFundNeeded(data.getFormDetail.fundsNeeded)
+    setStatus(data.getFormDetail.status)
+    setDeadline(data.getFormDetail.deadline)
   }
     
 
@@ -92,7 +99,7 @@ export default function DetailForm() {
                 type="date"
                 name="deadline"
                 placeholder="Masukkan tanggal batas kampanye"
-                value={dealine.split("T")[0]}
+                value={deadline.split("T")[0]}
                 className="px-3 py-2 rounded-lg bg-gray-100 cursor-not-allowed"
               />
             </div>
@@ -108,9 +115,9 @@ export default function DetailForm() {
           <div className="flex justify-between items-center">
             <div className="w-3/4 text-xs text-balance text-slate-400">
               <p>
-                * Setelah Anda mengirim formulir pengajuan, Anda akan segera
+                ** Setelah Anda mengirim formulir pengajuan, Anda akan segera
                 dihubungin oleh admin untuk memproses pengajuan kampanye lebih
-                lanjut.
+                lanjut. Harap untuk mengisi data diri profile secara valid dan lengkap.
               </p>
             </div>
             <div className="flex justify-end items-center">

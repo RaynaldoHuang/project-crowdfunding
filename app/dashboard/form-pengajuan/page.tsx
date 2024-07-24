@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
+
 export default function FormPengajuan() {
   const [initial, setInitial] = useState([]);
   const [dynamicArr, setDynamicArr] = useState([]);
@@ -34,13 +35,9 @@ export default function FormPengajuan() {
     setDynamicArr(data.getCampaign);
     setInitial(data.getCampaign);
     setLoading(false);
-
-    // setEventName(data["listCampaignMember"][0].eventName);
-    // setFundNeeded(data["listCampaignMember"][0].fundNeeded);
-    // setDeadline(data["listCampaignMember"][0].deadline);
-    // setStatus(data["listCampaignMember"][0].status);
-    // setCreatedDate(data["listCampaignMember"][0].createdDate);
   };
+
+  
   return (
     <div className="lg:ml-64">
       <div className="mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl">
@@ -114,7 +111,7 @@ export default function FormPengajuan() {
               dynamicArr.map((c: any, idx) => (
                 <tr key={idx} className="border-b">
                   <td className="text-xs py-5">{c.eventName}</td>
-                  <td className="text-xs">Rp {c.fundsNeeded.toLocaleString()}</td>
+                  <td className="text-xs">Rp{c.fundsNeeded.toLocaleString()}</td>
                   <td className="text-xs">{c.deadline.split("T")[0]}</td>
                   <td className={clsx("text-xs")}>{c.status}</td>
                   <td className="text-xs">{c.createdDate.split("T")[0]}</td>

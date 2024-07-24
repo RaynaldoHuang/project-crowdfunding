@@ -11,6 +11,7 @@ export default function CampaignMember() {
     const [initial, setInitial] = useState([]);
     const [campaigns, setCampaigns] = useState([]);
     const [dynamicArr, setDynamicArr] = useState([]);
+    const [initialDynamic, setInitialDynamic] = useState([]);
     const [prev, setPrev] = useState("ONGOING");
     const [loading, setLoading] = useState(true);
 
@@ -20,11 +21,12 @@ export default function CampaignMember() {
     ];
 
     const handleInputChange = (event: any) => {
-        const data = initial;
+        const data = initialDynamic;
 
         const filtered = data.filter((item: any) =>
-            item.eventName.toLowerCase().includes(event.currentTarget.value)
+            item.eventName.toLowerCase().includes(event.currentTarget.value.toLowerCase())
         );
+
         setDynamicArr(filtered);
     };
 
@@ -80,6 +82,7 @@ export default function CampaignMember() {
         }
         let result = campaigns.filter((c: any) => c.status == stats);
         setDynamicArr(result);
+        setInitialDynamic(result)
     };
 
     return (
@@ -139,7 +142,8 @@ export default function CampaignMember() {
                         : dynamicArr.map((c: any, idx) => (
                             <div key={idx}>
                                 <div className="bg-white px-3 py-3 rounded-2xl">
-                                    <Image src={img1} alt={""} width={350} className="rounded-xl" />
+                                    {/* c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink */}
+                                    <img src={c.campaignImage.length == 0 ? "./public/images/img1" : c.campaignImage[0].imageLink} alt={"gambar donasi"} width={350} height={350} className="rounded-xl" />
                                     <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                             {c.eventName}
