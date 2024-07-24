@@ -63,6 +63,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     console.log('Profile', profileAcc)
     console.log('Account', updateAccount)
 
+    if (cookies().get("firstName")?.value == "" || cookies().get("lastName")?.value == "") {
+        cookies().set('firstName', data.first)
+        cookies().set('lastName', data.last)
+    }
+
     return NextResponse.json({ 'success': true, message: 'Akun Profil telah berhasil di update' }, { status: 201 })
 }
 
