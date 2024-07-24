@@ -55,7 +55,7 @@ export default function RegisterPage() {
         let error = { message: "" }
 
         if (data.success) {
-            router.push('/login')
+            router.push('/Login')
             return
         }
 
@@ -157,7 +157,7 @@ export default function RegisterPage() {
                     </form>
                     <div className="flex flex-row mt-10 items-center justify-between">
                         <p className="text-xs">Sudah punya akun?</p>
-                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/login" as={Link}>
+                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/Login" as={Link}>
                             Login
                         </Button>
                     </div>
