@@ -32,7 +32,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${opnsns.className}`} suppressHydrationWarning={true}>
           {/* dekstop-view */}
-          <div className="fixed lg:flex lg:justify-between lg:px-5 lg:h-14 items-center text-xl font-semibold bg-white top-0 lg:left-64 w-full lg:right-0 lg:z-20">
+          <div className="fixed lg:flex lg:justify-between lg:px-5 lg:h-14 items-center text-xl font-semibold bg-white top-0 lg:left-64 w-full lg:right-0 lg:z-20 z-40">
             <div className="hidden lg:block">
               <h1 className="text-sky-900 text-base">Selamat Datang, {cookies().get('firstName')?.value + ' ' + cookies().get('lastName')?.value}</h1>
             </div>
