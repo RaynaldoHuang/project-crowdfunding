@@ -7,8 +7,8 @@ export default function changePassword() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     return (
         <>
-            <div className="ml-64">
-                <div className="mt-20 mx-5 bg-white px-5 py-7 mb-7 rounded-xl">
+            <div className="lg:ml-64">
+                <div className="lg:mt-20 mt-24 mx-5 bg-white px-5 py-7 mb-7 rounded-xl">
                     <h1 className="text-lg font-bold mb-1">
                         Ubah Kata Sandi
                     </h1>
@@ -24,7 +24,7 @@ export default function changePassword() {
                                 // required={true}
                                 className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                             />
-                            <Link href={"profile/katasandi"} className="mt-2 text-xs text-sky-600 ">Lupa kata sandi? klik disini</Link>
+                            <Link href={"/lupapassword"} className="mt-2 text-xs text-sky-600 ">Lupa kata sandi? klik disini</Link>
                         </div>
 
                         <div className='flex flex-col'>

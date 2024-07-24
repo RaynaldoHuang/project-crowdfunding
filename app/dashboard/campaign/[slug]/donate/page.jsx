@@ -1,13 +1,15 @@
 'use client'
 
 import { usePathname } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
 
 export default function Donate() {
     const { isOpen, onOpenChange } = useDisclosure();
     const path = usePathname()
+    const [amount, setAmount] = useState(0);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         const srcScript = 'https://app.sandbox.midtrans.com/snap/snap.js'
@@ -25,10 +27,23 @@ export default function Donate() {
         }
     }, [])
 
-    
+    const handleAmountChange = (event) => {
+        const value = parseInt(event.target.value, 10);
+        setAmount(value);
+        if (value < 1000) {
+            setErrorMessage("Minimal donasi Rp1000");
+        } else {
+            setErrorMessage("");
+        }
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+
+        if (amount < 1000) {
+            setErrorMessage("Minimal donasi Rp1000");
+            return;
+        }
 
         const form = new FormData(event.currentTarget)
 
@@ -68,13 +83,12 @@ export default function Donate() {
 
     return (
         <>
-            <div className="ml-64">
+            <div className="lg:ml-64">
                 <div className="mt-20 mx-5 bg-white px-5 py-5 mb-10 rounded-xl">
                     <div className="text-lg font-bold">
                         Masukkan Nominal Donasi
                     </div>
                     <div className='mt-3'>
-
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col">
                                 <div className="flex border border-gray-200 rounded-lg px-3 py-2 bg-gray-100">
@@ -85,17 +99,28 @@ export default function Donate() {
                                         placeholder='0'
                                         required={true}
                                         className="flex-1 outline-none bg-gray-100 w-full [&::-webkit-inner-spin-button]:appearance-none"
+                                        onChange={handleAmountChange}
                                     />
                                 </div>
+                                {errorMessage && (
+                                    <div className="text-red-500 mt-2 text-sm">
+                                        {errorMessage}
+                                    </div>
+                                )}
                                 <div className="flex justify-between items-center mt-5">
-                                    <button type='submit' className="bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm w-48">Donasi Sekarang</button>
+                                    <button
+                                        type='submit'
+                                        className={`bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm ${amount < 1000 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={amount < 1000}
+                                    >
+                                        Donasi Sekarang
+                                    </button>
                                     <Link className="border border-red-500 px-3 text-red-500 rounded-lg h-10 text-sm flex items-center" href={`/dashboard/campaign/${path.split("/")[3]}`}>
                                         Kembali
                                     </Link>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

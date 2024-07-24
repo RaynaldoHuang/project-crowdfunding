@@ -84,7 +84,7 @@ export default function forgotPassword() {
                                         <Button fullWidth className="bg-sky-600 text-white" type="submit">
                                             Reset password
                                         </Button>
-                                        <Link href={"/login"} className="text-xs text-sky-600 flex justify-center items-center mt-5">Kembali ke login</Link>
+                                        <Link href={"/login"} className="text-xs text-sky-600 flex justify-center items-center mt-5">Kembali</Link>
                                     </form>
                                 </div>
                         }
