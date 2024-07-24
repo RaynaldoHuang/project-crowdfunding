@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function ListHistory() {
   const [dynamicArr, setDynamicArr] = useState([]);
@@ -8,6 +10,7 @@ export default function ListHistory() {
   const [eventDesc, setEventDesc] = useState('');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchHistory();
@@ -16,8 +19,9 @@ export default function ListHistory() {
   const fetchHistory = async () => {
     const response = await fetch("/api/member-history");
     const data = await response.json();
-    
+
     setDynamicArr(data.getDonationHistory);
+    setLoading(false);
   };
   return (
     <div className="ml-64">
@@ -67,14 +71,25 @@ export default function ListHistory() {
             </tr>
           </thead>
           <tbody>
-            {dynamicArr.map((c: any, idx) => (
-              <tr key={idx} className="border-b">
-                <td className="text-xs py-5 pe-5 truncate">{c.campaign.eventName}</td>
-                <td className="text-xs pe-10 truncate ">{c.campaign.eventDescription}</td>
-                <td className="text-xs pe-5 ">Rp{c.amount.toLocaleString()}</td>
-                <td className="text-xs pe-5">{c.donateDate.split("T")[0]}</td>
-              </tr>
-            ))}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, idx) => (
+                <tr key={idx} className="border-b">
+                  <td className="text-xs py-5 pe-5 truncate"><Skeleton /></td>
+                  <td className="text-xs pe-10 truncate "><Skeleton /></td>
+                  <td className="text-xs pe-5 "><Skeleton /></td>
+                  <td className="text-xs pe-5"><Skeleton /></td>
+                </tr>
+              ))
+            ) : (
+              dynamicArr.map((c: any, idx) => (
+                <tr key={idx} className="border-b">
+                  <td className="text-xs py-5 pe-5 truncate">{c.campaign.eventName}</td>
+                  <td className="text-xs pe-10 truncate ">{c.campaign.eventDescription}</td>
+                  <td className="text-xs pe-5 ">Rp{c.amount.toLocaleString()}</td>
+                  <td className="text-xs pe-5">{c.donateDate.split("T")[0]}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
