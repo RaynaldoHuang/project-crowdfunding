@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function ListHistory() {
+  const [initial, setInitial] = useState([]);
   const [dynamicArr, setDynamicArr] = useState([]);
   const [eventName, setEventName] = useState('');
   const [eventDesc, setEventDesc] = useState('');
@@ -21,8 +22,18 @@ export default function ListHistory() {
     const data = await response.json();
 
     setDynamicArr(data.getDonationHistory);
+    setInitial(data.getDonationHistory)
     setLoading(false);
   };
+
+  const handleChange = (event: any) => {
+    const data = initial
+
+    const filtered = data.filter((item: any) => item.campaign.eventName.toLowerCase().includes(event.currentTarget.value.toLowerCase()))
+
+    setDynamicArr(filtered)
+  }
+
   return (
     <div className="ml-64">
       <div className="mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl">
@@ -44,7 +55,7 @@ export default function ListHistory() {
               </svg>
               <input
                 type="text"
-                id="first_name"
+                onChange={handleChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[350px] p-2.5 pl-12"
                 placeholder="Pencarian..."
               />
