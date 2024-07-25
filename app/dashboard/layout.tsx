@@ -3,7 +3,7 @@ import { Open_Sans } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/public/svgs/logo.svg"
+import logo from "@/public/svgs/logo.svg";
 import { cookies } from "next/headers";
 
 const opnsns = Open_Sans({ subsets: ["latin"] });
@@ -21,7 +21,12 @@ export default function RootLayout({
   return (
     <>
       <Head>
-        <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charSet="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -34,113 +39,252 @@ export default function RootLayout({
           {/* dekstop-view */}
           <div className="fixed lg:flex lg:justify-between lg:px-5 lg:h-14 items-center text-xl font-semibold bg-white top-0 lg:left-64 w-full lg:right-0 lg:z-20 z-40">
             <div className="hidden lg:block">
-              <h1 className="text-sky-900 text-base">Selamat Datang, {cookies().get('firstName')?.value + ' ' + cookies().get('lastName')?.value}</h1>
+              <h1 className="text-sky-900 text-base">
+                Selamat Datang,{" "}
+                {cookies().get("user")?.value}
+              </h1>
             </div>
             <div className="lg:hidden">
               <div className="flex justify-between items-center px-5 py-5">
                 <Image src={logo} alt={""} height={30} />
-                <Link href={"/dashboard/profile"}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 text-sky-600">
-                  <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
-                </svg></Link>
+                <Link href={"/dashboard/profile"}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="size-7 text-sky-600"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>
           <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-[#F5F5F5] text-gray-800">
             <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r hidden lg:block">
               <div className="flex items-center justify-center h-14 border-b">
-                <Image src={logo} alt={""} height={400} className="md:h-[30px] md:w-[140px]" />
+                <Image
+                  src={logo}
+                  alt={""}
+                  height={400}
+                  className="md:h-[30px] md:w-[140px]"
+                />
               </div>
               <div className="overflow-y-auto overflow-x-hidden flex-grow">
                 <ul className="flex flex-col">
                   {/* Admin Menu Dashboard Navigation */}
-                  <li className={cookies().get('role')?.value == 'MEMBER' ? 'hidden' : 'block'}>
+                  <li
+                    className={
+                      cookies().get("role")?.value == "MEMBER"
+                        ? "hidden"
+                        : "block"
+                    }
+                  >
                     <ul className="pt-4 space-y-1">
                       <li className="px-5">
                         <div className="flex flex-row items-center h-8">
-                          <div className="text-sm font-light tracking-wide text-gray-500">Admin Menu</div>
+                          <div className="text-sm font-light tracking-wide text-gray-500">
+                            Admin Menu
+                          </div>
                         </div>
                       </li>
                       <li>
-                        <Link href="/dashboard/admin" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                        <Link
+                          href="/dashboard/admin"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                        >
                           <span className="inline-flex justify-center items-center ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                              <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="size-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           </span>
-                          <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
+                          <span className="ml-2 text-sm tracking-wide truncate">
+                            Dashboard
+                          </span>
                         </Link>
                       </li>
                       <li>
-                        <Link href="/dashboard/admin/member" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                        <Link
+                          href="/dashboard/admin/member"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                        >
                           <span className="inline-flex justify-center items-center ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                              <path fillRule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clipRule="evenodd" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="size-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z"
+                                clipRule="evenodd"
+                              />
                               <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
                             </svg>
                           </span>
-                          <span className="ml-2 text-sm tracking-wide truncate">Member</span>
+                          <span className="ml-2 text-sm tracking-wide truncate">
+                            Member
+                          </span>
                         </Link>
                       </li>
                       <li>
-                        <a href="/dashboard/admin/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                        <a
+                          href="/dashboard/admin/campaign"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                        >
                           <span className="inline-flex justify-center items-center ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                              <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="size-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z"
+                                clipRule="evenodd"
+                              />
                               <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
                             </svg>
                           </span>
-                          <span className="ml-2 text-sm tracking-wide truncate">Kampanye</span>
+                          <span className="ml-2 text-sm tracking-wide truncate">
+                            Kampanye
+                          </span>
                         </a>
                       </li>
                     </ul>
                   </li>
 
                   {/* Member Menu Dashboard Navigation */}
-                  <div className={cookies().get('role')?.value == 'ADMIN' ? 'hidden' : 'block'}>
+                  <div
+                    className={
+                      cookies().get("role")?.value == "ADMIN"
+                        ? "hidden"
+                        : "block"
+                    }
+                  >
                     <li>
                       <ul className="py-4 space-y-1">
                         <li className="px-5">
                           <div className="flex flex-row items-center h-8">
-                            <div className="text-sm font-light tracking-wide text-gray-500">Menu Member</div>
+                            <div className="text-sm font-light tracking-wide text-gray-500">
+                              Menu Member
+                            </div>
                           </div>
                         </li>
                         <li>
-                          <a href="/dashboard" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                          <a
+                            href="/dashboard"
+                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                          >
                             <span className="inline-flex justify-center items-center ml-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                                <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="size-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
+                                  clipRule="evenodd"
+                                />
                               </svg>
                             </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
+                            <span className="ml-2 text-sm tracking-wide truncate">
+                              Dashboard
+                            </span>
                           </a>
                         </li>
                         <li>
-                          <a href="/dashboard/campaign" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                          <a
+                            href="/dashboard/campaign"
+                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                          >
                             <span className="inline-flex justify-center items-center ml-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                                <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="size-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z"
+                                  clipRule="evenodd"
+                                />
                                 <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
                               </svg>
                             </span>
-                            <span className="ml-2 text-sm tracking-wide truncate">Kampanye</span>
+                            <span className="ml-2 text-sm tracking-wide truncate">
+                              Kampanye
+                            </span>
                           </a>
-                          <div className={cookies().get('role')?.value == 'ADMIN' ? 'hidden' : 'block'}>
-                            <a href="/dashboard/form-pengajuan" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                          <div
+                            className={
+                              cookies().get("role")?.value == "ADMIN"
+                                ? "hidden"
+                                : "block"
+                            }
+                          >
+                            <a
+                              href="/dashboard/form-pengajuan"
+                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                            >
                               <span className="inline-flex justify-center items-center ml-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                                  <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="size-5"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
+                                    clipRule="evenodd"
+                                  />
                                   <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                 </svg>
                               </span>
-                              <span className="ml-2 text-sm tracking-wide truncate">Form Pengajuan</span>
+                              <span className="ml-2 text-sm tracking-wide truncate">
+                                Form Pengajuan
+                              </span>
                             </a>
-                            <a href="/dashboard/transaction-history" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                            <a
+                              href="/dashboard/transaction-history"
+                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                            >
                               <span className="inline-flex justify-center items-center ml-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                                  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="size-5"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                                    clipRule="evenodd"
+                                  />
                                 </svg>
                               </span>
-                              <span className="ml-2 text-sm tracking-wide truncate">Histori Transaksi</span>
+                              <span className="ml-2 text-sm tracking-wide truncate">
+                                Histori Transaksi
+                              </span>
                             </a>
                           </div>
                         </li>
@@ -149,56 +293,127 @@ export default function RootLayout({
                   </div>
                   <li className="px-5">
                     <div className="flex flex-row items-center h-8">
-                      <div className="text-sm font-light tracking-wide text-gray-500">Pengaturan</div>
+                      <div className="text-sm font-light tracking-wide text-gray-500">
+                        Pengaturan
+                      </div>
                     </div>
                   </li>
                   <li>
-                    <a href="/dashboard/profile" className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6">
+                    <a
+                      href="/dashboard/profile"
+                      className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                    >
                       <span className="inline-flex justify-center items-center ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                          <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="size-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
+                      <span className="ml-2 text-sm tracking-wide truncate">
+                        Profile
+                      </span>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div className="overflow-y-auto">
-              {children}
-            </div>
+            <div className="overflow-y-auto">{children}</div>
           </div>
 
           {/* mobile-view */}
           <div className="lg:hidden">
             <nav className="fixed z-50 bottom-0 left-0 right-0 bg-white border-t border-gray-200">
               <div className="flex justify-around items-center h-16">
-                <Link href={"/dashboard"} className="flex flex-col items-center">
-                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
-                    <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
-                  </svg></span>
+                <Link
+                  href={"/dashboard"}
+                  className="flex flex-col items-center"
+                >
+                  <span className="material-icons">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-5 text-sky-600"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                   <span className="text-sm">Dashboard</span>
                 </Link>
-                <Link href={"/dashboard/campaign"} className="flex flex-col items-center">
-                  <span className="material-icons"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
-                    <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clipRule="evenodd" />
-                    <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
-                  </svg> </span>
+                <Link
+                  href={"/dashboard/campaign"}
+                  className="flex flex-col items-center"
+                >
+                  <span className="material-icons">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-5 text-sky-600"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z"
+                        clipRule="evenodd"
+                      />
+                      <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+                    </svg>{" "}
+                  </span>
                   <span className="text-sm">Kampanye</span>
                 </Link>
-                <Link href={"/dashboard/form-pengajuan"} className="flex flex-col items-center">
-                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
-                    <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
-                    <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
-                  </svg></span>
+                <Link
+                  href={"/dashboard/form-pengajuan"}
+                  className="flex flex-col items-center"
+                >
+                  <span className="material-icons">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-5 text-sky-600"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
+                        clipRule="evenodd"
+                      />
+                      <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                    </svg>
+                  </span>
                   <span className="text-sm">Form Donasi</span>
                 </Link>
-                <Link href={"/dashboard/transaction-history"} className="flex flex-col items-center">
-                  <span className="material-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-sky-600">
-                    <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
-                  </svg></span>
+                <Link
+                  href={"/dashboard/transaction-history"}
+                  className="flex flex-col items-center"
+                >
+                  <span className="material-icons">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-5 text-sky-600"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                   <span className="text-sm">Histori</span>
                 </Link>
               </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { color } from "framer-motion";
 import Link from "next/link";
 
 import { useEffect, useState } from "react";
@@ -34,7 +35,20 @@ export default function DetailForm({ params }: { params: { slug: string } }) {
     setDeadline(data.getFormDetail.deadline)
   }
     
-
+  const getStatusColor = (status: any) => {
+    switch(status.toLowerCase()) {
+      case 'ongoing':
+        return 'bg-blue-400';
+      case 'canceled':
+        return 'bg-red-400';
+      case 'pending':
+        return 'bg-yellow-400';
+      case 'finished':
+        return 'bg-green-400';
+      default:
+        return 'bg-gray-400'; // Default color for unhandled status
+    }
+  }
     
 
   return (
@@ -42,8 +56,8 @@ export default function DetailForm({ params }: { params: { slug: string } }) {
       <div className="lg:mt-20 mt-24 mx-5 bg-white px-5 lg:mb-10 mb-24 pb-10 rounded-xl">
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold py-10">Form Pengajuan</div>
-          <div className="bg-yellow-400 py-2 px-4 rounded-md font-bold">
-            Pending
+          <div className={`${getStatusColor(status)} py-2 px-4 rounded-md font-bold text-white`}>
+            <h2>{status}</h2>
           </div>
         </div>
         <form>
