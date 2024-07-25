@@ -10,14 +10,14 @@ export async function middleware(req: NextRequest) {
             return NextResponse.redirect(new URL('/dashboard', req.url))
         }
 
-        if (cookies().get('session')?.value != null && req.nextUrl.pathname.includes('Login')) {
+        if (cookies().get('session')?.value != null && req.nextUrl.pathname.includes('login')) {
             console.log('login page')
             return NextResponse.redirect(new URL('/dashboard/admin', req.url))
         }
 
         return NextResponse.next()
     } catch (e) {
-        return NextResponse.redirect(new URL('/Login', req.url))
+        return NextResponse.redirect(new URL('/login', req.url))
     }
 }
 

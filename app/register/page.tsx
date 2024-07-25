@@ -58,7 +58,7 @@ export default function RegisterPage() {
         let error = { message: "" }
 
         if (data.success) {
-            router.push('/Login')
+            router.push('/login')
             return
         }
 
