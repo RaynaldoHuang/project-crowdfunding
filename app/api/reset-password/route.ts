@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 const nodemailer = require('nodemailer')
+import { hashPassword } from "@/auth";
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -73,7 +74,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {
-    console.log('CHANGE PASSWORD')
+    const data = await req.json()
+
+   
+    // const changePass = await prisma.account.update({
+    //     where: {
+    //         email: data.email
+    //     },
+    //     data: {
+    //         password: hashPassword(data.password)
+    //     },
+    // })
 
     return NextResponse.json({ success: true, message: 'Password changed successfully' }, { status: 201 })
 }

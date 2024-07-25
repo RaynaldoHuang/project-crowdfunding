@@ -58,9 +58,9 @@ export default function CampaignMember() {
         const result = data.filter((item: any) =>
             item.status == "ONGOING"
         );
-
-        setDynamicArr(result)
         setInitial(result)
+        setDynamicArr(result)
+        setInitialDynamic(result)  
     };
 
     const handleClick = (event: any) => {
@@ -150,7 +150,7 @@ export default function CampaignMember() {
                             <div key={idx}>
                                 <div className="bg-white px-3 py-3 rounded-2xl">
                                     {/* c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink */}
-                                    <img src={c.campaignImage.length == 0 ? "./public/images/img1" : c.campaignImage[0].imageLink} alt={"gambar donasi"} width={350} height={350} className="rounded-xl" />
+                                    <img src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink} alt={"gambar donasi"} width={350} height={350} className="rounded-xl" />
                                     <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                             {c.eventName}

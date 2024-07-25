@@ -16,7 +16,6 @@ import img6 from "@/public/svgs/img6.svg"
 
 
 export default function DetailCampaign({ params }: { params: { slug: string } }) {
-    const [kabarTerbaruAda, setKabarTerbaruAda] = useState(true);
     const [accountUsername, setAccountUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -26,6 +25,9 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
     const [fundsNeeded, setFundNeedded]: [any, any] = useState(0)
     const [eventDescription, setEventDescription] = useState('')
     const [donatorAccumulated, setDonatorAccumulated] = useState(0)
+    const [kabarTerbaruAda, setKabarTerbaruAda] = useState(true);
+    const [newsDate, setNewsDate] = useState('')
+    const [news, setNews] = useState('')
     const [dynamicArr, setDynamicArr] = useState([])
 
     useEffect(() => {
@@ -51,6 +53,8 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
         setFundNeedded(data['campaignDetailMember'][0].fundsNeeded)
         setEventDescription(data['campaignDetailMember'][0].eventDescription)
         setDonatorAccumulated(data.totalDonator._count.profileId)
+        setNewsDate(data['campaignDetailMember'][0].news.createdDate)
+        setNews(data['campaignDetailMember'][0].news.updateNews)
         let donator = data['donators']
         setDynamicArr(donator)
     }
@@ -187,13 +191,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                 Kabar Terbaru
                             </h1>}>
                                 {kabarTerbaruAda ? (
-                                    <div className="mb-8">
-                                        <h1 className="text-base text-sky-800 font-bold">Penarikan Dana Donasi</h1>
-                                        <p className="text-xs mt-1 mb-5">Dipublikasikan 30 Juli 2024</p>
-                                        <p className="text-base mb-4">penarikan dana dilakukan untuk membantu membeli buku yang akan digunakan anak-anak untuk belajar</p>
-
-                                        <Image src={img9} alt="" width={300}></Image>
-                                    </div>
+                                    <div dangerouslySetInnerHTML={{ __html: news }} />
                                 ) : (
                                     <div className="text-base items-center flex flex-col justify-center mb-5">
                                         <Image src={img6} alt="" className="mb-8" width={400}></Image>
