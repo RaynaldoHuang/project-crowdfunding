@@ -8,7 +8,7 @@ export default function ThanksPage() {
                     <div className="flex flex-col items-center">
                         <h1 className="font-bold text-3xl mb-2">Terima Kasih</h1>
                         <p className="text-sm mb-5">Kamu berhasil melakukan 1 kebaikan hari ini</p>
-                        <Link href="" className="text-red-600 text-sm"> Kembali</Link>
+                        <Link href="/dashboard/campaign" className="text-red-600 text-sm"> Kembali</Link>
                     </div>
                 </div>
             </div>
