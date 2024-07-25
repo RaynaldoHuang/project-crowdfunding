@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CircularProgress, Input } from "@nextui-org/react";
+import { CircularProgress } from "@nextui-org/react";
 import { FormEvent, useState, useEffect } from "react";
 import {
   Modal,
@@ -16,23 +16,23 @@ import clsx from "clsx";
 
 export default function ProfileAcc() {
   const [isEditing, setIsEditing] = useState(false);
-  const [username, setUsername] = useState("");
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [gender, setGender] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [created, setCreated] = useState("");
-
-  const [message, setMessage] = useState('')
-  const [success, setSuccess] = useState(false)
-
+  const [profileData, setProfileData] = useState({
+    username: "",
+    first: "",
+    last: "",
+    gender: "",
+    address: "",
+    city: "",
+    birthDate: "",
+    email: "",
+    phoneNumber: "",
+    created: "",
+  });
+  const [backupProfileData, setBackupProfileData] = useState(profileData);
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  
   useEffect(() => {
     fetchProfileAcc();
   }, []);
@@ -40,16 +40,21 @@ export default function ProfileAcc() {
   const logout = async () => {
     const res = await fetch('/api/logout', {
       method: 'POST'
-    })
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
     if (data.success) {
-      location.reload()
+      location.reload();
     }
-  }
+  };
 
   const toggleEdit = () => {
+    if (isEditing) {
+      setProfileData(backupProfileData); // Reset to original data
+    } else {
+      setBackupProfileData(profileData); // Save original data
+    }
     setIsEditing(!isEditing);
   };
 
@@ -60,16 +65,20 @@ export default function ProfileAcc() {
 
     const data = await response.json();
 
-    setUsername(data["profileAcc"][0].accountUsername);
-    setFirst(data["profileAcc"][0].firstName);
-    setLast(data["profileAcc"][0].lastName);
-    setGender(data["profileAcc"][0].gender);
-    setAddress(data["profileAcc"][0].address);
-    setCity(data["profileAcc"][0].city);
-    setBirthDate(data["profileAcc"][0].birthdate);
-    setEmail(data["profileAcc"][0].username.email);
-    setPhoneNumber(data["profileAcc"][0].phoneNumber);
-    setCreated(data["profileAcc"][0].createdDate);
+    const profile = {
+      username: data["profileAcc"][0].accountUsername,
+      first: data["profileAcc"][0].firstName,
+      last: data["profileAcc"][0].lastName,
+      gender: data["profileAcc"][0].gender,
+      address: data["profileAcc"][0].address,
+      city: data["profileAcc"][0].city,
+      birthDate: data["profileAcc"][0].birthdate,
+      email: data["profileAcc"][0].username.email,
+      phoneNumber: data["profileAcc"][0].phoneNumber,
+      created: data["profileAcc"][0].createdDate,
+    };
+    setProfileData(profile);
+    setBackupProfileData(profile); // Ensure backup data is also updated
   };
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -78,33 +87,28 @@ export default function ProfileAcc() {
     event.preventDefault();
     setIsLoading(true);
 
-    const formData = new FormData(event.currentTarget);
-
     const res = await fetch("/api/profile", {
       method: "PUT",
-      body: JSON.stringify({
-        first: formData.get('first'),
-        last: formData.get('last'),
-        gender: formData.get('jenisKelamin'),
-        address: formData.get('alamat'),
-        city: formData.get('tempatLahir'),
-        birthDate: formData.get('tanggalLahir') + "T00:00:00.000Z",
-        email: formData.get('email'),
-        phoneNumber: formData.get('noTelp'),
-      }),
+      body: JSON.stringify(profileData),
     });
 
     const data = await res.json();
 
-    console.log(data);
-
-    setIsLoading(false)
-    setMessage(data.message)
+    setIsLoading(false);
+    setMessage(data.message);
 
     if (data.success) {
-      setSuccess(true)
-      console.log(data);
+      setSuccess(true);
+      setBackupProfileData(profileData); // Update backup with new data
+      setIsEditing(false);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setProfileData({
+      ...profileData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -163,7 +167,7 @@ export default function ProfileAcc() {
                     <input
                       type="text"
                       placeholder="Masukkan username kamu"
-                      value={username}
+                      value={profileData.username}
                       disabled
                       className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm cursor-not-allowed"
                     />
@@ -175,9 +179,9 @@ export default function ProfileAcc() {
                       <input
                         type="text"
                         placeholder="Masukkan nama depan kamu"
-                        onChange={(e) => setFirst(e.currentTarget.value)}
-                        name='first'
-                        value={first}
+                        name="first"
+                        value={profileData.first}
+                        onChange={handleChange}
                         disabled={!isEditing}
                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                       />
@@ -188,9 +192,9 @@ export default function ProfileAcc() {
                       <input
                         type="text"
                         placeholder="Masukkan nama belakang kamu"
-                        onChange={(e) => setLast(e.target.value)}
-                        name='last'
-                        value={last}
+                        name="last"
+                        value={profileData.last}
+                        onChange={handleChange}
                         disabled={!isEditing}
                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                       />
@@ -200,9 +204,9 @@ export default function ProfileAcc() {
                   <div className="flex flex-col">
                     <label className="mb-2 text-sm">Jenis Kelamin</label>
                     <select
-                      name='jenisKelamin'
-                      onChange={(e) => setGender(e.target.value)}
-                      value={gender}
+                      name="gender"
+                      value={profileData.gender}
+                      onChange={handleChange}
                       className="px-3 py-2 rounded-lg bg-gray-100 text-sm"
                       style={{ borderRight: "12px solid rgb(243 244 246)" }}
                       disabled={!isEditing}
@@ -218,9 +222,9 @@ export default function ProfileAcc() {
                     <input
                       type="text"
                       placeholder="Masukkan alamat kamu"
-                      onChange={(e) => setAddress(e.target.value)}
-                      name='alamat'
-                      value={address}
+                      name="address"
+                      value={profileData.address}
+                      onChange={handleChange}
                       disabled={!isEditing}
                       className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                     />
@@ -232,9 +236,9 @@ export default function ProfileAcc() {
                       <input
                         type="text"
                         placeholder="Masukkan tempat lahir"
-                        onChange={(e) => setCity(e.target.value)}
-                        name='tempatLahir'
-                        value={city}
+                        name="city"
+                        value={profileData.city}
+                        onChange={handleChange}
                         disabled={!isEditing}
                         className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                       />
@@ -245,24 +249,24 @@ export default function ProfileAcc() {
                       <input
                         type="date"
                         placeholder="Masukkan tanggal lahir"
-                        onChange={(e) => setBirthDate(e.target.value)}
-                        name='tanggalLahir'
-                        value={birthDate.split("T")[0]}
+                        name="birthDate"
+                        value={profileData.birthDate.split("T")[0]}
+                        onChange={handleChange}
                         disabled={!isEditing}
-                        className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm "
-                        style={{ padding: "9px 12px 9px 12px" }}
+                        className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
+                        pattern="\d{4}-\d{2}-\d{2}"
                       />
                     </div>
                   </div>
 
                   <div className="flex flex-col">
-                    <label className="mb-2 text-sm">Alamat Email</label>
+                    <label className="mb-2 text-sm">Email</label>
                     <input
-                      type="text"
+                      type="email"
                       placeholder="Masukkan email kamu"
-                      onChange={(e) => setEmail(e.target.value)}
-                      name='email'
-                      value={email}
+                      name="email"
+                      value={profileData.email}
+                      onChange={handleChange}
                       disabled={!isEditing}
                       className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm"
                     />
@@ -273,9 +277,9 @@ export default function ProfileAcc() {
                     <input
                       type="number"
                       placeholder="Masukkan nomor telepon kamu"
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      name='noTelp'
-                      value={phoneNumber}
+                      name="phoneNumber"
+                      value={profileData.phoneNumber}
+                      onChange={handleChange}
                       disabled={!isEditing}
                       className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm [&::-webkit-inner-spin-button]:appearance-none"
                     />
@@ -285,7 +289,7 @@ export default function ProfileAcc() {
                     <label className="mb-2 text-sm">Tanggal Bergabung</label>
                     <input
                       type="date"
-                      value={created.split("T")[0]}
+                      value={profileData.created.split("T")[0]}
                       disabled
                       readOnly
                       className="px-3 py-2.5 rounded-lg bg-gray-100 text-sm cursor-not-allowed"
@@ -312,7 +316,8 @@ export default function ProfileAcc() {
 
                 <div className={isEditing ? "flex justify-end items-end mt-5" : 'hidden'}>
                   <button
-                    onClick={() => location.reload()}
+                    type="button"
+                    onClick={toggleEdit}
                     className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm"
                   >
                     Kembali
