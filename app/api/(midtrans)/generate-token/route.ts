@@ -37,35 +37,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const token = await snap.createTransactionToken(parameter)
 
-    // if (token != undefined || token != '') {
-    //     let total = campaignName.fundsAccumulated + data.amount
-
-    //     const updateDonationFunds = await prisma.campaign.update({
-    //         where: {
-    //             id: data.id,
-    //         },
-    //         data: {
-    //             fundsAccumulated: total
-    //         }
-    //     })
-
-    //     const getUserId: any = await prisma.profile.findUnique({
-    //         where: {
-    //             accountUsername: cookies().get('user')?.value
-    //         },
-    //         select: {
-    //             id: true
-    //         }
-    //     })
-
-    //     const createDonation = await prisma.donation.create({
-    //         data: {
-    //             campaignId: data.id,
-    //             amount: data.amount,
-    //             profileId: getUserId.id
-    //         }
-    //     })
-    // }
-
     return NextResponse.json({ success: true, token, campaignName, donationAmount: data.amount }, {status: 200})
 }
