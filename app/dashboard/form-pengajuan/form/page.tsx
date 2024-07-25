@@ -93,18 +93,18 @@ export default function AjukanForm() {
                         </div>
                     </div> */}
 
-          <div className="flex justify-between items-center">
-            <div className="w-3/4 text-xs text-balance text-slate-400">
+          <div className="lg:flex lg:justify-between lg:items-center">
+            <div className="lg:w-3/4 text-xs text-balance text-slate-400">
               <p>
                 * Setelah Anda mengirim formulir pengajuan, Anda akan segera
                 dihubungin oleh admin untuk memproses pengajuan kampanye lebih
                 lanjut. Harap untuk mengisi data diri profile secara valid dan lengkap.
               </p>
             </div>
-            <div className="flex justify-end items-center">
+            <div className="flex lg:justify-end items-center mt-5 lg:mt-0">
               <Link
                 href="/dashboard/form-pengajuan"
-                className="border border-red-500 px-3 py-2 text-red-500 mx-5 rounded-lg"
+                className="border border-red-500 px-3 py-2 text-red-500 lg:mx-5 rounded-lg me-3"
               >
                 Batal
               </Link>
