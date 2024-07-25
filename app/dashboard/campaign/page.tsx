@@ -32,8 +32,11 @@ export default function CampaignMember() {
 
     useEffect(() => {
         fetchCampaignData();
-        onInitialLoad();
     }, []);
+
+    useEffect(() => {
+        document.getElementById("ONGOING")?.click();
+    }, [campaigns]);
 
     const fetchCampaignData = async () => {
         const res = await fetch("/api/campaign");
@@ -41,26 +44,14 @@ export default function CampaignMember() {
 
         setCampaigns(data["campaigns"]);
 
-        // let result = data["campaigns"].filter(
-        //     (campaign: any) => campaign.status == "ONGOING"
-        // );
-
-        // setDynamicArr(result);
-        // setInitial(result);
-        setLoading(false);
-    };
-
-    const onInitialLoad = () => {
-        const btn: any = document.getElementById(prev);
-        btn.className = "bg-sky-600 text-white text-xs mr-4 px-4 py-2 rounded-full";
-
-        const data = initialDynamic
-        const result = data.filter((item: any) =>
-            item.status == "ONGOING"
+        const ongoingCampaigns = data["campaigns"].filter(
+            (campaign: any) => campaign.status == "ONGOING"
         );
-        setInitial(result)
-        setDynamicArr(result)
-        setInitialDynamic(result)  
+
+        setDynamicArr(ongoingCampaigns);
+        setInitial(ongoingCampaigns);
+        setInitialDynamic(ongoingCampaigns);
+        setLoading(false);
     };
 
     const handleClick = (event: any) => {
@@ -149,8 +140,11 @@ export default function CampaignMember() {
                         : dynamicArr.map((c: any, idx) => (
                             <div key={idx}>
                                 <div className="bg-white px-3 py-3 rounded-2xl">
-                                    {/* c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink */}
-                                    <img src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink} alt={"gambar donasi"} width={350} height={350} className="rounded-xl" />
+                                        <img
+                                            src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink}
+                                            alt={"gambar donasi"}
+                                            className="object-cover w-full h-full absolute inset-0 rounded-xl w-64 h-56 overflow-hidden relative"
+                                        />                
                                     <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                             {c.eventName}
