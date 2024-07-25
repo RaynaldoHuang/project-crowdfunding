@@ -153,7 +153,7 @@ export default function FormPengajuan() {
               </div>
             ))
           ) : dynamicArr.map((c: any, idx) => (
-            <div className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
+            <div key={idx} className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
               <div className="flex flex-col">
                 <div className="font-bold text-base mb-2 line-clamp-2">
                   Judul Kampanye :

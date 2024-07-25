@@ -131,7 +131,7 @@ export default function ListHistory() {
               </div>
             ))
           ) : dynamicArr.map((c: any, idx) => (
-            <div className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
+            <div key={idx} className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
               <div className="flex flex-col">
                 <div className="font-bold text-base line-clamp-2 mb-2">
                   Judul Kampanye :
