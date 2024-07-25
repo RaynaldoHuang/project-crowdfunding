@@ -140,11 +140,12 @@ export default function CampaignMember() {
                         : dynamicArr.map((c: any, idx) => (
                             <div key={idx}>
                                 <div className="bg-white px-3 py-3 rounded-2xl">
+                                    <div className="w-full h-48 overflow-hidden relative">
                                         <img
                                             src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink}
                                             alt={"gambar donasi"}
-                                            className="object-cover w-full h-full absolute inset-0 rounded-xl w-64 h-56 overflow-hidden relative"
-                                        />                
+                                            className="object-cover w-full h-full rounded-xl absolute inset-0"
+                                        />  </div>
                                     <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                             {c.eventName}
