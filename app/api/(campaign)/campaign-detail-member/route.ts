@@ -21,6 +21,13 @@ export async function POST (req: NextRequest, res: NextResponse) {
                     lastName: true,
                     createdDate: true,
                 }
+            },
+
+            news: {
+                select: {
+                    updateNews: true,
+                    createdDate: true
+                }
             }
         },
         
