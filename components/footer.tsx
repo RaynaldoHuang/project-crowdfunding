@@ -30,14 +30,6 @@ export default function Footer() {
                     </div>
                     <div className="flex flex-row lg:w-1/3 lg:justify-between lg:ml-10">
                         <div className="">
-                            <h1 className="text-lg font-bold text-sky-900 mt-12 mb-6 mr-32 lg:mt-0 lg:mr-0">Menu</h1>
-                            <div className="flex flex-col gap-y-2">
-                                <Link href={""} className="text-slate-500 text-base">Fitur</Link>
-                                <Link href={""} className="text-slate-500 text-base">Kampanye</Link>
-                                <Link href={""} className="text-slate-500 text-base">Sukarelawan</Link>
-                            </div>
-                        </div>
-                        <div className="">
                             <h1 className="text-lg font-bold text-sky-900 mt-12 mb-6 lg:mt-0">Kategori</h1>
                             <div className="flex flex-col gap-y-2">
                                 <Link href={""} className="text-slate-500 text-base">Uang</Link>

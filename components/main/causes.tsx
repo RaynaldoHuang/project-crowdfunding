@@ -17,7 +17,7 @@ type Campaign = {
 }
 
 
-export default async function Causes() {
+export default function Causes() {
     const settings = {
         dots: true,
         infinite: true,
