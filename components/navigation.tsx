@@ -16,7 +16,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} className="bg-sky-600 text-white" href="/login" variant="flat">
+          <Button as={Link} className="bg-sky-600 text-white" href="/Login" variant="flat">
             Login
           </Button>
         </NavbarItem>

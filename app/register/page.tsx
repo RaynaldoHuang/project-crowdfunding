@@ -7,6 +7,7 @@ import { EyeFilledIcon } from "@/components/icon/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icon/EyeSlashFilledIcon";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import {CircularProgress} from "@nextui-org/react";
 
 export default function RegisterPage() {
     const router = useRouter()
@@ -21,6 +22,8 @@ export default function RegisterPage() {
 
     const [isVisible1, setIsVisible1] = React.useState(false);
     const toggleVisibility1 = () => setIsVisible1(!isVisible1);
+
+    const [isLoading, setIsLoading] = useState(false);
 
     /**
      * Handles the creation of new user and password matching
@@ -66,13 +69,13 @@ export default function RegisterPage() {
 
 
     return (
-        <>  
-            {error.message && <p className="w-full text-red-600 bg-red-200 px-5 py-2 rounded-lg mb-5">{error.message}</p>}
+        <>
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
                 <div className="drop-shadow-md bg-white rounded-lg px-5 py-5 w-[520px]">
                     <div className="flex flex-col">
                         <h1 className="font-bold text-3xl mb-2">Daftar Akun</h1>
                         <p className="text-xs">Ayo Daftar Dulu Untuk Bergabung ke Sedekah.id</p>
+                        {error.message && <p className="text-red-600 w-full bg-red-200 px-4 py-1 text-red-600 mt-5 rounded-lg text-sm">{error.message}</p>}
                     </div>
                     <form className="pt-10" onSubmit={handleSubmit}>
                         {/* Username */}
@@ -157,7 +160,7 @@ export default function RegisterPage() {
                     </form>
                     <div className="flex flex-row mt-10 items-center justify-between">
                         <p className="text-xs">Sudah punya akun?</p>
-                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/Login" as={Link}>
+                        <Button className="bg-slate-100 text-black font-semibold" size="sm" href="/login" as={Link}>
                             Login
                         </Button>
                     </div>
