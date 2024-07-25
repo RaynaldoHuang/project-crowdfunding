@@ -280,6 +280,7 @@ export default function CampaignDetail({
               >
                 <option value="PENDING">Pending</option>
                 <option value="ONGOING">Approve</option>
+                <option value="FINISHED">Finish</option>
                 <option value="CANCELED">Reject</option>
               </select>
             </div>
