@@ -35,10 +35,10 @@ export default function ListHistory() {
   }
 
   return (
-    <div className="ml-64">
-      <div className="mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl">
-        <div className="flex justify-between mb-10">
-          <div className="text-lg font-bold">History Transaksi Donasi</div>
+    <div className="lg:ml-64">
+      <div className="lg:mt-20 mt-24 mx-5 bg-white px-5 py-10 lg:mb-10 mb-20 rounded-xl">
+        <div className="lg:flex lg:justify-between mb-10">
+          <div className="text-lg font-bold mb-5">History Transaksi Donasi</div>
           <div className="flex">
             <div className="relative mr-3">
               <svg
@@ -56,53 +56,114 @@ export default function ListHistory() {
               <input
                 type="text"
                 onChange={handleChange}
-                className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[350px] p-2.5 pl-12"
-                placeholder="Pencarian..."
+                className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-sky-600 block w-[312px] p-2.5 pl-12"
+                placeholder="Pencarian Judul Kampanye..."
               />
             </div>
           </div>
         </div>
 
-        <table className="table-fixed w-full">
-          <thead className="text-left border-b-2">
-            <tr className="">
-              <th className="font-normal text-xs w-1/4 text-slate-500 pb-2 pe-2">
-                Judul Kampanye
-              </th>
-              <th className="font-normal text-xs w-1/2 text-slate-500 pb-2 pe-2">
-                Deskripsi
-              </th>
-              <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
-                Jumlah Donasi
-              </th>
-              <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
-                Tanggal Donasi
-              </th>
-              <th className="font-normal text-xs text-slate-500 pb-2 pe-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
-              Array.from({ length: 5 }).map((_, idx) => (
-                <tr key={idx} className="border-b">
-                  <td className="text-xs py-5 pe-5 truncate"><Skeleton /></td>
-                  <td className="text-xs pe-10 truncate "><Skeleton /></td>
-                  <td className="text-xs pe-5 "><Skeleton /></td>
-                  <td className="text-xs pe-5"><Skeleton /></td>
-                </tr>
-              ))
-            ) : (
-              dynamicArr.map((c: any, idx) => (
-                <tr key={idx} className="border-b">
-                  <td className="text-xs py-5 pe-5 truncate">{c.campaign.eventName}</td>
-                  <td className="text-xs pe-10 truncate ">{c.campaign.eventDescription}</td>
-                  <td className="text-xs pe-5 ">Rp{c.amount.toLocaleString()}</td>
-                  <td className="text-xs pe-5">{c.donateDate.split("T")[0]}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+
+        {/* dekstop view */}
+        <div className="hidden lg:block">
+          <table className="table-fixed w-full">
+            <thead className="text-left border-b-2">
+              <tr className="">
+                <th className="font-normal text-xs w-1/4 text-slate-500 pb-2 pe-2">
+                  Judul Kampanye
+                </th>
+                <th className="font-normal text-xs w-1/2 text-slate-500 pb-2 pe-2">
+                  Deskripsi
+                </th>
+                <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
+                  Jumlah Donasi
+                </th>
+                <th className="font-normal text-xs text-slate-500 pb-2 pe-2">
+                  Tanggal Donasi
+                </th>
+                <th className="font-normal text-xs text-slate-500 pb-2 pe-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                Array.from({ length: 5 }).map((_, idx) => (
+                  <tr key={idx} className="border-b">
+                    <td className="text-xs py-5 pe-5 truncate"><Skeleton /></td>
+                    <td className="text-xs pe-10 truncate "><Skeleton /></td>
+                    <td className="text-xs pe-5 "><Skeleton /></td>
+                    <td className="text-xs pe-5"><Skeleton /></td>
+                  </tr>
+                ))
+              ) : (
+                dynamicArr.map((c: any, idx) => (
+                  <tr key={idx} className="border-b">
+                    <td className="text-xs py-5 pe-5 truncate">{c.campaign.eventName}</td>
+                    <td className="text-xs pe-10 truncate ">{c.campaign.eventDescription}</td>
+                    <td className="text-xs pe-5 ">Rp{c.amount.toLocaleString()}</td>
+                    <td className="text-xs pe-5">{c.donateDate.split("T")[0]}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* mobile view */}
+        <div className="lg:hidden">
+          {loading ? (
+            Array.from({ length: 3 }).map((_, idx) => (
+              <div key={idx} className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
+                <div className="mb-2">
+                  <Skeleton />
+                </div>
+                <div className="mb-2">
+                  <Skeleton />
+                </div>
+                <div className="mb-2">
+                  <Skeleton />
+                </div>
+                <div className="mb-2">
+                  <Skeleton />
+                </div>
+                <div className="mb-2">
+                  <Skeleton />
+                </div>
+              </div>
+            ))
+          ) : dynamicArr.map((c: any, idx) => (
+            <div className="bg-white border border-2 px-4 py-4 rounded-2xl mt-6">
+              <div className="flex flex-col">
+                <div className="font-bold text-base line-clamp-2 mb-2">
+                  Judul Kampanye :
+                </div>
+                <div className="text-md mb-3">
+                  {c.campaign.eventName}
+                </div>
+
+                <div className="font-bold text-base mb-2">
+                  Deskripsi :
+                </div>
+                <div className="text-md mb-3 line-clamp-5 text-balance">
+                  {c.campaign.eventDescription}
+                </div>
+
+                <div className="font-bold text-base mb-2">
+                  Jumlah Donasi :
+                </div>
+                <div className="text-md mb-3">
+                  Rp{c.amount.toLocaleString()}
+                </div>
+
+                <div className="font-bold text-base mb-2">
+                  Tanggal Donasi :
+                </div>
+                <div className="text-md mb-3">
+                  {c.donateDate.split("T")[0]}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

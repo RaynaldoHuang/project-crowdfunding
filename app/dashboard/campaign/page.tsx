@@ -133,14 +133,14 @@ export default function CampaignMember() {
                                 <div className="pb-0 pt-2 flex-col items-start">
                                     <Skeleton count={2} />
                                     <Skeleton height={30} width={150} />
-                                    <Skeleton height={40} width={200} style={{ marginTop: '20px' }} />
+                                    <Skeleton height={40} width={150} style={{ marginTop: '20px' }} />
                                 </div>
                             </div>
                         ))
                         : dynamicArr.map((c: any, idx) => (
                             <div key={idx}>
                                 <div className="bg-white px-3 py-3 rounded-2xl">
-                                    <div className="w-full h-48 overflow-hidden relative">
+                                    <div className="w-full lg:h-48  h-32 overflow-hidden relative">
                                         <img
                                             src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink}
                                             alt={"gambar donasi"}
