@@ -63,12 +63,12 @@ export default function LoginPage() {
 
     return (
         <>
-            {errMessage == '' ? <div></div> : <div className="text-red-600 w-full bg-red-200 text-red-600 rounded-lg">{errMessage}</div>}
             <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
                 <div className="drop-shadow-md bg-white rounded-lg px-5 py-5 w-[520px]">
                     <div className="flex flex-col">
                         <h1 className="font-bold text-3xl mb-2">Selamat Datang Kembali</h1>
                         <p className="text-xs">Silahkan Masukkan Username dan Password Kamu</p>
+                        {errMessage == '' ? <div></div> : <div className="text-red-600 w-full bg-red-200 px-4 py-1 text-red-600 mt-5 rounded-lg text-sm">{errMessage}</div>}
                     </div>
                     <form className="pt-10" onSubmit={handleSubmit}>
                         {/* email */}
@@ -110,7 +110,7 @@ export default function LoginPage() {
                         <Link href={"/lupapassword"} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
                         <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit" disabled={isLoading}>
                             {isLoading ? (<div className="flex items-center justify-center">
-                                <CircularProgress aria-label="Loading..." size="sm" className="me-3"/>
+                                <CircularProgress aria-label="Loading..." size="sm" className="me-3" />
                                 <span>Memuat...</span>
                             </div>) : (<>Login
                             </>)}
