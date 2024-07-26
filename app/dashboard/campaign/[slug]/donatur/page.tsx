@@ -27,8 +27,8 @@ export default function Donatur({ params }: { params: { slug: string } }) {
   };
   return (
     <>
-      <div className="ml-64">
-        <div className="mt-20 mx-5 bg-white px-5 py-5 mb-10 rounded-xl">
+      <div className="lg:ml-64">
+        <div className="lg:mt-20 mt-24 mx-5 bg-white px-5 py-5 lg:mb-10 mb-24 rounded-xl">
           <div className="flex mb-5 justify-between items-center">
             <div className="flex">
               <div className="text-lg font-bold me-3">Para Donatur</div>
