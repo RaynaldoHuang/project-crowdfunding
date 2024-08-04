@@ -108,7 +108,7 @@ export default function LoginPage() {
                             />
                         </div>
                         <Link href={"/lupapassword"} className="text-xs text-sky-600 flex justify-end">Lupa password?</Link>
-                        <Button fullWidth className="mt-10 bg-sky-600 text-white" type="submit" disabled={isLoading}>
+                        <Button fullWidth className="mt-10 bg-yellow-500 text-white" type="submit" disabled={isLoading}>
                             {isLoading ? (<div className="flex items-center justify-center">
                                 <CircularProgress aria-label="Loading..." size="sm" className="me-3" />
                                 <span>Memuat...</span>

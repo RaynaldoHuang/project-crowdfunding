@@ -115,7 +115,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                         </svg>
                                         <h1>Bagikan</h1>
                                     </Button>
-                                    <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm">
+                                    <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-yellow-500 text-white px-6 py-2.5 rounded-xl text-sm">
                                         Donasi Sekarang
                                     </Link>
                                 </div>
@@ -245,7 +245,7 @@ export default function DetailCampaign({ params }: { params: { slug: string } })
                                 </svg>
                                 <h1>Bagikan</h1>
                             </Button>
-                            <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm">
+                            <Link href={`/dashboard/campaign/${params.slug}/donate`} className="bg-yellow-500 text-white px-6 py-2.5 rounded-xl text-sm">
                                 Donasi Sekarang
                             </Link>
                         </div>

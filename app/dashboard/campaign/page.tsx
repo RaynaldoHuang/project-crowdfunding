@@ -69,7 +69,7 @@ export default function CampaignMember() {
                 const btn: any = document.getElementById(categories[idx]["status"]);
                 console.log(btn);
                 btn.className =
-                    "bg-sky-600 text-white w-fit text-xs mr-4 px-4 py-2 rounded-full";
+                    "bg-yellow-500 text-white w-fit text-xs mr-4 px-4 py-2 rounded-full";
 
                 setPrev(categories[idx]["status"]);
 
@@ -118,7 +118,7 @@ export default function CampaignMember() {
                         <button
                             key={c.id}
                             onClick={handleClick}
-                            className="bg-[#7E84A3] text-white focus:bg-sky-600 text-xs mr-4 px-4 py-2 rounded-full"
+                            className="bg-[#7E84A3] text-white focus:bg-yellow-500 text-xs mr-4 px-4 py-2 rounded-full"
                             id={c.status}
                         >
                             <p>{c.title}</p>
@@ -157,7 +157,7 @@ export default function CampaignMember() {
                                             Dana Dibutuhkan Rp{c.fundsNeeded.toLocaleString()}
                                         </p>
                                         <Link href={`/dashboard/campaign/${c.id}`}>
-                                            <button className="text-white px-8 mt-4 py-2 bg-sky-600 rounded-xl text-sm text-center w-full">
+                                            <button className="text-white px-8 mt-4 py-2 bg-yellow-500 rounded-xl text-sm text-center w-full">
                                                 Lihat Detail
                                             </button>
                                         </Link>

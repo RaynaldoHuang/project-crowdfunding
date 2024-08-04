@@ -110,7 +110,7 @@ export default function AjukanForm() {
               </Link>
               <button
                 type="submit"
-                className="bg-sky-600 px-3 py-2 rounded-lg text-white"
+                className="bg-yellow-500 px-3 py-2 rounded-lg text-white"
               >
                 Kirim Formulir
               </button>

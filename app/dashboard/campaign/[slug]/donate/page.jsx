@@ -104,7 +104,7 @@ export default function Donate() {
                                 <div className="flex justify-between items-center mt-5">
                                     <button
                                         type='submit'
-                                        className={`bg-sky-600 text-white px-6 py-2.5 rounded-xl text-sm ${amount < 1000 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        className={`bg-yellow-500 text-white px-6 py-2.5 rounded-xl text-sm ${amount < 1000 ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         disabled={amount < 1000}
                                     >
                                         Donasi Sekarang

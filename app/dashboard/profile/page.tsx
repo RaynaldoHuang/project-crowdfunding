@@ -128,7 +128,7 @@ export default function ProfileAcc() {
                 </div>
                 <button
                   onClick={onOpen}
-                  className="bg-sky-600 px-4 h-10 rounded-lg text-white text-sm"
+                  className="bg-yellow-500 px-4 h-10 rounded-lg text-white text-sm"
                 >
                   Keluar
                 </button>
@@ -324,7 +324,7 @@ export default function ProfileAcc() {
                   </button>
                   <Button
                     type="submit"
-                    className="bg-sky-600 px-3 py-2 rounded-lg text-white"
+                    className="bg-yellow-500 px-3 py-2 rounded-lg text-white"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -346,7 +346,7 @@ export default function ProfileAcc() {
               <div className="flex justify-end items-end">
                 <button
                   onClick={toggleEdit}
-                  className={isEditing ? "hidden" : "bg-sky-600 px-3 py-2 rounded-lg text-white text-sm mt-5"}
+                  className={isEditing ? "hidden" : "bg-yellow-500 px-3 py-2 rounded-lg text-white text-sm mt-5"}
                 >
                   Edit Profile
                 </button>

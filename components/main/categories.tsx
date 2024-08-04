@@ -28,14 +28,14 @@ export default function Categories() {
             <div className="lg:max-w-8xl mx-auto lg:mt-32">
                 <div className="w-11/12 mx-auto mt-4 overflow-x-hidden">
                     <div className="lg:flex lg:flex-col lg:items-center">
-                        <p className="text-orange-500 text-base mt-10">KATEGORI</p>
-                        <h1 className="text-2xl lg:text-center font-bold text-sky-900 mt-4 lg:text-4xl lg:w-7/12">
+                        <p className="text-red-500 text-base mt-10">KATEGORI</p>
+                        <h1 className="text-2xl lg:text-center font-bold text-black mt-4 lg:text-4xl lg:w-7/12">
                             Apa yang bisa Anda sumbangkan
                             kepada mereka yang membutuhkan?</h1>
                         <p className="text-slate-500 text-base mt-4 lg:w-1/2 lg:text-center">Ada banyak hal yang mereka butuhkan dari mainan,
                             makanan, pakaian dan sebagainya. Mereka sangat senang
                             ketika mereka memiliki hal-hal yang mereka miliki.</p>
-                        <Button className="bg-sky-600 text-white mt-8 px-7 py-4 rounded-xl" as={Link} href="/login">
+                        <Button className="bg-yellow-500 text-white mt-8 px-7 py-4 rounded-xl" as={Link} href="/login">
                             Donasi Sekarang
                         </Button>
                     </div>

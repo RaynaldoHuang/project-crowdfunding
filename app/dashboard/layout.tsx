@@ -3,7 +3,7 @@ import { Open_Sans } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/public/svgs/logo.svg";
+import logo1 from "@/public/svgs/logo1.svg";
 import { cookies } from "next/headers";
 
 const opnsns = Open_Sans({ subsets: ["latin"] });
@@ -39,20 +39,20 @@ export default function RootLayout({
           {/* dekstop-view */}
           <div className="fixed lg:flex lg:justify-between lg:px-5 lg:h-14 items-center text-xl font-semibold bg-white top-0 lg:left-64 w-full lg:right-0 lg:z-20 z-40">
             <div className="hidden lg:block">
-              <h1 className="text-sky-900 text-base">
+              <h1 className="text-black text-base">
                 Selamat Datang,{" "}
                 {cookies().get("user")?.value}
               </h1>
             </div>
             <div className="lg:hidden">
               <div className="flex justify-between items-center px-5 py-5">
-                <Image src={logo} alt={""} height={30} />
+                <Image src={logo1} alt={""} height={30} />
                 <Link href={"/dashboard/profile"}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="size-7 text-sky-600"
+                    className="size-7 text-yellow-500"
                   >
                     <path
                       fillRule="evenodd"
@@ -68,10 +68,10 @@ export default function RootLayout({
             <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r hidden lg:block">
               <div className="flex items-center justify-center h-14 border-b">
                 <Image
-                  src={logo}
+                  src={logo1}
                   alt={""}
                   height={400}
-                  className="md:h-[30px] md:w-[140px]"
+                  className="md:h-[50px] md:w-[160px]"
                 />
               </div>
               <div className="overflow-y-auto overflow-x-hidden flex-grow">
@@ -95,7 +95,7 @@ export default function RootLayout({
                       <li>
                         <Link
                           href="/dashboard/admin"
-                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                         >
                           <span className="inline-flex justify-center items-center ml-4">
                             <svg
@@ -119,7 +119,7 @@ export default function RootLayout({
                       <li>
                         <Link
                           href="/dashboard/admin/member"
-                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                         >
                           <span className="inline-flex justify-center items-center ml-4">
                             <svg
@@ -144,7 +144,7 @@ export default function RootLayout({
                       <li>
                         <a
                           href="/dashboard/admin/campaign"
-                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                          className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                         >
                           <span className="inline-flex justify-center items-center ml-4">
                             <svg
@@ -189,7 +189,7 @@ export default function RootLayout({
                         <li>
                           <a
                             href="/dashboard"
-                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                           >
                             <span className="inline-flex justify-center items-center ml-4">
                               <svg
@@ -213,7 +213,7 @@ export default function RootLayout({
                         <li>
                           <a
                             href="/dashboard/campaign"
-                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                            className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                           >
                             <span className="inline-flex justify-center items-center ml-4">
                               <svg
@@ -243,7 +243,7 @@ export default function RootLayout({
                           >
                             <a
                               href="/dashboard/form-pengajuan"
-                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                             >
                               <span className="inline-flex justify-center items-center ml-4">
                                 <svg
@@ -266,7 +266,7 @@ export default function RootLayout({
                             </a>
                             <a
                               href="/dashboard/transaction-history"
-                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                              className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                             >
                               <span className="inline-flex justify-center items-center ml-4">
                                 <svg
@@ -301,7 +301,7 @@ export default function RootLayout({
                   <li>
                     <a
                       href="/dashboard/profile"
-                      className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-sky-600 hover:rounded-lg hover:duration-100 text-sky-600 hover:text-white hover:border-indigo-500 pr-6"
+                      className="relative flex flex-row items-center h-11 w-11/12 mx-auto focus:outline-none hover:bg-yellow-500 hover:rounded-lg hover:duration-100 text-yellow-500 hover:text-white hover:border-indigo-500 pr-6"
                     >
                       <span className="inline-flex justify-center items-center ml-4">
                         <svg
@@ -342,7 +342,7 @@ export default function RootLayout({
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5 text-sky-600"
+                      className="size-5 text-yellow-500"
                     >
                       <path
                         fillRule="evenodd"
@@ -363,7 +363,7 @@ export default function RootLayout({
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5 text-sky-600"
+                      className="size-5 text-yellow-500"
                     >
                       <path
                         fillRule="evenodd"
@@ -384,7 +384,7 @@ export default function RootLayout({
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5 text-sky-600"
+                      className="size-5 text-yellow-500"
                     >
                       <path
                         fillRule="evenodd"
@@ -405,7 +405,7 @@ export default function RootLayout({
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5 text-sky-600"
+                      className="size-5 text-yellow-500"
                     >
                       <path
                         fillRule="evenodd"

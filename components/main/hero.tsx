@@ -6,13 +6,13 @@ import Link from "next/link";
 export default function Hero() {
     return (
         <div>
-            <div className="bg-sky-100">
+            <div className="bg-yellow-50">
                 <div className="lg:max-w-8xl mx-auto">
                     <div className="w-11/12 mx-auto py-6 lg:flex lg:flex-row lg:items-center lg:justify-between">
                         <div className="lg:w-1/2">
-                            <h1 className="text-black text-3xl font-bold text-sky-900 lg:text-5xl lg:leading-normal">Donasi Anda sekecil apapun, akan sangat berarti bagi mereka</h1>
+                            <h1 className="text-black text-3xl font-bold lg:text-5xl lg:leading-normal">Donasi Anda sekecil apapun, akan sangat berarti bagi mereka</h1>
                             <p className="text-base mt-4 text-slate-500 lg:w-3/4 lg:mt-6 lg:leading-relaxed">Sekecil apapun donasi yang Anda berikan akan sangat berarti bagi mereka, yuk berdonasi sekarang juga untuk membantu sesama manusia yang membutuhkan</p>
-                            <Button className="bg-sky-600 text-white mt-10 px-7 py-4 rounded-xl" as={Link} href="/register">
+                            <Button className="bg-yellow-500 text-white mt-10 px-7 py-4 rounded-xl" as={Link} href="/register">
                                 Gabung Sekarang
                             </Button> 
                         </div>
