@@ -77,7 +77,7 @@ export default function AdminDashboard() {
                         <div className="flex flex-row items-center w-full justify-between px-5 py-3">
                             <div>
                                 <p className="text-xs text-slate-500 mb-2">Jumlah Donasi</p>
-                                <h1 className="font-bold text-xl mb-1">{fundAccumulatedCount.toLocaleString()} <span className="text-base font-semibold">IDR</span></h1>
+                                <h1 className="font-bold text-xl mb-1">{fundAccumulatedCount == null ? 0 : fundAccumulatedCount.toLocaleString()} <span className="text-base font-semibold">IDR</span></h1>
                             </div>
                             <div className="h-12 w-12 bg-blue-100 rounded-full flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-6 text-blue-500">
