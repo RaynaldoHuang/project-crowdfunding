@@ -64,7 +64,7 @@ export default function ForgotPassword() {
                                     <p className="text-xs text-center w-9/12">Kami telah mengirimkan verifikasi OTP untuk mengubah kata sandi anda, silahkan cek email kamu.</p>
                                     <Input type='text' name='otp' className="w-full mt-5 mb-2 text-center" maxLength={6} style={{ textAlign: 'center' }} onChange={(event: any) => setOneTimePass(event.currentTarget.value)} />
                                     <p className="text-xs text-center w-9/12 mb-5">Tidak mendapatkan kode? <Link><span className="text-sky-600 text-xs">klik untuk kirim ulang kode</span></Link></p>
-                                    <Button fullWidth className="bg-sky-600 text-white" type="submit" onClick={handleClick}>
+                                    <Button fullWidth className="bg-yellow-500text-white" type="submit" onClick={handleClick}>
                                         Submit
                                     </Button>
                                 </div>
@@ -81,7 +81,7 @@ export default function ForgotPassword() {
                                             isRequired
                                             name="email"
                                         />
-                                        <Button fullWidth className="bg-sky-600 text-white" type="submit">
+                                        <Button fullWidth className="bg-yellow-500text-white" type="submit">
                                             Reset password
                                         </Button>
                                         <Link href={"/login"} className="text-xs text-sky-600 flex justify-center items-center mt-5">Kembali</Link>
@@ -116,7 +116,7 @@ export default function ForgotPassword() {
                                     errorMessage="Silahkan diisi kolom ini."
                                 />
                             </div>
-                            <Button fullWidth className="mt-5 bg-sky-600 text-white" type="submit">
+                            <Button fullWidth className="mt-5 bg-yellow-500text-white" type="submit">
                                 Ganti Password
                             </Button>
                         </form>

@@ -50,7 +50,7 @@ export default function ChangePassword() {
 
                     <div className="flex justify-end items-end mt-5">
                         <Link href="/dashboard/profile" className="border border-red-500 px-3 py-2 text-red-500 rounded-lg me-3 text-sm">Kembali</Link>
-                        <button type='submit' onClick={onOpen} className='bg-sky-600 px-3 py-2 rounded-lg text-white text-sm '>Ubah Kata Sandi</button>
+                        <button type='submit' onClick={onOpen} className='bg-yellow-500 px-3 py-2 rounded-lg text-white text-sm '>Ubah Kata Sandi</button>
                         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                             <ModalContent>
                                 {(onClose) => (

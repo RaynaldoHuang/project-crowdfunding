@@ -37,7 +37,7 @@ export default function DashboardMember() {
                          text-sm">Untuk membuat dunia menjadi lebih baik</p>
                             <p className="text-white py-4 font-light text-balance w-3/5 mb-6
                          text-sm">Sekecil apapun donasi yang Anda berikan akan sangat berarti bagi mereka.</p>
-                            <Link className="bg-sky-600 text-white mt-6 px-7 py-2 rounded-xl text-sm" href={'/dashboard/campaign'}>
+                            <Link className="bg-yellow-500 text-white mt-6 px-7 py-2 rounded-xl text-sm" href={'/dashboard/campaign'}>
                                 Donasi Sekarang
                             </Link>
                         </div>
@@ -55,7 +55,7 @@ export default function DashboardMember() {
                             <h1 className="text-4xl font-bold text-sky-600 mb-2">Donasi Sekarang</h1>
                             <p className="text-sky-600 font-light text-balance mb-10
                          text-sm">Sekecil apapun donasi yang Anda berikan akan sangat berarti bagi mereka.</p>
-                            <Link className="bg-sky-600 text-white mt-6 px-7 py-2 rounded-xl text-sm" href={'/dashboard/campaign'}>
+                            <Link className="bg-yellow-500 text-white mt-6 px-7 py-2 rounded-xl text-sm" href={'/dashboard/campaign'}>
                                 Donasi Sekarang
                             </Link>
                         </div>
@@ -85,7 +85,7 @@ export default function DashboardMember() {
                                             {c.eventName}</h1>
                                         <p className="text-slate-500 text-sm mt-4 line-clamp-2 text-balance"> {c.eventDescription}</p>
                                         <p className="text-orange-500 text-base mt-2">Dana Dibutuhkan Rp{c.fundsNeeded.toLocaleString()}</p>
-                                        <Link href={`/dashboard/campaign/${c.id}`}><button className='text-white px-8 mt-6 py-2 bg-sky-600 rounded-xl text-sm text-center w-full'>Lihat Detail</button></Link>
+                                        <Link href={`/dashboard/campaign/${c.id}`}><button className='text-white px-8 mt-6 py-2 bg-yellow-500 rounded-xl text-sm text-center w-full'>Lihat Detail</button></Link>
                                     </div>
                               </div>
                             ))}

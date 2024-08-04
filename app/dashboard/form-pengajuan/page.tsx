@@ -67,7 +67,7 @@ export default function FormPengajuan() {
                 />
               </div>
               <Link href={"/dashboard/form-pengajuan/form"}>
-                <button className="bg-sky-600 text-white text-sm px-3 py-2.5 rounded-lg flex items-center">Ajukan Kampanye</button>
+                <button className="bg-yellow-500 text-white text-sm px-3 py-2.5 rounded-lg flex items-center">Ajukan Kampanye</button>
               </Link>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function FormPengajuan() {
                     <td className="text-xs">
                       <Link
                         href={`/dashboard/form-pengajuan/${c.id}`}
-                        className="text-white bg-sky-600 px-3 py-2 rounded"
+                        className="text-white bg-yellow-500 px-3 py-2 rounded"
                       >
                         Lihat Detail
                       </Link>
@@ -193,7 +193,7 @@ export default function FormPengajuan() {
                 <Link
                   href={`/dashboard/form-pengajuan/${c.id}`}
                 >
-                  <button className="text-white bg-sky-600 px-3 py-2 rounded-md">Lihat Detail</button>
+                  <button className="text-white bg-yellow-500 px-3 py-2 rounded-md">Lihat Detail</button>
                 </Link>
               </div>
             </div>
