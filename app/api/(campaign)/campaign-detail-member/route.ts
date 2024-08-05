@@ -13,6 +13,7 @@ export async function POST (req: NextRequest, res: NextResponse) {
             fundsAccumulated: true,
             fundsNeeded: true,
             eventDescription: true,
+            deadline: true,
             
             profile: {
                 select: {
@@ -20,6 +21,12 @@ export async function POST (req: NextRequest, res: NextResponse) {
                     firstName: true,
                     lastName: true,
                     createdDate: true,
+                }
+            },
+
+            campaignImage: {
+                select: {
+                    imageLink: true
                 }
             },
 
