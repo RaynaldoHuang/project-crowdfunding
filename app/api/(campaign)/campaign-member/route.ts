@@ -24,6 +24,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
             eventName: true,
             eventDescription: true,
             fundsNeeded: true,
+            campaignImage: {
+                select: {
+                    imageLink: true
+                }
+            }
         }
     })
 

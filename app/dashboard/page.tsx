@@ -78,8 +78,12 @@ export default function DashboardMember() {
                             ))
                             : campaigns.map((c: any, idx) => (
                                 <div key={idx} className="bg-white px-3 py-3 rounded-2xl">
-                                    <Image src={img1} alt={""} width={350} className="rounded-xl"
-                                    />
+                                    <div className="w-full lg:h-48  h-32 overflow-hidden relative">
+                                        <img
+                                            src={c.campaignImage.length == 0 ? img1 : c.campaignImage[0].imageLink}
+                                            alt={"gambar donasi"}
+                                            className="object-cover w-full h-full rounded-xl absolute inset-0"
+                                        />  </div>
                                     <div className="pb-0 pt-2 flex-col items-start">
                                         <h1 className="text-xl font-bold mt-2 line-clamp-2 text-balance">
                                             {c.eventName}</h1>

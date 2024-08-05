@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+
 import img1 from "@/public/images/img1.jpg";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
