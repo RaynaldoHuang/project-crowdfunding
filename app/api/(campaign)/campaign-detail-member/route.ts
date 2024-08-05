@@ -65,22 +65,48 @@ export async function POST (req: NextRequest, res: NextResponse) {
         }
     })
 
-    const allDonators = await prisma.donation.findMany({
-        where: {
-            campaignId: data.id
+    // const allDonators = await prisma.donation.findMany({
+    //     where: {
+    //         campaignId: data.id
+    //     },
+    //     select: {
+    //         amount: true,
+    //         donateDate: true,
+    //         profile: {
+    //             select: {
+    //                 accountUsername: true
+    //             }
+    //         }
+    //     }
+    // })
+
+    const groupedDonators = await prisma.donation.groupBy({
+        by: ['profileId'],
+        _sum: {
+            amount: true
         },
-        select: {
-            amount: true,
-            donateDate: true,
-            profile: {
-                select: {
-                    accountUsername: true
-                }
+        orderBy: {
+            _sum: {
+                amount: 'desc'
             }
         }
     })
 
-    console.log(campaignDetailMember, totalDonator, donators,)
+    // Grouped all donators into a new json
+    let listDonators: any[] = []
 
-    return NextResponse.json({ success: true, campaignDetailMember, totalDonator, donators, allDonators }, { status: 200 })
+    for (let index in groupedDonators) {
+        const username = await prisma.profile.findUnique({
+            where: {
+                id: groupedDonators[index].profileId
+            },
+            select: {
+                accountUsername: true
+            }
+        })
+
+        listDonators.push({user: username?.accountUsername, amount: groupedDonators[index]._sum.amount})
+    }
+
+    return NextResponse.json({ success: true, campaignDetailMember, totalDonator, donators, listDonators }, { status: 200 })
 }

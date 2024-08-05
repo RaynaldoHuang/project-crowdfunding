@@ -48,6 +48,8 @@ export default function DetailCampaign({
 
     const data = await res.json();
 
+    console.log('Data: ',data.listDonators)
+
     setAccountUsername(data["campaignDetailMember"][0].profile.accountUsername);
     setFirstName(data["campaignDetailMember"][0].profile.firstName);
     setLastName(data["campaignDetailMember"][0].profile.lastName);
@@ -62,9 +64,9 @@ export default function DetailCampaign({
     setDonatorAccumulated(data.totalDonator._count.profileId);
     setNewsDate(data["campaignDetailMember"][0].news.createdDate);
     setNews(data["campaignDetailMember"][0].news.updateNews);
-    console.log(data["campaignDetailMember"][0].campaignImage.imageLink);
+    setCampaignImage(data["campaignDetailMember"][0].campaignImage[0].imageLink);
     
-    let donator = data["donators"];
+    let donator = data.listDonators.slice(0, 3);
     setDynamicArr(donator);
   };
 
@@ -101,13 +103,13 @@ export default function DetailCampaign({
         <div className="hidden lg:block">
           <div className="flex gap-x-3">
             <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
-              <div className="slider-container rounded-lg h-[335px] overflow-hidden bg-red-300">
+              <div className="slider-container rounded-lg h-[335px] overflow-hidden">
                 <Slider {...settings}>
                   <div>
                     <Image
                       src={campaignImage}
                       alt="gambar donasi"
-                      className="object-cover w-full h-full rounded-xl absolute inset-0"
+                      className="!object-cover rounded-xl absolute inset-0"
                       layout="fill"
                     />
                   </div>
@@ -242,7 +244,7 @@ export default function DetailCampaign({
                       </div>
                       <div className="ml-5">
                         <h1 className="font-bold text-base">
-                          {c.profile.accountUsername}
+                          {c.user}
                         </h1>
                         <p className="text-xs">
                           berdonasi Sebesar{" "}
@@ -318,14 +320,10 @@ export default function DetailCampaign({
       {/* mobile-view */}
       <div className="lg:hidden">
         <div className="bg-white px-5 py-5 rounded-xl mx-5">
-          <div className="slider-container rounded-lg h-[150px] overflow-hidden bg-red-300">
+          <div className="slider-container rounded-lg h-[150px] overflow-hidden">
             <Slider {...settings}>
               <div>
-                <Image
-                  src={campaignImage}
-                  alt=""
-                  className="object-cover w-full h-full"
-                ></Image>
+                <Image src={campaignImage} width={800} height={500} alt="campaign" className="!object-cover !w-full !h-full" />
               </div>
             </Slider>
           </div>
@@ -503,7 +501,7 @@ export default function DetailCampaign({
                 </div>
                 <div className="ml-5">
                   <h1 className="font-bold text-base">
-                    {c.profile.accountUsername}
+                    {c.user}
                   </h1>
                   <p className="text-xs">
                     berdonasi Sebesar{" "}
