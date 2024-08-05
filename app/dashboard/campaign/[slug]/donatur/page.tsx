@@ -22,7 +22,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
 
     const data = await res.json();
     setDonatorAccumulated(data.totalDonator._count.profileId)
-    let donator = data["allDonators"];
+    let donator = data["listDonators"];
     setDynamicArr(donator);
   };
   return (
@@ -59,7 +59,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
                 </div>
                 <div className="ml-5">
                   <h1 className="font-bold text-base">
-                    {c.profile.accountUsername}
+                    {c.user}
                   </h1>
                   <p className="text-xs">
                     berdonasi Sebesar{" "}
