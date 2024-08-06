@@ -21,7 +21,7 @@ export default function Donatur({ params }: { params: { slug: string } }) {
     });
 
     const data = await res.json();
-    setDonatorAccumulated(data.totalDonator._count.profileId)
+    setDonatorAccumulated(data.totalDonatorCount)
     let donator = data["listDonators"];
     setDynamicArr(donator);
   };

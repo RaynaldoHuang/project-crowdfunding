@@ -39,16 +39,17 @@ export async function POST (req: NextRequest, res: NextResponse) {
         },
         
     });
-    const totalDonator = await prisma.donation.aggregate({
+    const totalDonator = await prisma.donation.groupBy({
         where: {
             campaignId: data.id
         },
-      
+      by: ['profileId'],
         _count: {
             profileId: true
         },
         
     })
+    const totalDonatorCount = totalDonator.length;
 
     const donators = await prisma.donation.findMany({
         take: 3,
@@ -81,6 +82,9 @@ export async function POST (req: NextRequest, res: NextResponse) {
     // })
 
     const groupedDonators = await prisma.donation.groupBy({
+        where: {
+            campaignId: data.id
+        },
         by: ['profileId'],
         _sum: {
             amount: true
@@ -108,5 +112,5 @@ export async function POST (req: NextRequest, res: NextResponse) {
         listDonators.push({user: username?.accountUsername, amount: groupedDonators[index]._sum.amount})
     }
 
-    return NextResponse.json({ success: true, campaignDetailMember, totalDonator, donators, listDonators }, { status: 200 })
+    return NextResponse.json({ success: true, campaignDetailMember, totalDonatorCount, donators, listDonators }, { status: 200 })
 }
