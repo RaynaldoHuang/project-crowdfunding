@@ -10,12 +10,6 @@ import { storage } from "@/firebase";
 
 import { useRouter } from "next/navigation";
 
-//RichText Quill
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css"; // Import Quill styles
-
-const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
-
 export default function CampaignDetail({
   params,
 }: {
@@ -23,6 +17,8 @@ export default function CampaignDetail({
 }) {
   const router = useRouter()
 
+  const [news, setNews] = useState([])
+  const [images, setImages] = useState([])
   const [url, setURL] = useState("")
   const [eventName, setEventName] = useState("");
   const [statusEvent, setStatusEvent] = useState("");
@@ -59,12 +55,17 @@ export default function CampaignDetail({
 
     const data = await res.json();
 
+    console.log(data)
+
     setEventName(data["campaign"].eventName);
-    setStatusEvent(data["campaign"].statusEvent);
+    setStatusEvent(data["campaign"].status);
     setDescEvent(data["campaign"].eventDescription);
     setFundNeed(data["campaign"].fundsNeeded);
-    setFundAccumulated(data["campaign"].fundAccumulated);
+    setFundAccumulated(data["campaign"].fundsAccumulated);
     setDeadline(data["campaign"].deadline);
+
+    setNews(data.news)
+    setImages(data.images)
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -74,14 +75,7 @@ export default function CampaignDetail({
 
     let valid: any = validateForm(formData);
 
-    console.log(formData.get('file'))
-
-    if (formData.get('file').size == 0) {
-      setIsLoading(false)
-      return
-    }
-
-    if (valid) { 
+    if (valid && formData.get('file').size != 0) { 
       const storageRef = ref(storage, 'images/' + formData.get('file').name)
       const uploadTask = uploadBytesResumable(storageRef, formData.get('file'));
 
@@ -108,8 +102,8 @@ export default function CampaignDetail({
                 fundsNeeded: formData.get("fundsNeeded"),
                 deadline: formData.get("deadline"),
                 id: params.slug,
-                news: content,
                 imgUrl: downloadURL,
+                news: formData.get('news')
               }),
             });
 
@@ -123,29 +117,29 @@ export default function CampaignDetail({
           });
         }
       );
+    } else {
+      const res = await fetch("/api/campaign-detail", {
+        method: "PUT",
+        body: JSON.stringify({
+          eventName: formData.get("event"),
+          status: formData.get("status"),
+          eventDescription: formData.get("desc"),
+          fundsNeeded: formData.get("fundsNeeded"),
+          deadline: formData.get("deadline"),
+          id: params.slug,
+          imgUrl: "",
+          news: formData.get('news')
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        router.push('/dashboard/admin/campaign')
+      }
+
+      setIsLoading(false)
     }
-
-      // const res = await fetch("/api/campaign-detail", {
-      //   method: "PUT",
-      //   body: JSON.stringify({
-      //     eventName: formData.get("event"),
-      //     status: formData.get("status"),
-      //     eventDescription: formData.get("desc"),
-      //     fundsNeeded: formData.get("fundsNeeded"),
-      //     deadline: formData.get("deadline"),
-      //     id: params.slug,
-      //     news: content,
-      //     imgUrl: url,
-      //   }),
-      // });
-
-    //   const data = await res.json();
-
-    //   if (data.success) {
-    //     router.push('/dashboard/admin/campaign')
-    //   }
-    // }
-    // setIsLoading(false);
   };
 
   const styles = {
@@ -210,42 +204,6 @@ export default function CampaignDetail({
     return valid;
   };
 
-  //RichText Quill
-  const [content, setContent] = useState("");
-
-  const quillModules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
-      [{ align: [] }],
-      [{ color: [] }],
-      ["code-block"],
-      ["clean"],
-    ],
-  };
-
-  const quillFormats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "image",
-    "align",
-    "color",
-    "code-block",
-  ];
-
-  const handleEditorChange = (newContent: any) => {
-    setContent(newContent);
-  };
-
   return (
     <div className="ml-64">
       <div className="mt-20 mx-5 bg-white px-5 py-10 mb-10 rounded-xl">
@@ -276,6 +234,7 @@ export default function CampaignDetail({
                 onChange={(e) => setStatusEvent(e.target.value)}
                 value={statusEvent}
                 className="px-3 py-2 rounded-lg bg-gray-100"
+                id='campaignStatus'
                 style={{ borderRight: "12px solid rgb(243 244 246)" }}
               >
                 <option value="PENDING">Pending</option>
@@ -323,7 +282,7 @@ export default function CampaignDetail({
               <label className="mb-1 text-sm">Dana Terkumpul</label>
               <input
                 type="text"
-                value={fundAccumulated}
+                value={`${fundAccumulated}`}
                 className="px-3 py-2 rounded-lg bg-gray-100 border-slate-300 cursor-not-allowed"
                 disabled
               />
@@ -349,20 +308,33 @@ export default function CampaignDetail({
 
           <div className="flex flex-col mb-5">
             <label className="mb-1">Gambar Pendukung</label>
+            
+            <div className="flex space-x-3">
+              {
+                images.map((i: any, index) => (
+                  <img key={index} src={i.imageLink} alt='campaign' width={300}/>
+                ))
+              }
+            </div>
+
             <div className="border border-dashed border-slate-300 rounded-lg py-20 flex justify-center">
               <input name='file' type="file" accept=".png, .jpg, .jpeg" multiple/>
             </div>
           </div>
-        
-            <div className="flex flex-col mb-5">
-              <QuillEditor
-                value={content}
-                onChange={handleEditorChange}
-                modules={quillModules}
-                formats={quillFormats}
-                className="w-full h-[70%] mt-10 bg-white"
-              />
+
+          <div className="flex flex-col mb-5">
+            <label className="mb-1">Kabar Terbaru</label>
+
+            <div>
+              {
+                news.map((n: any, index) => (
+                  <p key={index}>{n.createdDate.split('T')[0]} - {n.updateNews}</p>
+                ))
+              }
             </div>
+
+            <textarea name='news' className="px-3 py-2 rounded-lg bg-gray-100" />
+          </div>
         
           <div className="flex justify-end items-center">
             <Link

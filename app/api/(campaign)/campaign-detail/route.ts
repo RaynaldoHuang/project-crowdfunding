@@ -10,9 +10,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
     })
 
-    console.log(campaign)
+    const news = await prisma.news.findMany({
+        where: {
+            campaignId: data.id
+        },
+        select: {
+            updateNews: true,
+            createdDate: true
+        }
+    })
 
-    return NextResponse.json({ 'success': true, campaign })
+    const images = await prisma.campaignImage.findMany({
+        where: {
+            campaignId: data.id
+        },
+        select: {
+            imageLink: true
+        }
+    })
+
+    console.log(news, images)
+
+    return NextResponse.json({ 'success': true, campaign, news, images }, {status: 200})
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {
@@ -42,12 +61,14 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         })
     }
 
-    const setCampaignImage = await prisma.campaignImage.create({
-        data: {
-            campaignId: data.id,
-            imageLink: data.imgUrl
-        }
-    })
+    if (data.imgUrl != '') {
+        const setCampaignImage = await prisma.campaignImage.create({
+            data: {
+                campaignId: data.id,
+                imageLink: data.imgUrl
+            }
+        })
+    }
 
     return NextResponse.json({ 'success': true })
 }

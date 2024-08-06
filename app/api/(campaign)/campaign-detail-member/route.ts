@@ -39,6 +39,18 @@ export async function POST (req: NextRequest, res: NextResponse) {
         },
         
     });
+
+    const images = await prisma.campaignImage.findMany({
+        where: {
+            campaignId: data.id
+        },
+        select: {
+            imageLink: true
+        }
+    })
+
+    console.log(images)
+
     const totalDonator = await prisma.donation.groupBy({
         where: {
             campaignId: data.id
@@ -112,5 +124,5 @@ export async function POST (req: NextRequest, res: NextResponse) {
         listDonators.push({user: username?.accountUsername, amount: groupedDonators[index]._sum.amount})
     }
 
-    return NextResponse.json({ success: true, campaignDetailMember, totalDonatorCount, donators, listDonators }, { status: 200 })
+    return NextResponse.json({ success: true, campaignDetailMember, totalDonatorCount, donators, listDonators, images }, { status: 200 })
 }

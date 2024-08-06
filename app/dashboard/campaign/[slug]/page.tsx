@@ -34,18 +34,19 @@ export default function DetailCampaign({
   const [newsDate, setNewsDate] = useState("");
   const [news, setNews] = useState("");
   const [dynamicArr, setDynamicArr] = useState([]);
+  const [images, setImages] = useState([])
 
   useEffect(() => {
     fetchCampaigDetail();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      calculateRemainingTime();
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     calculateRemainingTime();
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [eventDeadline]);
+  //   return () => clearInterval(interval);
+  // }, [eventDeadline]);
 
   const fetchCampaigDetail = async () => {
     const res = await fetch("/api/campaign-detail-member", {
@@ -57,8 +58,7 @@ export default function DetailCampaign({
 
     const data = await res.json();
 
-    console.log('Data: ',data.listDonators)
-
+    setImages(data.images)
     setAccountUsername(data["campaignDetailMember"][0].profile.accountUsername);
     setFirstName(data["campaignDetailMember"][0].profile.firstName);
     setLastName(data["campaignDetailMember"][0].profile.lastName);
@@ -102,7 +102,7 @@ export default function DetailCampaign({
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
   };
 
   const shareCampaign = () => {
@@ -131,15 +131,19 @@ export default function DetailCampaign({
             <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
               <div className="slider-container rounded-xl overflow-hidden bg-red-600">
                 <Slider {...settings} className="h-80">
-                  <div>
-                    <img src={campaignImage} alt="gambar donasi"/>
-                    {/* <Image
-                      src={campaignImage}
-                      alt="gambar donasi"
-                      className="object-cover absolute inset-0 h-full"
-                      layout="fill"
-                    /> */}
-                  </div>
+                  {
+                    images.map((i: any, index) => (
+                      <div key={index}>
+                        <img src={i.imageLink} alt="gambar donasi"/>
+                        {/* <Image
+                          src={campaignImage}
+                          alt="gambar donasi"
+                          className="object-cover absolute inset-0 h-full"
+                          layout="fill"
+                        /> */}
+                      </div>
+                    ))
+                  }
                 </Slider>
               </div>
               <div className="py-5">
