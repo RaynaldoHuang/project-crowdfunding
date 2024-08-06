@@ -129,15 +129,16 @@ export default function DetailCampaign({
         <div className="hidden lg:block">
           <div className="flex gap-x-3">
             <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
-              <div className="slider-container rounded-lg h-[335px] overflow-hidden">
-                <Slider {...settings}>
+              <div className="slider-container rounded-xl overflow-hidden bg-red-600">
+                <Slider {...settings} className="h-80">
                   <div>
-                    <Image
+                    <img src={campaignImage} alt="gambar donasi"/>
+                    {/* <Image
                       src={campaignImage}
                       alt="gambar donasi"
-                      className="!object-cover rounded-xl absolute inset-0"
+                      className="object-cover absolute inset-0 h-full"
                       layout="fill"
-                    />
+                    /> */}
                   </div>
                 </Slider>
               </div>
