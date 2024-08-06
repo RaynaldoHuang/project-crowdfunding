@@ -24,9 +24,10 @@ export default function DetailCampaign({
   const [dateCreated, setDateCreated] = useState("");
   const [eventName, setEventName] = useState("");
   const [fundAccumulated, setFundAccumulated]: [any, any] = useState(0);
-  const [fundsNeeded, setFundNeedded]: [any, any] = useState(0);
+  const [fundsNeeded, setFundNeeded]: [any, any] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
   const [eventDeadline, setEventDeadline] = useState("")
+  const [remainingTime, setRemainingTime] = useState("");
   const [donatorAccumulated, setDonatorAccumulated] = useState(0);
   const [kabarTerbaruAda, setKabarTerbaruAda] = useState(true);
   const [campaignImage, setCampaignImage] = useState("");
@@ -37,6 +38,14 @@ export default function DetailCampaign({
   useEffect(() => {
     fetchCampaigDetail();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      calculateRemainingTime();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [eventDeadline]);
 
   const fetchCampaigDetail = async () => {
     const res = await fetch("/api/campaign-detail-member", {
@@ -58,16 +67,33 @@ export default function DetailCampaign({
     );
     setEventName(data["campaignDetailMember"][0].eventName);
     setFundAccumulated(data["campaignDetailMember"][0].fundsAccumulated);
-    setFundNeedded(data["campaignDetailMember"][0].fundsNeeded);
+    setFundNeeded(data["campaignDetailMember"][0].fundsNeeded);
     setEventDescription(data["campaignDetailMember"][0].eventDescription);
     setEventDeadline(data["campaignDetailMember"][0].deadline.split("T")[0])
-    setDonatorAccumulated(data.totalDonator._count.profileId);
+    setDonatorAccumulated(data.totalDonatorCount);
     setNewsDate(data["campaignDetailMember"][0].news.createdDate);
     setNews(data["campaignDetailMember"][0].news.updateNews);
     setCampaignImage(data["campaignDetailMember"][0].campaignImage[0].imageLink);
     
     let donator = data.listDonators.slice(0, 3);
     setDynamicArr(donator);
+  };
+
+  const calculateRemainingTime = () => {
+    const now: any = new Date();
+    const deadline: any = new Date(eventDeadline);
+    const timeDifference = deadline - now;
+
+    if (timeDifference > 0) {
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      setRemainingTime(`${days}hari ${hours}jam ${minutes}menit ${seconds}detik`);
+    } else {
+      setRemainingTime("Expired");
+    }
   };
 
   const settings = {
@@ -121,6 +147,12 @@ export default function DetailCampaign({
                   Batas Waktu:{" "}
                   <span className="font-semibold text-red-600">
                     {eventDeadline}
+                  </span>
+                </p>
+                <p className="text-xs">
+                  Sisa Waktu:{" "}
+                  <span className="font-semibold text-red-600">
+                    {remainingTime}
                   </span>
                 </p>
               </div>
