@@ -41,13 +41,13 @@ export default function DetailCampaign({
     fetchCampaigDetail();
   }, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     calculateRemainingTime();
-  //   }, 1000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      calculateRemainingTime();
+    }, 1000);
 
-  //   return () => clearInterval(interval);
-  // }, [eventDeadline]);
+    return () => clearInterval(interval);
+  }, [eventDeadline]);
 
   const fetchCampaigDetail = async () => {
     const res = await fetch("/api/campaign-detail-member", {
@@ -209,7 +209,7 @@ export default function DetailCampaign({
                     variant="bordered"
                     className={`border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600 ${status.toLowerCase() == "finished" ? 'opacity-50 cursor-not-allowed' : ''}`}
                     onClick={shareCampaign}
-                    disabled={status.toLowerCase() == "finished"}
+                    isDisabled={status.toLowerCase() == "finished"}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
