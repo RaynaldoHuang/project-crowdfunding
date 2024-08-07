@@ -75,7 +75,7 @@ export default function CampaignDetail({
 
     let valid: any = validateForm(formData);
 
-    if (valid && formData.get('file').size != 0) { 
+    if (valid && formData.get('file').size != 0) {
       const storageRef = ref(storage, 'images/' + formData.get('file').name)
       const uploadTask = uploadBytesResumable(storageRef, formData.get('file'));
 
@@ -83,16 +83,16 @@ export default function CampaignDetail({
         (snapshot) => {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        }, 
+        },
         (error) => {
           // A full list of error codes is available at
           // https://firebase.google.com/docs/storage/web/handle-errors
           console.log('Error: ', error)
           return
-        }, 
+        },
         () => {
           // Upload completed successfully, now we can get the download URL
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => { 
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             const res = await fetch("/api/campaign-detail", {
               method: "PUT",
               body: JSON.stringify({
@@ -307,35 +307,39 @@ export default function CampaignDetail({
           </div>
 
           <div className="flex flex-col mb-5">
-            <label className="mb-1">Gambar Pendukung</label>
-            
-            <div className="flex space-x-3">
+            <label className="mb-1 text-sm">Gambar Pendukung</label>
+
+            <div className="grid grid-cols-4 gap-4 mb-5">
               {
                 images.map((i: any, index) => (
-                  <img key={index} src={i.imageLink} alt='campaign' width={300}/>
+                  <div key={index} className="w-full">
+                    <img src={i.imageLink} alt='campaign' className="object-cover w-full h-40 rounded-md" />
+                  </div>
                 ))
               }
             </div>
 
             <div className="border border-dashed border-slate-300 rounded-lg py-20 flex justify-center">
-              <input name='file' type="file" accept=".png, .jpg, .jpeg" multiple/>
+              <input name='file' type="file" accept=".png, .jpg, .jpeg" multiple />
             </div>
           </div>
 
           <div className="flex flex-col mb-5">
-            <label className="mb-1">Kabar Terbaru</label>
+            <label className="mb-1 text-sm">Kabar Terbaru</label>
 
-            <div>
+            <div className="mb-5">
               {
                 news.map((n: any, index) => (
-                  <p key={index}>{n.createdDate.split('T')[0]} - {n.updateNews}</p>
+                  <li>
+                    <p key={index} className="flex flex-col mb-3 text-balance">{n.updateNews}<span className="text-sm text-slate-400">{n.createdDate.split('T')[0]}</span></p>
+                  </li>
                 ))
               }
             </div>
 
             <textarea name='news' className="px-3 py-2 rounded-lg bg-gray-100" />
           </div>
-        
+
           <div className="flex justify-end items-center">
             <Link
               href="/dashboard/admin/campaign"
