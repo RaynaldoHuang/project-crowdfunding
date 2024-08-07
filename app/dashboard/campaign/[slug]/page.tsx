@@ -23,18 +23,19 @@ export default function DetailCampaign({
   const [lastName, setLastName] = useState("");
   const [dateCreated, setDateCreated] = useState("");
   const [eventName, setEventName] = useState("");
+  const [status, setStatus] = useState("");
   const [fundAccumulated, setFundAccumulated]: [any, any] = useState(0);
   const [fundsNeeded, setFundNeeded]: [any, any] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
-  const [eventDeadline, setEventDeadline] = useState("")
+  const [eventDeadline, setEventDeadline] = useState("");
   const [remainingTime, setRemainingTime] = useState("");
   const [donatorAccumulated, setDonatorAccumulated] = useState(0);
   const [kabarTerbaruAda, setKabarTerbaruAda] = useState(true);
   const [campaignImage, setCampaignImage] = useState("");
-  const [newsDate, setNewsDate] = useState("");
-  const [news, setNews] = useState("");
+  // const [newsDate, setNewsDate] = useState("");
+  const [news, setNews] = useState([]);
   const [dynamicArr, setDynamicArr] = useState([]);
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     fetchCampaigDetail();
@@ -58,7 +59,7 @@ export default function DetailCampaign({
 
     const data = await res.json();
 
-    setImages(data.images)
+    setImages(data.images);
     setAccountUsername(data["campaignDetailMember"][0].profile.accountUsername);
     setFirstName(data["campaignDetailMember"][0].profile.firstName);
     setLastName(data["campaignDetailMember"][0].profile.lastName);
@@ -66,15 +67,19 @@ export default function DetailCampaign({
       data["campaignDetailMember"][0].profile.createdDate.split("T")[0]
     );
     setEventName(data["campaignDetailMember"][0].eventName);
+    setStatus(data["campaignDetailMember"][0].status);
     setFundAccumulated(data["campaignDetailMember"][0].fundsAccumulated);
     setFundNeeded(data["campaignDetailMember"][0].fundsNeeded);
     setEventDescription(data["campaignDetailMember"][0].eventDescription);
-    setEventDeadline(data["campaignDetailMember"][0].deadline.split("T")[0])
+    setEventDeadline(data["campaignDetailMember"][0].deadline.split("T")[0]);
     setDonatorAccumulated(data.totalDonatorCount);
-    setNewsDate(data["campaignDetailMember"][0].news.createdDate);
-    setNews(data["campaignDetailMember"][0].news.updateNews);
-    setCampaignImage(data["campaignDetailMember"][0].campaignImage[0].imageLink);
-    
+    // setNewsDate(data["campaignDetailMember"][0].news[0].createdDate.split("T")[0]);
+    // setNews(data["campaignDetailMember"][0].news[0].updateNews);
+    setNews(data["campaignDetailMember"][0].news);
+    setCampaignImage(
+      data["campaignDetailMember"][0].campaignImage[0].imageLink
+    );
+
     let donator = data.listDonators.slice(0, 3);
     setDynamicArr(donator);
   };
@@ -86,11 +91,17 @@ export default function DetailCampaign({
 
     if (timeDifference > 0) {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const hours = Math.floor(
+        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+      );
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      setRemainingTime(`${days}hari ${hours}jam ${minutes}menit ${seconds}detik`);
+      setRemainingTime(
+        `${days}hari ${hours}jam ${minutes}menit ${seconds}detik`
+      );
     } else {
       setRemainingTime("Expired");
     }
@@ -120,7 +131,20 @@ export default function DetailCampaign({
     }
   };
 
-  console.log(dynamicArr);
+  const getStatusColor = (status: any) => {
+    switch (status.toLowerCase()) {
+      case "ongoing":
+        return "bg-blue-400";
+      case "canceled":
+        return "bg-red-400";
+      case "pending":
+        return "bg-yellow-400";
+      case "finished":
+        return "bg-green-400";
+      default:
+        return "bg-gray-400"; // Default color for unhandled status
+    }
+  };
 
   return (
     <div className="lg:ml-64">
@@ -131,35 +155,42 @@ export default function DetailCampaign({
             <div className="w-4/6 bg-white px-5 py-5 rounded-xl">
               <div className="slider-container rounded-xl overflow-hidden bg-red-600">
                 <Slider {...settings} className="h-80">
-                  {
-                    images.map((i: any, index) => (
-                      <div key={index}>
-                        <img src={i.imageLink} alt="gambar donasi"/>
-                        {/* <Image
-                          src={campaignImage}
-                          alt="gambar donasi"
-                          className="object-cover absolute inset-0 h-full"
-                          layout="fill"
-                        /> */}
-                      </div>
-                    ))
-                  }
+                  {images.map((i: any, index) => (
+                    <div key={index} className="w-full">
+                      <img
+                        src={i.imageLink}
+                        alt="gambar donasi"
+                        className="ovject-cover w-full h-80 rounded-md"
+                      />
+                    </div>
+                  ))}
                 </Slider>
               </div>
               <div className="py-5">
                 <h1 className="text-2xl font-bold mb-1">{eventName}</h1>
-                <p className="text-xs">
-                  Batas Waktu:{" "}
-                  <span className="font-semibold text-red-600">
-                    {eventDeadline}
-                  </span>
-                </p>
-                <p className="text-xs">
-                  Sisa Waktu:{" "}
-                  <span className="font-semibold text-red-600">
-                    {remainingTime}
-                  </span>
-                </p>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="text-xs">
+                      Batas Waktu:{" "}
+                      <span className="font-semibold text-red-600">
+                        {eventDeadline}
+                      </span>
+                    </p>
+                    <p className="text-xs">
+                      Sisa Waktu:{" "}
+                      <span className="font-semibold text-red-600">
+                        {remainingTime}
+                      </span>
+                    </p>
+                  </div>
+                  <div
+                    className={`${getStatusColor(
+                      status
+                    )} py-1 px-4 rounded-md font-semibold text-white text-xs`}
+                  >
+                    <div>{status}</div>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center justify-between mb-7">
                 <div>
@@ -176,8 +207,9 @@ export default function DetailCampaign({
                 <div>
                   <Button
                     variant="bordered"
-                    className="border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600"
+                    className={`border-sky-600 text-white px-8 py-2 rounded-xl mr-2 text-sky-600 ${status.toLowerCase() == "finished" ? 'opacity-50 cursor-not-allowed' : ''}`}
                     onClick={shareCampaign}
+                    disabled={status.toLowerCase() == "finished"}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -192,12 +224,21 @@ export default function DetailCampaign({
                     </svg>
                     <h1>Bagikan</h1>
                   </Button>
-                  <Link
-                    href={`/dashboard/campaign/${params.slug}/donate`}
-                    className="bg-yellow-500 text-white px-6 py-2.5 rounded-xl text-sm"
-                  >
-                    Donasi Sekarang
-                  </Link>
+                  {status.toLowerCase() !== "finished" ? (
+                    <Link
+                      href={`/dashboard/campaign/${params.slug}/donate`}
+                      className="bg-yellow-500 text-white px-6 py-2.5 rounded-xl text-sm"
+                    >
+                      Donasi Sekarang
+                    </Link>
+                  ) : (
+                    <button
+                      className="bg-yellow-500 opacity-50 text-white px-6 py-2.5 rounded-xl text-sm cursor-not-allowed"
+                      disabled
+                    >
+                      Donasi Sekarang
+                    </button>
+                  )}
                 </div>
               </div>
               <Progress
@@ -280,9 +321,7 @@ export default function DetailCampaign({
                         </svg>
                       </div>
                       <div className="ml-5">
-                        <h1 className="font-bold text-base">
-                          {c.user}
-                        </h1>
+                        <h1 className="font-bold text-base">{c.user}</h1>
                         <p className="text-xs">
                           berdonasi Sebesar{" "}
                           <span className="font-bold text-sm">
@@ -322,7 +361,26 @@ export default function DetailCampaign({
                 title={<h1 className="font-bold text-lg">Kabar Terbaru</h1>}
               >
                 {kabarTerbaruAda ? (
-                  <div dangerouslySetInnerHTML={{ __html: news }} />
+                  <>
+                    <div className="flex flex-col mb-5">
+                      {news.map((n: any, index) => (
+                        <div className="py-3">
+                          <h1
+                            key={index}
+                            className="font-semibold text-sky-600 mb-2"
+                          >
+                            {n.createdDate.split("T")[0]}{" "}
+                          </h1>
+                          <p key={index} className="text-base">
+                            {n.updateNews}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    {/* <Button className="text-sky-600 bg-sky-100" variant="flat">
+                      Lihat Semua
+                    </Button> */}
+                  </>
                 ) : (
                   <div className="text-base items-center flex flex-col justify-center mb-5">
                     <Image
@@ -360,15 +418,30 @@ export default function DetailCampaign({
           <div className="slider-container rounded-lg h-[150px] overflow-hidden">
             <Slider {...settings}>
               <div>
-                <Image src={campaignImage} width={800} height={500} alt="campaign" className="!object-cover !w-full !h-full" />
+                <Image
+                  src={campaignImage}
+                  width={800}
+                  height={500}
+                  alt="campaign"
+                  className="!object-cover !w-full !h-full"
+                />
               </div>
             </Slider>
           </div>
           <div className="py-5">
             <h1 className="text-xl font-bold mb-1">{eventName}</h1>
+
             <p className="text-sm">
               Batas Waktu:{" "}
-              <span className="font-semibold text-red-600">49 Hari Lagi</span>
+              <span className="font-semibold text-red-600">
+                {eventDeadline}
+              </span>
+            </p>
+            <p className="text-sm">
+              Sisa Waktu:{" "}
+              <span className="font-semibold text-red-600">
+                {remainingTime}
+              </span>
             </p>
           </div>
           <div className="lg:flex items-center lg:justify-between lg:mb-7">
@@ -465,7 +538,7 @@ export default function DetailCampaign({
               aria-label="Accordion 1"
               title={<h1 className="font-bold text-lg">Kabar Terbaru</h1>}
             >
-              {kabarTerbaruAda ? (
+              {/* {kabarTerbaruAda ? (
                 <div dangerouslySetInnerHTML={{ __html: news }} />
               ) : (
                 <div className="text-base items-center flex flex-col justify-center mb-5">
@@ -486,7 +559,7 @@ export default function DetailCampaign({
                     </p>
                   </div>
                 </div>
-              )}
+              )} */}
             </AccordionItem>
           </Accordion>
         </div>
@@ -537,9 +610,7 @@ export default function DetailCampaign({
                   </svg>
                 </div>
                 <div className="ml-5">
-                  <h1 className="font-bold text-base">
-                    {c.user}
-                  </h1>
+                  <h1 className="font-bold text-base">{c.user}</h1>
                   <p className="text-xs">
                     berdonasi Sebesar{" "}
                     <span className="font-bold text-sm">Rp{c.amount}</span>
