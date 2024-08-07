@@ -14,6 +14,7 @@ export async function POST (req: NextRequest, res: NextResponse) {
             fundsNeeded: true,
             eventDescription: true,
             deadline: true,
+            status: true,
             
             profile: {
                 select: {
@@ -33,7 +34,7 @@ export async function POST (req: NextRequest, res: NextResponse) {
             news: {
                 select: {
                     updateNews: true,
-                    createdDate: true
+                    createdDate: true,
                 }
             }
         },
